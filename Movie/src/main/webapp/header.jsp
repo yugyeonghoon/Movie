@@ -128,7 +128,7 @@
 </style>
 <body>
 	<div class="navbar_logo">
-		<h1><span style="font-family: 'Gugi' !important;">오 . 영 . 추</span></h1>
+		<h1><a href="main.jsp"><span style="font-family: 'Gugi' !important;">오 . 영 . 추</span></a></h1>
 	</div>
 		<nav class="navbar">
 		<ul class="navbar_menu">
