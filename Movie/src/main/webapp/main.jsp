@@ -77,26 +77,6 @@
 	    background-size: contain;
         transform: translate(0, -50%);
 	}
-	
-	/* .linkfirst {
-		background-position: 100% 0;
-	    position: absolute;
-	    top: 0;
-	    width: 300px;
-	    height: 440px;
-	    right: 0px;
-	    margin-right: 530px;
-	}
-	
-	.linksecond {
-		position: absolute;
-	    top: 0;
-	    width: 300px;
-	    height: 440px;
-	    left: 530px;
-	} */
-	ㅁㅁㅁㅁㅁㅁㅁㅁㅁ
-	
 </style>
 </head>
 <body>
