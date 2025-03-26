@@ -99,6 +99,13 @@
 	    border: none;
 	    font-family: "Noto Sans KR", sans-serif;
 	}
+	.dropdown {
+		padding: 8px 20px;
+	}
+	.dropdown-menu.show {
+		top: 100%;
+		left: -60px;
+	}
 	@media screen and (max-width: 800px) {
     .navbar{
         flex-direction: column;
@@ -118,9 +125,7 @@
 		width: 100%;
 		display: flex;
 	} 
-}
 </style>
-
 <body>
 	<div class="navbar_logo">
 		<h1><span style="font-family: 'Gugi' !important;">오 . 영 . 추</span></h1>
@@ -149,9 +154,9 @@
 			<div class="dropdown">
 				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">목차</button>
 				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-					<li><a class="dropdown-item" href="#">로그인</a></li>
+					<li><a class="dropdown-item" href="login.jsp">로그인</a></li>
 					<li><a class="dropdown-item" href="#">마이페이지</a></li>
-					<li><a class="dropdown-item" href="#">로그아웃</a></li>
+					<li><a class="dropdown-item" href="login.jsp">로그아웃</a></li>
 				</ul>
 			</div>
 		</ul>

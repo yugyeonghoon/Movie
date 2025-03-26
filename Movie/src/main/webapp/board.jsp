@@ -26,7 +26,7 @@
 		}
         h2 {
             color: black;
-            margin-bottom: 20px;
+            margin: 20px;
             text-align: center;
             font-size: 1.6rem;
         }
@@ -126,8 +126,8 @@
     </style>
 </head>
 <body>
+    <h2>자유 게시판</h2>
     <div class="board-container">
-        <h2>자유 게시판</h2>
         <ul class="post-list">
 			<li class="post-item">
 				<a href="">제목</a>
