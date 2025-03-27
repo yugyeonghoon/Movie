@@ -135,14 +135,14 @@
 			<div class="dropdown">
 				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">영화 장르</button>
 				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-					<li><a class="dropdown-item" href="#">액션</a></li>
-					<li><a class="dropdown-item" href="#">범죄</a></li>
-					<li><a class="dropdown-item" href="#">SF</a></li>
-					<li><a class="dropdown-item" href="#">스릴러</a></li>
-					<li><a class="dropdown-item" href="#">범죄</a></li>
-					<li><a class="dropdown-item" href="#">코미디</a></li>
-					<li><a class="dropdown-item" href="#">멜로</a></li>
-					<li><a class="dropdown-item" href="#">공포</a></li>
+					<li><a class="dropdown-item" href="genreaction.jsp">액션</a></li>
+					<li><a class="dropdown-item" href="genreaction.jsp">범죄</a></li>
+					<li><a class="dropdown-item" href="genreaction.jsp">SF</a></li>
+					<li><a class="dropdown-item" href="genreaction.jsp">스릴러</a></li>
+					<li><a class="dropdown-item" href="genreaction.jsp">범죄</a></li>
+					<li><a class="dropdown-item" href="genreaction.jsp">코미디</a></li>
+					<li><a class="dropdown-item" href="genreaction.jsp">멜로</a></li>
+					<li><a class="dropdown-item" href="genreaction.jsp">공포</a></li>
 				</ul>
 			</div>
 			<li><a href="movieBoard.jsp">영화 토론</a></li>
@@ -155,8 +155,9 @@
 				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">목차</button>
 				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 					<li><a class="dropdown-item" href="login.jsp">로그인</a></li>
-					<li><a class="dropdown-item" href="#">마이페이지</a></li>
+					<li><a class="dropdown-item" href="profile.jsp">마이페이지</a></li>
 					<li><a class="dropdown-item" href="login.jsp">로그아웃</a></li>
+					<li><a class="dropdown-item" href="user_management.jsp">회원관리</a></li>
 				</ul>
 			</div>
 		</ul>

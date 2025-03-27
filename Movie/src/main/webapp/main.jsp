@@ -18,7 +18,7 @@
 		position:relative;
 	}
 	#content {
-		width: 1200px;
+		width: 1500px;
     	margin: auto;
 	}
 	
@@ -63,9 +63,9 @@
 	    top: 50%;
 	    left: 0;
 	    margin-left: 20px;
-	    width: 250px;
+	    width: 300px;
 	    background-size: contain;
-        transform: translate(0, -50%);
+        /* transform: translate(0, -50%); */
 	}
 	
 	.banner2 {
@@ -73,9 +73,9 @@
 	    top: 50%;
 	    right: 0;
 	    margin-right: 20px;
-	    width: 250px;
+	    width: 300px;
 	    background-size: contain;
-        transform: translate(0, -50%);
+        /* transform: translate(0, -50%); */
 	}
 </style>
 </head>
@@ -113,7 +113,7 @@
 		    	<img src="https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20250221_149%2F1740118679052Pi7wI_JPEG%2Fmovie_image.jpg" style="max-width: 100%; height: auto;" class="d-block w-100" alt="...">
 		    </div>
 	    </div>
-	    <div class="carousel-item" data-bs-interval="3000">
+	    <div class="carousel-item" data-bs-interval="4000">
 	    	<div class="first">
 	    		<img src="https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20210311_155%2F1615423409170FPnKV_JPEG%2Fmovie_image.jpg" style="max-width: 100%; height: auto;" class="d-block w-100" alt="...">
 	    	</div>
@@ -159,7 +159,7 @@
 		    	<img src="https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20250207_226%2F1738893645067Bx00O_JPEG%2Fmovie_image.jpg" style="max-width: 100%; height: auto;" class="w-100" alt="...">
 		    </div>
 	    </div>
-	    <div class="carousel-item" data-bs-interval="3000">
+	    <div class="carousel-item" data-bs-interval="4000">
 	    	<div class="first">
 	    		<img src="https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20250207_292%2F17388936739007UfwO_JPEG%2Fmovie_image.jpg" style="max-width: 100%; height: auto;" class="w-100" alt="...">
 	    	</div>
@@ -205,7 +205,7 @@
 		    	<img src="https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20250207_226%2F1738893645067Bx00O_JPEG%2Fmovie_image.jpg" style="max-width: 100%; height: auto;" class="w-100" alt="...">
 		    </div>
 	    </div>
-	    <div class="carousel-item" data-bs-interval="3000">
+	    <div class="carousel-item" data-bs-interval="4000">
 	    	<div class="first">
 	    		<img src="https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20250207_292%2F17388936739007UfwO_JPEG%2Fmovie_image.jpg" style="max-width: 100%; height: auto;" class="w-100" alt="...">
 	    	</div>
