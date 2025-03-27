@@ -155,8 +155,9 @@
 				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">목차</button>
 				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 					<li><a class="dropdown-item" href="login.jsp">로그인</a></li>
-					<li><a class="dropdown-item" href="#">마이페이지</a></li>
+					<li><a class="dropdown-item" href="profile.jsp">마이페이지</a></li>
 					<li><a class="dropdown-item" href="login.jsp">로그아웃</a></li>
+					<li><a class="dropdown-item" href="user_management.jsp">회원관리</a></li>
 				</ul>
 			</div>
 		</ul>
