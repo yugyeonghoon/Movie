@@ -128,12 +128,18 @@
 <body>
     <h2>자유 게시판</h2>
     <div class="board-container">
+    	<table>
+    	<th>타입</th>
+    	<th>제목</th>
+    	<th>작성일</th>
         <ul class="post-list">
 			<li class="post-item">
+				<div>자유</div>
 				<a href="">제목</a>
 				<div class="meta">작성자: 22222| 작성일:222222</div>
 			</li>
         </ul>
+        </table>
   			<div class="action">
 	            <button onclick="location.href='write.jsp'">글쓰기</button>
 	        </div>
@@ -143,7 +149,7 @@
 	        <a class="active" href="">1</a>
 	        <a href="">2</a>
 		    <a href="">&gt;</a>
-		    <a href="">&lt;&lt;</a>
+		    <a href="">&gt;&gt;</a>
         </div>
         <div class="search-bar">
             <form action="board.jsp" method="get">
