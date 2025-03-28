@@ -1,11 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String error = request.getParameter("error");
+	String cookie = "";
+	
+	Cookie[] cookies = request.getCookies();
+	
+	if(cookies != null && cookies.length > 0){
+		for(int i = 0; i < cookies.length; i++){
+			if(cookies[i].getName().equals("id")){
+				cookie = cookies[i].getValue();
+			}
+		}
+	}
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>오.영.추</title>
-	<script src="./jquery-3.7.1.js"></script>
+<script src="./jquery-3.7.1.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400');
 
@@ -239,11 +255,11 @@
 			<form method="post" name="form1" class="box" onsubmit="return formCheckId()" action="loginok.jsp">
 				<h4>로그인 페이지<span></span></h4>
 				<h5></h5>
-					<input type="text" id="username" value="" name="username" placeholder="Id" autocomplete="off">
+					<input type="text" id="id" value="<%= cookie %>" name="id" placeholder="Id" autocomplete="off">
 						<i class="typcn typcn-eye" id="eye"></i>
-					<input type="password" name="password" placeholder="Passsword" id="pwd" autocomplete="off">
+					<input type="password" name="password" placeholder="Passsword" id="pw" autocomplete="off">
 					<label>
-						<input type="checkbox"  id="checkId" name="checkId" class="checkId">
+						<input type="checkbox" <%= !cookie.equals("") ? "checked" : "" %> id="checkId" name="checkId" class="checkId">
 						<span></span>
 						<small class="rmb">아이디 저장</small>
 					</label>
@@ -255,5 +271,30 @@
 		</div> 	
 	</div>
 </body>
-
+<script>
+$(document).ready(function(){
+	let error = "<%= error%>";
+	if(error == "fail"){
+		alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+	}
+	
+	let id = $("#id");
+	let pw = $("#pw");
+	
+	function formCheckId(){
+		if(id.val().trim() == ""){
+			id.focus();
+			id.val("");
+			alert("아이디를 입력해주세요.")
+			return false;
+		}
+		if(pw.val().trim() == ""){
+			pw.focus();
+			pw.val("");
+			alert("비밀번호를 입력해주세요.")
+			return false;
+		}
+	}
+})
+</script>
 </html>

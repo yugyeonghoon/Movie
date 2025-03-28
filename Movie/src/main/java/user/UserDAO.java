@@ -32,7 +32,7 @@ public class UserDAO extends DBManager{
 		DBConnect();
 		
 		String sql = "";
-		sql += "select * from user where id = '"+id+"' and pw = '"+pw+"' and user_type != 98 or 99";
+		sql += "select * from user where id = '"+id+"' and pw = '"+pw+"' and user_type not in(98, 99)";
 		executeQuery(sql);
 		
 		if(next()) {
