@@ -1,7 +1,13 @@
+<%@page import="board.BoardVO"%>
+<%@page import="board.BoardDAO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp" %>
+<%
+	BoardDAO dao = new BoardDAO();
+	List<BoardVO> list = dao.listView("1");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,7 +42,7 @@
         }
         .post-item {
             padding: 15px;
-            margin-bottom: 400px;
+            /* margin-bottom: 400px; */
             background: white;
             border-radius: 5px;
             border: 1px solid #ddd;
@@ -129,10 +135,22 @@
 	<h2>영화 토론</h2>
     <div class="board-container">
         <ul class="post-list">
-			<li class="post-item">
-				<a href="">제목</a>
-				<div class="meta">작성자: 22222| 작성일:222222</div>
-			</li>
+        	<%
+	        	for(int i = 0; i < list.size(); i++){
+	    			BoardVO vo = list.get(i);
+	    			int no = vo.getNo();
+	    			String title = vo.getTitle();
+	    			String author = vo.getAuthor();   		
+	    			String createDate = vo.getCreateDate();
+	    			int boardType = vo.getBoardType();
+        	%>
+				<li class="post-item" style="background:<%= boardType == 0 ? "lightgray" : "white" %>;">
+					<a href="post.jsp?no=<%= no %>"><%= title %></a>
+					<div class="meta">작성자: <%= author %>| 작성일: <%= createDate %></div>
+				</li>
+			<%
+	        	}
+			%>
         </ul>
   			<div class="action">
 	            <button onclick="location.href='write.jsp'">글쓰기</button>

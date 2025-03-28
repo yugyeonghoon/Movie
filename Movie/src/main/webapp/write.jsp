@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>+
 <%@ include file="header.jsp" %>
+<%
+	String referer = request.getHeader("Referer");
+	//System.out.println(referer);
+	String last = referer.substring(referer.lastIndexOf('/') + 1);
+	//System.out.println(last);
+%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -64,12 +70,41 @@
 		    height: 30px;
 		    border-radius: 9px;
 		    }
+		    .search-bar {
+            display: flex;
+            /* justify-content: space-around; */
+            margin-bottom: 0px;
+	        }
+	        .search-bar select, .search-bar input[type="text"], .search-bar button {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+	        }
+	        .search-bar button {
+            background: #2575fc;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+	        }
+	        .search-bar button:hover {
+            background: black;
+	        }
 		</style>
 	</head>
 	<body>
 		<h2>글 쓰기</h2>
 		<div class="write-container">
 			<form action="writeok.jsp" method="post">
+				<input type="hidden" name="refer" value="<%= last %>">
+				<div class="search-bar">
+	                <select name="boardType">
+	                	<option>게시판 타입을 선택해주세요.</option>
+	                    <option value="1">영화 토론</option>
+	                    <option value="2">자유 게시판</option>
+	                </select>
+		        </div>
 				<table class="t1" border="0">
 					<tr>
 						<td>

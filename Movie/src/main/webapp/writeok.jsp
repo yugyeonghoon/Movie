@@ -1,3 +1,4 @@
+<%@page import="user.UserVO"%>
 <%@page import="board.BoardVO"%>
 <%@page import="board.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -5,13 +6,27 @@
 <%
 	request.setCharacterEncoding("utf-8");
 	
+	UserVO user = (UserVO)session.getAttribute("user");
+	String title = request.getParameter("title");
+	String refer = request.getParameter("refer");
+	String content = request.getParameter("content");
+	String boardType = request.getParameter("boardType");
+	
 	BoardDAO dao = new BoardDAO();
 	BoardVO vo = new BoardVO();
-	dao.write(vo);
+	int boardTypeNum = Integer.parseInt(boardType);
 	
-	vo.getTitle();
-	vo.getContent();
-	vo.getAuthor();
-	vo.getBoardType();
+	vo.setAuthor(user.getId());
+	vo.setTitle(title);
+	vo.setContent(content);
+	vo.setBoardType(boardTypeNum);
 	
+	int no = dao.write(vo);
+	response.sendRedirect("post.jsp?no="+ no);
+	
+	/* if (refer != null) {
+	    response.sendRedirect(refer);
+	} else {
+	    response.sendRedirect("board.jsp");
+	} */
 %>

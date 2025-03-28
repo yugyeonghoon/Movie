@@ -19,8 +19,8 @@ public class BoardDAO extends DBManager{
 		String sql = "";
 		sql += "insert into board(author, title, content, board_type)";
 		sql += " values('"+author+"', '"+title+"', '"+content+"', "+boardType+")";	
-		executeQuery(sql);
-		
+		executeUpdate(sql);
+
 		if(next()) {
 			int no = getInt("no");
 			DBDisConnect();
@@ -32,11 +32,11 @@ public class BoardDAO extends DBManager{
 	}
 	
 	//글 조회(여러건)
-	public List<BoardVO> listView(){
+	public List<BoardVO> listView(String bno){
 		driverLoad();
 		DBConnect();
 		
-		String sql = "select * from board where board_type = 0 or board_type = 1";
+		String sql = "select * from board where board_type = 0 or board_type = + "+bno+" order by board_type ASC";
 		executeQuery(sql);
 		
 		List<BoardVO> list = new ArrayList<>();
@@ -45,12 +45,14 @@ public class BoardDAO extends DBManager{
 			String title = getString("title");
 			String author = getString("author");
 			String createDate = getString("create_date");
+			int boardType = getInt("board_type");
 			
 			BoardVO vo = new BoardVO();
 			vo.setNo(no);
 			vo.setTitle(title);
 			vo.setAuthor(author);
 			vo.setCreateDate(createDate);
+			vo.setBoardType(boardType);
 			
 			list.add(vo);
 		}
