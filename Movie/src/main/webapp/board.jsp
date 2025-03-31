@@ -1,13 +1,19 @@
+<%@page import="board.BoardVO"%>
+<%@page import="board.BoardDAO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp" %>
+<%
+	BoardDAO dao = new BoardDAO();
+	List<BoardVO> list = dao.listView("2");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>영화 토론</title>
+    <title>자유 게시판</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -36,7 +42,7 @@
         }
         .post-item {
             padding: 15px;
-            margin-bottom: 400px;
+            /* margin-bottom: 400px; */
             background: white;
             border-radius: 5px;
             border: 1px solid #ddd;
@@ -128,18 +134,24 @@
 <body>
     <h2>자유 게시판</h2>
     <div class="board-container">
-    	<table>
-    	<th>타입</th>
-    	<th>제목</th>
-    	<th>작성일</th>
         <ul class="post-list">
-			<li class="post-item">
-				<div>자유</div>
-				<a href="">제목</a>
-				<div class="meta">작성자: 22222| 작성일:222222</div>
-			</li>
+        	<%
+	        	for(int i = 0; i < list.size(); i++){
+	    			BoardVO vo = list.get(i);
+	    			int no = vo.getNo();
+	    			String title = vo.getTitle();
+	    			String author = vo.getAuthor();   		
+	    			String createDate = vo.getCreateDate();
+	    			int boardType = vo.getBoardType();
+        	%>
+				<li class="post-item" style="background:<%= boardType == 0 ? "lightgray" : "white" %>;">
+					<a href="post.jsp?no=<%= no %>"><%= title %></a>
+					<div class="meta">작성자: <%= author %>| 작성일: <%= createDate %></div>
+				</li>
+			<%
+	        	}
+			%>
         </ul>
-        </table>
   			<div class="action">
 	            <button onclick="location.href='write.jsp'">글쓰기</button>
 	        </div>
@@ -149,7 +161,7 @@
 	        <a class="active" href="">1</a>
 	        <a href="">2</a>
 		    <a href="">&gt;</a>
-		    <a href="">&gt;&gt;</a>
+		    <a href="">&lt;&lt;</a>
         </div>
         <div class="search-bar">
             <form action="board.jsp" method="get">
