@@ -157,10 +157,27 @@
 			<div class="dropdown">
 				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">목차</button>
 				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-					<li><a class="dropdown-item" href="login.jsp">로그인</a></li>
-					<li><a class="dropdown-item" href="profile.jsp">마이페이지</a></li>
-					<li><a class="dropdown-item" href="login.jsp">로그아웃</a></li>
-					<li><a class="dropdown-item" href="user_management.jsp">회원관리</a></li>
+				<%
+					if(user != null){
+						%>
+							<li><a class="dropdown-item" href="profile.jsp">마이페이지</a></li>
+							<!-- <li><a class="dropdown-item" href="login.jsp">로그아웃</a></li> -->
+							<%
+							if(user.getUserType() == 0){
+								%>
+									<li><a class="dropdown-item" href="user_management.jsp">회원관리</a></li>
+								<%
+							}
+						%>
+							<li><a class="dropdown-item" href="login.jsp">로그아웃</a></li>
+						<%
+							}else{
+								%>
+								<li><a class="dropdown-item" href="login.jsp">로그인</a></li>
+								<li><a class="dropdown=item" href="signup.jsp">회원가입</a></li>
+								<%
+							}
+						%>				
 				</ul>
 			</div>
 		</ul>
