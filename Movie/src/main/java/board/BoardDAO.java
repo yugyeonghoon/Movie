@@ -20,6 +20,9 @@ public class BoardDAO extends DBManager{
 		sql += "insert into board(author, title, content, board_type)";
 		sql += " values('"+author+"', '"+title+"', '"+content+"', "+boardType+")";	
 		executeUpdate(sql);
+		
+		String sql2 = "select last_insert_id() as no";
+		executeQuery(sql2);
 
 		if(next()) {
 			int no = getInt("no");
@@ -92,5 +95,31 @@ public class BoardDAO extends DBManager{
 			DBDisConnect();
 			return null;
 		}
+	}
+	
+	//글 삭제
+	public void delete(String no) {
+		driverLoad();
+		DBConnect();
+		
+		String sql = "";
+		sql += "update board set board_type = 99 where no = " + no;
+		executeUpdate(sql);
+		DBDisConnect();
+	}
+	
+	//글 수정
+	public void modify(BoardVO vo) {
+		String title = vo.getTitle();
+		String content = vo.getContent();
+		int no = vo.getNo();
+		
+		driverLoad();
+		DBConnect();
+		
+		String sql = "update board set title = '"+title+"', content = '"+content+"', update_date = now() ";
+		sql += "where no = "+ no;
+		executeUpdate(sql);
+		DBDisConnect();
 	}
 }

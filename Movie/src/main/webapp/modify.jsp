@@ -1,5 +1,15 @@
+<%@page import="board.BoardVO"%>
+<%@page import="board.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String no = request.getParameter("no");
+		
+	BoardDAO dao = new BoardDAO();
+	BoardVO vo = dao.view(no);
+	String title = vo.getTitle();
+	String content = vo.getContent();
+%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -32,12 +42,13 @@
 		     width: 100%;
 		    }
 		    .title{
-		    width: 100%;
+		    width: 98%;
 		    padding: 10px;
 		    color: black; 
+		    border-radius: 9px
 		    }
 		    .content{
-		    width: 100%;
+		    width: 99%;
 		    margin: 0px;
 		    resize: none;
 		    height: 580px;
@@ -66,28 +77,22 @@
 		</style>
 	</head>
 	<body>
-		<h2>글 수정</h2>
 		<div class="write-container">
-			<form action="writeok.jsp" method="post">
-				<table class="t1" border="0">
-					<tr>
-						<td>
-							<input class="title" name="title" type="text" placeholder="입력된 제목" autocomplete="off">
-						</td>
-					</tr>
-				</table>
-				<table class="t1" border="0">	
-					<tr>
-						<td>
-							<textarea class="content" name="content" placeholder="입력된 내용" autocomplete="off"></textarea>
-						</td>
-					</tr>
-				</table>
-				<div>
-					<button type="submit" class="btn1">확인</button>
-					<button type="button" class="btn2" onclick="history.back();">취소</button>
-				</div>
-			</form>
+			<h2>글 수정</h2>
+				<form action="modifyok.jsp" method="post">
+					<input type="hidden" name="no" value="<%= no %>">
+	        	
+		            <label for="title">제목</label>
+		            <input type="text" id="title" name="title" class="title" placeholder="제목을 입력하세요" value="<%= title %>">
+		
+		            <label for="content">내용</label>
+		            <textarea id="content" name="content" class="content" placeholder="내용을 입력하세요"><%= content %></textarea>
+		          
+		            <div class="action">
+		                <button class="btn1" type="submit">수정</button>
+		                <button type="button" class="btn2" onclick="history.back()">취소</button>
+		            </div>
+			</form>	
 		</div>
 	</body>
 </html>
