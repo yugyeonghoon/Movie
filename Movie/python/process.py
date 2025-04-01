@@ -12,7 +12,7 @@ df.dropna(subset=["plots"], inplace=True)
 
 print(df.info())
 
-df["poster"].fillna("a.jpg", inplace=True)
+df["poster"].fillna("aa.jpg", inplace=True)
 print(df.info())
 
 df.drop(df[df["genre"] == "에로"].index, inplace=True)
