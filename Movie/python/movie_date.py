@@ -2,61 +2,67 @@ import requests
 import pandas as pd
 
 url = "http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&ServiceKey=H2W8Y70VM9R38UQ32FVL&startCount1&listCount=500"
-
-# for i in range(223) :
-#     start_count = i * 500
-#     url = f"http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&ServiceKey=H2W8Y70VM9R38UQ32FVL&startCount={start_count}&listCount=500"
-
-response = requests.get(url).json()
-
-datas = response["Data"][0]["Result"]
-
 result = []
 
-for data in datas:
-    #print(data["DOCID"])
-    #print(data["title"])
+for i in range(1, 224) :
+     
+    start_count = i 
 
-    # directors = data["directors"]["director"]
+    url = f"http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&ServiceKey=H2W8Y70VM9R38UQ32FVL&startCount={start_count}&listCount=500"
+     
 
-    # 감독 = []
-    
-    # for director in directors:
-    #     감독.append(director["directorNm"])
-    
-    # 감독 = " ".join(감독)
-    # print(감독)
+    print(url)
+    response = requests.get(url).json()
 
-    directors = " ".join([director["directorNm"] for director in data["directors"]["director"]])
+    datas = response["Data"][0]["Result"]
 
-    actors = " ".join([actor["actorNm"] for actor in data["actors"]["actor"][:5]])
+    for data in datas:
+        #print(data["DOCID"])
+        #print(data["title"])
 
-    nation = data["nation"]
+        # directors = data["directors"]["director"]
 
-    genre = data["genre"]
+        # 감독 = []
+        
+        # for director in directors:
+        #     감독.append(director["directorNm"])
+        
+        # 감독 = " ".join(감독)
+        # print(감독)
 
-    plots = " ".join([plot["plotText"] for plot in data["plots"]["plot"]])
+        directors = " ".join([director["directorNm"] for director in data["directors"]["director"]])
 
-    releaseDts = data["regDate"]
+        actors = " ".join([actor["actorNm"] for actor in data["actors"]["actor"][:5]])
 
-    poster = data["posters"]
+        nation = data["nation"]
 
-    runtime = data["runtime"]
+        genre = data["genre"]
 
-    dict = {
-        "DOCID" : data["DOCID"],
-        "title" : data["title"],
-        "directors" : directors,
-        "actors" : actors,
-        "nation" : nation,
-        "genre" : genre,
-        "plot" : plots,
-        "releaseDts" : releaseDts,
-        "poster" : poster,
-        "runtime" : runtime
-    }
+        plots = " ".join([plot["plotText"] for plot in data["plots"]["plot"]])
 
-    result.append(dict)
+        releaseDts = data["regDate"]
+
+        poster = data["posters"]
+
+        runtime = data["runtime"]
+
+        ratingGrade = data["ratings"]["rating"][0]["ratingGrade"]
+
+        dict = {
+            "DOCID" : data["DOCID"],
+            "title" : data["title"],
+            "directors" : directors,
+            "actors" : actors,
+            "nation" : nation,
+            "genre" : genre,
+            "plot" : plots,
+            "releaseDts" : releaseDts,
+            "poster" : poster,
+            "runtime" : runtime,
+            "ratingGrade" : ratingGrade
+        }
+
+        result.append(dict)
 
 df = pd.DataFrame(result)
 
