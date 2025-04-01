@@ -6,6 +6,9 @@
 <%@ include file="header.jsp" %>
 <%
 	BoardDAO dao = new BoardDAO();
+/* 	String searchType = request.getParameter("searchType");
+	String keyword = request.getParameter("keyword"); */
+	
 	List<BoardVO> list = dao.listView("1");
 %>
 <!DOCTYPE html>
