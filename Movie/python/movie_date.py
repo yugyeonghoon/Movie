@@ -38,7 +38,7 @@ for i in range(1, 224) :
 
         genre = data["genre"]
 
-        plots = " ".join([plot["plotText"] for plot in data["plots"]["plot"]])
+        plots = data["plots"]["plot"][0]["plotText"]
 
         releaseDts = data["regDate"]
 
@@ -55,7 +55,7 @@ for i in range(1, 224) :
             "actors" : actors,
             "nation" : nation,
             "genre" : genre,
-            "plot" : plots,
+            "plots" : plots,
             "releaseDts" : releaseDts,
             "poster" : poster,
             "runtime" : runtime,
