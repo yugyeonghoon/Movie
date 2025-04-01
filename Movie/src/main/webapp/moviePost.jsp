@@ -176,7 +176,7 @@
 		        	}
 		        %>
 				<div>
-					<button type="button" class="btn1" onclick="location.href='board.jsp'">목록으로</button>
+					<button type="button" class="btn1" onclick="location.href='movieBoard.jsp'">목록으로</button>
 				</div>
 		</div>
 		<%

@@ -6,6 +6,9 @@
 <%@ include file="header.jsp" %>
 <%
 	BoardDAO dao = new BoardDAO();
+/* 	String searchType = request.getParameter("searchType");
+	String keyword = request.getParameter("keyword"); */
+	
 	List<BoardVO> list = dao.listView("1");
 %>
 <!DOCTYPE html>
@@ -145,7 +148,7 @@
 	    			int boardType = vo.getBoardType();
         	%>
 				<li class="post-item" style="background:<%= boardType == 0 ? "lightgray" : "white" %>;">
-					<a href="post.jsp?no=<%= no %>"><%= title %></a>
+					<a href="moviePost.jsp?no=<%= no %>"><%= title %></a>
 					<div class="meta">작성자: <%= author %>| 작성일: <%= createDate %></div>
 				</li>
 			<%

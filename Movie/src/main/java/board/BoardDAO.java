@@ -39,7 +39,12 @@ public class BoardDAO extends DBManager{
 		driverLoad();
 		DBConnect();
 		
-		String sql = "select * from board where board_type = 0 or board_type = + "+bno+" order by board_type ASC";
+		String sql = "select * from board where board_type = 0 or board_type= "+bno+" order by board_type ASC";
+		/*
+		 * if(searchType != null && keyword != null) { sql +=
+		 * " and "+searchType+" like '%"+keyword+"%'"; }
+		 */
+		//sql += " limit " + startNum + ", " + limitSize;
 		executeQuery(sql);
 		
 		List<BoardVO> list = new ArrayList<>();

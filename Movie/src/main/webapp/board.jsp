@@ -5,8 +5,18 @@
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp" %>
 <%
+	
+	/* String searchType = request.getParameter("searchType");
+	String keyword = request.getParameter("keyword"); */
 	BoardDAO dao = new BoardDAO();
 	List<BoardVO> list = dao.listView("2");
+	
+	/* if(searchType == null) {
+		searchType = "";
+	}
+	if(keyword == null) {
+		keyword = "";
+	} */
 %>
 <!DOCTYPE html>
 <html lang="en">

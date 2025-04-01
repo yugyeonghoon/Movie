@@ -3,6 +3,11 @@
     pageEncoding="UTF-8"%>
 <%
 	UserVO user = (UserVO)session.getAttribute("user");
+
+	String mkeyword = request.getParameter("mkeyword");
+	if(mkeyword == null) {
+		mkeyword = "";
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -151,8 +156,10 @@
 				<li><a href="movieBoard.jsp">영화 토론</a></li>
 				<li><a href="board.jsp">자유 게시판</a></li>
 			</ul>
-				<input type="text" placeholder="검색어를 입력해주세요">
-				<button>검색</button>
+			<form action="moviesearch.jsp" method="get">
+				<input value="<%=mkeyword %>" type="text" name="movieKeyword" placeholder="검색어를 입력해주세요">
+				<button type="submit">검색</button>
+			</form>
 			<ul class="navbar_icons">
 				<div class="dropdown">
 					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">목차</button>
