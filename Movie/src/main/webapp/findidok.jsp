@@ -1,9 +1,27 @@
+<%@page import="java.util.List"%>
+<%@page import="user.UserVO"%>
+<%@page import="user.UserDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
 	
-	User
+	UserVO user = (UserVO)session.getAttribute("user");
+
+	String email = request.getParameter("email");
+	if(email == null || email.isEmpty()){
+		response.sendRedirect("findid.jsp");
+		return;
+	}
+	UserDAO dao = new UserDAO();
+	UserVO vo = new UserVO();
+	
+	List<String> list = dao.findId(email);
+	System.out.print(list);
+	if(list == null){
+		response.sendRedirect("findid.jsp");
+		return;
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -47,11 +65,11 @@
 				text-align: center;
 				transform: translateX(-50%);
 				background-color: #b1dbe900;
-				border-radius: 9px;
+/* 				border-radius: 9px;
 				border-top: 2px solid gray;
 				border-bottom: 2px solid gray;
 				border-right: 2px solid gray;
-				border-left:2px solid gray;
+				border-left:2px solid gray; */
 				width: 500px;
 				height: 250px;
 				/* box-shadow: 1px 1px 108.8px 19.2px rgb(25,31,53); */
@@ -63,7 +81,7 @@
 	            color: black;
 			}
 			.find-box{
-				position: absolute;
+				/* position: absolute; */
 				top: 20%;
 				left: 25%;
 			}
@@ -102,7 +120,16 @@
 				<form>
 					<div class="find-box">
 						<label>사용자님의 아이디는</label>
+						<% 
+							for(int i = 0; i < list.size(); i++){
+								String id = list.get(i);
+							%>
 							<input type="text" value="<%=id %>" readonly>
+							<%
+								
+							}
+						
+						%>
 						<label>입니다.</label>
 					</div>	
 				</form>

@@ -272,29 +272,32 @@
 	</div>
 </body>
 <script>
+
 $(document).ready(function(){
+	console.log("html 로딩 완료")
 	let error = "<%= error%>";
 	if(error == "fail"){
 		alert("아이디 또는 비밀번호가 일치하지 않습니다.");
 	}
-	
+})
+
+console.log("스크립트 로딩 완료")
+function formCheckId(){
 	let id = $("#id");
 	let pw = $("#pw");
 	
-	function formCheckId(){
-		if(id.val().trim() == ""){
-			id.focus();
-			id.val("");
-			alert("아이디를 입력해주세요.")
-			return false;
-		}
-		if(pw.val().trim() == ""){
-			pw.focus();
-			pw.val("");
-			alert("비밀번호를 입력해주세요.")
-			return false;
-		}
+	if(id.val().trim() == ""){
+		id.focus();
+		id.val("");
+		alert("아이디를 입력해주세요.")
+		return false;
 	}
-})
+	if(pw.val().trim() == ""){
+		pw.focus();
+		pw.val("");
+		alert("비밀번호를 입력해주세요.")
+		return false;
+	}
+}
 </script>
 </html>

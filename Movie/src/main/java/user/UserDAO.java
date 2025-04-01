@@ -12,13 +12,12 @@ public class UserDAO extends DBManager{
 		String pw = vo.getPw();
 		String email = vo.getEmail();
 		String nick = vo.getNick();
-		int userType = vo.getUserType();
 		driverLoad();
 		DBConnect();
 		
 		String sql = "";
-		sql += "insert into user(id, pw, email, nick, userType)";
-		sql += " value ('"+id+"', '"+pw+"', '"+email+"', '"+nick+"', '"+userType+"')";
+		sql += "insert into user(id, pw, email, nick)";
+		sql += " value ('"+id+"', '"+pw+"', '"+email+"', '"+nick+"')";
 		executeUpdate(sql);
 		
 		DBDisConnect();
@@ -112,6 +111,23 @@ public class UserDAO extends DBManager{
 			return 0;
 		}
 	}
+	//닉네임 중복검사
+	public int nickCheck(String nick) {
+		driverLoad();
+		DBConnect();
+		
+		String sql = "";
+		sql += "select count(*) as cnt from user where nick = '"+nick+"'";
+		executeQuery(sql);
+		if(next()) {
+			int cnt = getInt("cnt");
+			DBDisConnect();
+			return cnt;
+		}else {
+			DBDisConnect();
+			return 0;
+		}
+	}
 	//회원목록조회
 	public List<UserVO> gettAllUser(){
 		driverLoad();
@@ -138,23 +154,20 @@ public class UserDAO extends DBManager{
 		return list;
 	}
 	//아이디 찾기
-	public String findId(UserVO vo) {
-		String email = vo.getEmail();
+	public List<String> findId(String email) {
 		
 		driverLoad();
 		DBConnect();
 		
-		String sql = "select id from user where eamil = '"+email+"'";
+		String sql = "select id from user where email = '"+email+"'";
 		executeQuery(sql);
-		
-		if(next()) {
+		List<String> list = new ArrayList<>();
+		while(next()) {
 			String id = getString("id");
-			DBDisConnect();
-			return id;
-		}else {
-			DBDisConnect();
-			return null;
+			list.add(id);
 		}
+		DBDisConnect();
+		return list;
 	}
 	//비밀번호변경
 	public void changePw(UserVO vo) {
@@ -196,4 +209,25 @@ public class UserDAO extends DBManager{
 			return null;
 		}
 	}
+	//비밀번호 찾기
+	public int idemail(String id, String email) {
+		driverLoad();
+		DBConnect();
+		
+		String sql = "";
+		sql += "select count(*) as cnt from user where id = '"+id+"' and email = '"+email+"'";
+		executeQuery(sql);
+		
+		System.out.println(sql);
+		
+		if(next()) {
+			int cnt = getInt("cnt");
+			DBDisConnect();
+			return cnt;
+		}else {
+			DBDisConnect();
+			return 0;
+		}
+	}
+	
 }

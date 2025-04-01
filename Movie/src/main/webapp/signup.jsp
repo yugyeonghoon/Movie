@@ -2,218 +2,278 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>회원 가입</title>
-		<script src="./jquery-3.7.1.js"></script>
-		<style>
-			body{
-				font-family: 'Source Sans Pro', sans-serif;
-				background-color: #ffffff;
-				padding: 0;
-				margin: 0;
-			}
-			.signup-container {
-				margin: 0;
-				top: 100px;
-				left: 50%;
-				position: absolute;
-				text-align: center;
-				transform: translateX(-50%);
-				background-color: #b1dbe900;
-				border-radius: 9px;
-				border-top: 2px solid gray;
-				border-bottom: 2px solid gray;
-				border-right: 2px solid gray;
-				border-left:2px solid gray;
-				width: 500px;
-				height: 770px;
-				/* box-shadow: 1px 1px 108.8px 19.2px rgb(25,31,53); */
-			}
-			h1{
-				text-align: center;
-				margin-bottom: 20px;
-				color: #000000;
-				font-family: 'Seoul 1980', sans-serif;
-			}
-			form{
-				
-			}
-			label{
-				display: block;
-	            margin-bottom: 10px;
-	            margin-top: 7px;
-	            font-size: 1rem;
-	            font-weight: bold;
-	            color: #000000;
-			}
-			input{
-				margin: 2px auto;
-				background: #C2E9F3;
-				border: 0;
-				border-radius: 5px;
-				outline: none;
-				width: 250px;
-				height: 35px;
-				font-size: 0.8rem;
-				color: #000000;
-				      -webkit-transition: all .2s ease-out;
-				    -moz-transition: all .2s ease-out;
-				    -ms-transition: all .2s ease-out;
-				    -o-transition: all .2s ease-out;
-				    transition: all .2s ease-out;
-			}
-			input:focus{
-				border: 1px solid #79A6FE;
-				color: #000000;
+<head>
+<meta charset="UTF-8">
+<title>회원 가입</title>
+<script src="./jquery-3.7.1.js"></script>
+<style>
+	body{
+		font-family: 'Source Sans Pro', sans-serif;
+		background-color: #ffffff;
+		padding: 0;
+		margin: 0;
+	}
+	.signup-container {
+		margin: 0;
+		top: 100px;
+		left: 50%;
+		position: absolute;
+		text-align: center;
+		transform: translateX(-50%);
+		background-color: #b1dbe900;
+		border-radius: 9px;
+		border-top: 2px solid gray;
+		border-bottom: 2px solid gray;
+		border-right: 2px solid gray;
+		border-left:2px solid gray;
+		width: 500px;
+		height: 770px;
+	}
+	h1{
+		text-align: center;
+		margin-bottom: 70px;
+		color: #000000;
+		font-family: 'Seoul 1980', sans-serif;
+	}
+	form{
+		
+	}
+	label{
+		display: block;
+           margin-bottom: 10px;
+           margin-top: 7px;
+           font-size: 1rem;
+           font-weight: bold;
+           color: #000000;
+	}
+	input{
+		margin: 2px auto;
+		background: #C2E9F3;
+		border: 0;
+		border-radius: 5px;
+		outline: none;
+		width: 250px;
+		height: 35px;
+		font-size: 0.8rem;
+		color: #000000;
+		      -webkit-transition: all .2s ease-out;
+		    -moz-transition: all .2s ease-out;
+		    -ms-transition: all .2s ease-out;
+		    -o-transition: all .2s ease-out;
+		    transition: all .2s ease-out;
+	}
+	input:focus{
+		border: 1px solid #79A6FE;
+		color: #000000;
+	}
+	button{
+		width: 100%;
+		height: 40px;
+		font-size: 1rem;
+		cursor: pointer;
+		border-radius: 5px;
+		margin-top: 10px;
+		color: black;
+		background: gray;
+	}
+	select.box{
+		width: 110px;
+		height: 40px;
+		box-sizing: border-box;
+		margin-left: 5px;
+		padding: 5px 0 5px 10px;
+		border-radius: 4px;
+		border: 1px solid #d9d6d6;
+		color: #383838;
+		background-color: #ffffff;
+		font-family: 'Montserrat', 'Pretendard', sans-serif;
+	}
+	.feedback{
+		font-size: 1rem;
+		color: red;
+		margin-bottom: 10px;
+		display : none;
+	}
+	.feedback.success{
+		color: green;
+	}
+	.btn1 {
+	  border:0;
+	  background: #C2E9F3;
+	  color: #000000;
+	  border-radius: 100px;
+	  width: 340px;
+	  height: 49px;
+	  font-size: 16px;
+	  position: absolute;
+	  top: 90%;
+	  left: 16%;
+	  transition: 0.3s;
+	  cursor: pointer;
+	}
+	.btn{
+		border: 0;
+		background: #C2E9F3;
+		color: #000000;
+		border-radius: 100px;
+		width: 120px;
+		position: absolute;
+		left: 370px;		
+	}
+	.email{
+		width: 220px;
+		height: 35px;
+		border-top: none;
+		border-left: none;
+		border-right: none;
+		/* border-bottom: 3px solid black; */
+		font-size: 1rem;
+	}
+	.bounceInDown{
+		width: 100%;
+		height: 100%;
+	}
+	
+	.bounceInDown::before{
+		content: "";
+	    background-size: 100% 100%;
+	    opacity: 0.5;
+	    position: absolute;
+	    top: 0px;
+	    left: 0px;
+	    right: 0px;
+	    bottom: 0px;
+	}
+</style>
+</head>
+<body>
+	<div class="bounceInDown">
+		<div class="signup-container">
+			<h1>회원 가입</h1>
+				<form method="post" action="signupok.jsp" onsubmit="return formCheck()">
+					<label for="username">아이디</label>
+					<input type="text" id="id" name="id">
+						<div id="id-feedback" class="feedback">아이디 중복확인을 해주세요</div>
+					<label>비밀번호</label>
+					<input type="password" id="pw" name="pw">
+					<label>비밀번호 확인</label>
+					<input type="password" id="pwc" name="pwc">
+						<div id="pw-feedback" class="feedback">비밀번호가 일치하지 않습니다.</div>
+					<label>닉네임</label>
+					<input type="text" id="nickname" name="nickname">
+						<div id="nickname-feedback" class="feedback">닉네임 중복확인을 해주세요.</div>
+					<label>이메일</label>
+					<input type="text" id="email" class="email" name="email">
+					<input type="button" id="emailBtn" class="btn" value="이메일 인증">
+						<div id="email-feedback" class="feedback">인증번호가 일치하지 않습니다.</div>
+					<label>인증번호</label>
+					<input type="text" id="emailCheck" class="email">
+					<input type="button" id="emailCheckBtn" class="btn" value="인증번호 확인">
+						<div id="emailCheck-feedback" class="feedback">인증번호가 일치하지 않습니다.</div>
+					<input type="submit" value="회원가입" class="btn1" >
+				</form>
+		</div>
+	</div>	
+</body>
+<script>
+/* flag = false 면 폼전송 x true 일때만 폼전송  */
+	let idRegex = /^[a-zA-Z0-9]{6,12}$/;
+	let idFeedback = $("#id-feedback");
+	let idCheckFlag = false;
+	let id = $("#id");
+	
+	let nick = $("#nickname")
+	let nickFeedback = $("#nickname-feedback");
+	let nickRegex = /^[a-zA-Z0-9가-힣]{2,8}$/;
+	let nickCheckFlag = false;
+	
+	let pw = $("#pw");
+	let pwc = $("#pwc");
+	let pwFeedback = $("#pw-feedback");
+	
+	let email = $("#email");
+	let emailFeedback = $("#email-feedback");
+	let emc = $("#emailCheck");
+	let emcFeedback = $("#emailCheck-feedback");
+	let emailRegex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+	let emailCheckFlag = false;
+	
+	$("#id").keyup(function(e){
+		let id = e.target.value;
+		
+		idFeedback.css("display", "block");
+		idFeedback.removeClass("success");
+		idFeedback.text("아이디는 영어 대소문자, 숫자6~12자리만 사용 가능합니다.")
+		idCheckFlag = false;
+		
+		if(!idRegex.test(id)){
+			return;
+		}
+		$.ajax({
+			url : "idCheck.jsp",
+			type : "post",
+			data : {
+				id : id
+			},
+			success : function(result){
+				if(result.trim() == "0"){
+					idCheckFlag = true;
+					idFeedback.css("display", "block");
+					idFeedback.addClass("success");
+					idFeedback.text("사용가능한 아이디입니다.");
+				}else{
+					idCheckFlag = false;
+					idFeedback.css("display", "block");
+					idFeedback.removeClass("success");
+					idFeedback.text("사용불가능한 아이디 입니다.");
 				}
-			button{
-				width: 100%;
-				height: 40px;
-				font-size: 1rem;
-				cursor: pointer;
-				border-radius: 5px;
-				margin-top: 10px;
-				color: black;
-				background: gray;
-			}
-			select.box{
-				width: 110px;
-				height: 40px;
-				box-sizing: border-box;
-				margin-left: 5px;
-				padding: 5px 0 5px 10px;
-				border-radius: 4px;
-				border: 1px solid #d9d6d6;
-				color: #383838;
-				background-color: #ffffff;
-				font-family: 'Montserrat', 'Pretendard', sans-serif;
-			}
-			.feedback{
-				font-size: 1rem;
-				color: red;
-				margin-bottom: 10px;
-				display : none;
-			}
-			.feedback.success{
-				color: green;
-			}
-			.btn1 {
-			  border:0;
-			  background: #C2E9F3;
-			  color: #000000;
-			  border-radius: 100px;
-			  width: 340px;
-			  height: 49px;
-			  font-size: 16px;
-			  position: absolute;
-			  top: 90%;
-			  left: 16%;
-			  transition: 0.3s;
-			  cursor: pointer;
-			}
-			.btn{
-				border: 0;
-				background: #C2E9F3;
-				color: #000000;
-				border-radius: 100px;
-				width: 120px;
-				position: absolute;
-				left: 370px;		
-			}
-			.email{
-				width: 220px;
-				height: 35px;
-				border-top: none;
-				border-left: none;
-				border-right: none;
-				/* border-bottom: 3px solid black; */
-				font-size: 1rem;
-			}
-			.bounceInDown{
-				width: 100%;
-				height: 100%;
+			},
+			error : function(){
+				consloe.log("에러발생");
 			}
 			
-			.bounceInDown::before{
-				content: "";
-				background: url(./sky1.jpg) no-repeat;
-			    background-size: 100% 100%;
-			    opacity: 0.5;
-			    position: absolute;
-			    top: 0px;
-			    left: 0px;
-			    right: 0px;
-			    bottom: 0px;
+		});
+	});
+	
+	$("#nickname").keyup(function(e){
+		let nick = e.target.value;
+		let nickFeedback = $("#nickname-feedback");
+		
+		nickFeedback.css("display", "block");
+		nickFeedback.removeClass("success");
+		nickFeedback.text("닉네임은 2 ~ 8자리만 사용가능합니다.");
+		nickCheckFlag = false;
+		
+		if(!nickRegex.test(nick)){
+			return;
+		}
+		$.ajax({
+			url : "nickCheck.jsp",
+			type : "post",
+			data : {
+				nick : nick
+			},
+			success : function(result){
+				if(result.trim() == "0"){
+					nickCheckFlag = true;
+					nickFeedback.css("display", "block");
+					nickFeedback.addClass("success");
+					nickFeedback.text("사용 가능한 닉네임입니다.");
+				}else{
+					nickCheckFlag = false;
+					nickFeedback.css("display", "block");
+					nickFeedback.removeClass("success");
+					nickFeedback.text("중복된 닉네임 입니다.");
+				}
+			},
+			error: function(){
+				console.log("에러발생");
 			}
-		</style>
-	</head>
-	<body>
-		<div class="bounceInDown">
-			<div class="signup-container">
-				<h1>회원 가입</h1>
-					<form method="post" action="signupok.jsp" onsubmit="return formCheck()">
-						<label for="username">아이디</label>
-						<input type="text" id="username" name="username">
-						<div id="username-feedback" class="feedback">아이디 중복확인을 해주세요</div>
-						
-						<label>이름</label>
-						<input type="text" id="name" name="name">
-						<div id="name-feedback" class="feedback">이름을 입력해주세요.</div>
-						
-						<label>비밀번호</label>
-						<input type="password" id="password" name="password">
-						
-						<label>비밀번호 확인</label>
-						<input type="password" id="password-check" name="password-check">
-						<div id="password-feedback" class="feedback">비밀번호가 일치하지 않습니다.</div>
-						
-						<label>닉네임</label>
-						<input type="text" id="nickname" name="nickname">
-						<div id="nickname-feedback" class="feedback">닉네임 중복확인을 해주세요.</div>
-						
-						<label>이메일</label>
-						<input type="text" id="mail" class="email" name="email">
-						<input type="button" id="mailBtn" class="btn" value="이메일 인증">
-						<div id="mail-feedback" class="feedback">인증번호가 일치하지 않습니다.</div>
-						
-						<label>인증번호</label>
-						<input type="text" id="mailCheck" class="email">
-						<input type="button" id="mailCheckBtn" class="btn" value="인증번호 확인">
-						<div id="mailCheck-feedback" class="feedback">인증번호가 일치하지 않습니다.</div>
-						
-						<input type="submit" value="회원가입" class="btn1" >
-					</form>
-			</div>
-		</div>	
-	</body>
-	<script>
-	let idRegex = /^[a-zA-Z0-9]{6,12}$/;
-	let idCheckFlag = false;
+		});
+	});
 	
-	let nick = $("#nickname");
-	let nickFeedback = $("#nickname-feedback");
-	let nickCheckFlag = false;
-	let nickRegex = /^[a-zA-z0-9가-핳]{2,10}$/;
-	
-	let emailCheckFlag = false;
-	let mailCode = "";
-	
-	let pw = $("#password");
-	let pwc = $("#password-check");
-	let pwFeedback = $("#password-feedback");
-	
-	let email = $("#mail");
-	let emailFeedback = $("#mail-feedback");
-	let emc = $("#mailCheck");
-	let emcFeedback = $("#mailCheck-feedback");
-	let emailRegex = /^[a-zA-Z0-9]+@[0-9a-zA-Z]+\\.[a-z]$/;
-	
-	let name = $("#name");
-	let nameFeedback = $("#name-feedback");
-	let nameRegex = /^[가-힣]{2,5}$/;
-	
-	$("#mailBtn").click(function(){
+	$("#emailBtn").click(function(){
+		emailCheckFlag = false
 		if(email.val().trim() == ""){
 			alert("이메일을 입력해주세요");
 			return;
@@ -226,18 +286,18 @@
 			return;
 		}
 		
-		$("#mailBtn").attr("disabled", true);
+		$("#emailBtn").attr("disabled", true);
 		
 		$.ajax({
 			url : "sendMail.jsp",
 			type : "post",
 			data : {
-				mail : email.val()
+				email : email.val()
 			},
 			success : function(result){
 				mailCode = result.trim();
 				if(mailCode == "fail"){
-					$("#mailBtn").attr("disabled", false);
+					$("#emailBtn").attr("disabled", false);
 					emailFeedback.css("display", "block");
 					emailFeedback.removeClass("success");
 					emailFeedback.text("이메일이 올바르지 않습니다.");
@@ -257,15 +317,14 @@
 		});		
 	});
 	
-	$("#mailCheckBtn").click(function(){
-		let mailCheck = $("#mailCheck");
-		if(mailCheck.val().trim() == ""){
+	$("#emailCheckBtn").click(function(){
+		let emailCheck = $("#emailCheck");
+		if(emailCheck.val().trim() == ""){
 			alert("이메일 인증코드를 입력해주세요");
-			
 			return;
 		}
 		
-		if(mailCode == mailCheck.val().trim()){
+		if(mailCode == emailCheck.val().trim()){
 			emailCheckFlag = true;
 			alert("코드가 일치합니다!")
 			emailFeedback.css("display", "none");
@@ -279,85 +338,7 @@
 			
 	});
 	
-	$("#username").keyup(function(e){
-		let id = e.target.value;
-		
-		let idFeedback = $("#username-feedback");
-		idFeedback.css("display", "block");
-		idFeedback.removeClass("success");
-		idFeedback.text("아이디는 영어 대소문자와 숫자 6 ~ 12자리만 사용 가능합니다.")
-		idCheckFlag = false;
-		
-		if(!idRegex.test(id)){
-			return;
-		}
-		
-		$.ajax({
-			url : "idCheck.jsp",
-			type : "post",
-			data : {
-				id : id
-			},
-			success : function(result){
-				if(result.trim() == "0"){
-					idCheckFlag = true;
-					idFeedback.css("display", "block");
-					idFeedback.addClass("success");
-					idFeedback.text("사용 가능한 아이디입니다.");
-				}else{
-					idCheckFlag = false;
-					idFeedback.css("display", "block");
-					idFeedback.removeClass("success");
-					idFeedback.text("사용 불가능한 아이디입니다.");
-				}
-			},
-			error : function(){
-				console.log("에러 발생");
-			}
-		});
-	});
-		
-	$("#nickname").keyup(function(e){
-		let nick = e.target.value;
-		
-		let nickFeedback = $("#nickname-feedback");
-		nickFeedback.css("display", "block");
-		nickFeedback.removeClass("success");
-		nickFeedback.text("닉네임은 2 ~ 10자리만 사용가능합니다.");
-		nickCheckFlag = false;
-		
-		if(!nickRegex.test(nick)){
-			return;
-		}
-		
-		$.ajax({
-			url : "nickCheck.jsp",
-			type : "post",
-			data : {
-				nick : nick
-			},
-			success : function(result){
-				if(result.trim() == "0"){
-					nickCheckFlag = true;
-					nickFeedback.css("display", "block");
-					nickFeedback.addClass("success");
-					nickFeedback.text("사용 가능한 닉네임입니다.");
-				}else{
-					nickCheckFlag = false;
-					nickFeedback.css("display", "block");
-					nickFeedback.removeClass("success");
-					nickFeedback.text("닉네임이 중복됩니다.")
-				}
-			},
-			error : function(){
-				console.log("에러 발생");
-			}
-		});
-	});
-	
 	function formCheck(){
-		let id = $("#username");
-		let idFeedback = $("#username-feedback");
 		
 		if(id.val().trim() == ""){
 			id.focus();
@@ -388,32 +369,8 @@
 		idFeedback.css("display", "block");
 		idFeedback.addClass("success");
 		idFeedback.text("아이디 확인이 완료되었습니다.");
-		
-		if(name.val().trim() == ""){
-			name.focus();
-			name.val("");
-			nameFeedback.css("display", "block");
-			nameFeedback.text("이름을 입력해주세요.");
-			nameFeedback.removeClass("success");
-			return false;
-		}
-		
-		
-		if(!nameRegex.test(name.val())){
-			name.focus();
-			name.val("");
-			nameFeedback.css("display", "block");
-			nameFeedback.text("정확한 이름을 작성해주세요.");
-			nameFeedback.removeClass("success");
-			return false;
-		}
-		
-		nameFeedback.css("display", "block");
-		nameFeedback.addClass("success");
-		nameFeedback.text("확인되었습니다.");
-		
-		idFeedback.css("display", "none");
-		
+
+
 		if(pw.val().trim() == ""){
 			pw.focus();
 			pw.val("");
@@ -423,7 +380,7 @@
 			return false;
 		}
 		
-		nameFeedback.css("display", "none");
+		idFeedback.css("display", "none");
 		
 		if(pwc.val().trim() == ""){
 			pwc.focus();
@@ -455,6 +412,7 @@
 			nickFeedback.removeClass("success");
 			return false;
 		}
+		pwFeedback.css("display", "none");
 		
 		if(!nickRegex.test(nick.val())){
 			nick.focus();
@@ -465,13 +423,11 @@
 			return false;
 		}
 		
-		pwFeedback.css("display", "none");
-		
 		if(nickCheckFlag == false){
 			nick.focus();
 			nick.val("");
 			nickFeedback.css("display", "block");
-			nickFeedback.text("닉네임 중복확인이 필요합니다.");
+			nickFeedback.text("중복된 닉네임입니다.");
 			nickFeedback.removeClass("success");
 			return false;
 		}
