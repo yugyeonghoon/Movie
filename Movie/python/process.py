@@ -38,5 +38,4 @@ df["ratingGrade"].fillna("자료없음", inplace=True)
 df.drop(df[df["runtime"] < 40].index, inplace=True)
 
 print(df.info())
-
-df.to_csv("movie.csv", index=False)
+#df.to_csv("movie.csv", index=False)
