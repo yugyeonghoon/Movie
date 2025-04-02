@@ -1,19 +1,29 @@
 import requests
 import pandas as pd
+import json
+import re
 
 url = "http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&ServiceKey=H2W8Y70VM9R38UQ32FVL&startCount1&listCount=500"
 result = []
+list_count = 500
 
-for i in range(1, 224) :
-     
-    start_count = i 
+for i in range(0, 224) :
 
-    url = f"http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&ServiceKey=H2W8Y70VM9R38UQ32FVL&startCount={start_count}&listCount=500"
-     
+    start_count = i * list_count
+    #0 * 500 -> 0 -> 0페이지부터 500개 0 ~ 499개
+    #1 * 500 -> 500 -> 500페이지부터 500개 500 ~ 999
+    #2 * 500 -> 1000 -> 1000페이지부터 500개 1000 ~ 1499
+
+    url = f"http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&ServiceKey=H2W8Y70VM9R38UQ32FVL&startCount={start_count}&listCount={list_count}"
 
     print(url)
-    response = requests.get(url).json()
+    response = requests.get(url).text
+    response = response.replace("\n", "").replace("\r", "")
+    response = re.sub(r"[\x00-\x1F\x7F]", "", response)
+    #x00x1f ~ x00x7f
 
+    response = json.loads(response)
+    
     datas = response["Data"][0]["Result"]
 
     for data in datas:
