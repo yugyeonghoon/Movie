@@ -39,9 +39,7 @@ df.drop(df[df["runtime"] < 40].index, inplace=True)
 
 print(df.info())
 #df.to_csv("movie.csv", index=False)
-=======
 
 df["rating"] = "0"
 
 df.to_csv("movie.csv", index=False)
->>>>>>> 2f483893f5e48c3d46252270c671383b78061790
