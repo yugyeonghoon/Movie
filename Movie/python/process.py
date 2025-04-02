@@ -39,4 +39,6 @@ df.drop(df[df["runtime"] < 40].index, inplace=True)
 
 print(df.info())
 
+df["rating"] = "0"
+
 df.to_csv("movie.csv", index=False)
