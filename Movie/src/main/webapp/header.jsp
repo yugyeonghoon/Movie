@@ -143,14 +143,14 @@
 				<div class="dropdown">
 					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">영화 장르</button>
 					<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-						<li><a class="dropdown-item" href="genreaction.jsp">액션</a></li>
-						<li><a class="dropdown-item" href="genreaction.jsp">범죄</a></li>
-						<li><a class="dropdown-item" href="genreaction.jsp">SF</a></li>
-						<li><a class="dropdown-item" href="genreaction.jsp">스릴러</a></li>
-						<li><a class="dropdown-item" href="genreaction.jsp">범죄</a></li>
-						<li><a class="dropdown-item" href="genreaction.jsp">코미디</a></li>
-						<li><a class="dropdown-item" href="genreaction.jsp">멜로</a></li>
-						<li><a class="dropdown-item" href="genreaction.jsp">공포</a></li>
+						<li><a class="dropdown-item" name="genre" href="genreaction.jsp?genre=액션">액션</a></li>
+						<li><a class="dropdown-item" name="genre" href="genreaction.jsp?genre=범죄">범죄</a></li>
+						<li><a class="dropdown-item" name="genre" href="genreaction.jsp?genre=SF">SF</a></li>
+						<li><a class="dropdown-item" name="genre" href="genreaction.jsp?genre=스릴러">스릴러</a></li>
+						<li><a class="dropdown-item" name="genre" href="genreaction.jsp?genre=범죄">범죄</a></li>
+						<li><a class="dropdown-item" name="genre" href="genreaction.jsp?genre=액션">코미디</a></li>
+						<li><a class="dropdown-item" name="genre" href="genreaction.jsp?genre=멜로">멜로</a></li>
+						<li><a class="dropdown-item" name="genre" href="genreaction.jsp?genre=공포">공포</a></li>
 					</ul>
 				</div>
 				<li><a href="movieBoard.jsp">영화 토론</a></li>

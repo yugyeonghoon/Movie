@@ -127,18 +127,18 @@
 			  <div class="carousel-inner">
 				<div class="title">
 				  <h4>
-				  	<span>관리자 추천 상영작</span>
+				  	<span>개봉 예정작</span>
 				  </h4>
 				</div>
-				    <%
-						for(int idx = 0; idx < list.size(); idx += 4){
-							int lastIndex = idx + 3  > list.size() ? list.size() - 1 : idx +  3;
+			    	<%
+						for(int idx = 0; idx < slist.size(); idx += 4){
+							int lastIndex = idx + 3  > slist.size() ? slist.size() - 1 : idx +  3;
 						
 					%>
-					    <div class="carousel-item<%= idx == 0 ? " active" : "" %>" data-bs-interval="6000">
+					    <div class="carousel-item<%= idx == 0 ? " active" : "" %>" data-bs-interval="5000">
 					    <%
 					        	for(int i = idx; i <= lastIndex; i++){
-					    			MovieVO vo = list.get(i);
+					    			MovieVO vo = slist.get(i);
 					    			String no = vo.getDocid();
 					    			String title = vo.getTitle();
 					    			String poster = vo.getPoster();
@@ -167,18 +167,18 @@
 			  <div class="carousel-inner">
 				<div class="title">
 				  <h4>
-				  	<span>개봉 예정작</span>
+				  	<span>관리자 추천 상영작</span>
 				  </h4>
 				</div>
-			    	<%
-						for(int idx = 0; idx < slist.size(); idx += 4){
-							int lastIndex = idx + 3  > slist.size() ? slist.size() - 1 : idx +  3;
+				    <%
+						for(int idx = 0; idx < list.size(); idx += 4){
+							int lastIndex = idx + 3  > list.size() ? list.size() - 1 : idx +  3;
 						
 					%>
-					    <div class="carousel-item<%= idx == 0 ? " active" : "" %>" data-bs-interval="5000">
+					    <div class="carousel-item<%= idx == 0 ? " active" : "" %>" data-bs-interval="6000">
 					    <%
 					        	for(int i = idx; i <= lastIndex; i++){
-					    			MovieVO vo = slist.get(i);
+					    			MovieVO vo = list.get(i);
 					    			String no = vo.getDocid();
 					    			String title = vo.getTitle();
 					    			String poster = vo.getPoster();
