@@ -16,7 +16,7 @@ rvs_list = []
 print(df)
 
 start_index = 0
-last_index = 10000
+last_index = 1000
 
 for i, t in enumerate(df["title"][start_index:last_index]):
   title = f"영화 {t} 관람평"
