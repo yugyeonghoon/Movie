@@ -1,27 +1,42 @@
 package movie;
 
 public class MovieVO {
-	private String id;
-	private String releaseDate;
+	private String docid;
+	private String title;
+	private String directors;
+	private String actors;
 	private String nation;
 	private String genre;
-	private String mtitle;
-	private String director;
-	private String actor;
-	private String mcontent;
+	private String plots;
+	private String repRlsDate; 
+	private String poster;
+	private int runtime;
+	private String rating_grade;
 	private int rating;
 	
-	public String getId() {
-		return id;
+	public String getDocid() {
+		return docid;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setDocid(String docid) {
+		this.docid = docid;
 	}
-	public String getReleaseDate() {
-		return releaseDate;
+	public String getTitle() {
+		return title;
 	}
-	public void setReleaseDate(String releaseDate) {
-		this.releaseDate = releaseDate;
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getDirectors() {
+		return directors;
+	}
+	public void setDirectors(String directors) {
+		this.directors = directors;
+	}
+	public String getActors() {
+		return actors;
+	}
+	public void setActors(String actors) {
+		this.actors = actors;
 	}
 	public String getNation() {
 		return nation;
@@ -35,29 +50,35 @@ public class MovieVO {
 	public void setGenre(String genre) {
 		this.genre = genre;
 	}
-	public String getMtitle() {
-		return mtitle;
+	public String getPlots() {
+		return plots;
 	}
-	public void setMtitle(String mtitle) {
-		this.mtitle = mtitle;
+	public void setPlots(String plots) {
+		this.plots = plots;
 	}
-	public String getDirector() {
-		return director;
+	public String getRepRlsDate() {
+		return repRlsDate;
 	}
-	public void setDirector(String director) {
-		this.director = director;
+	public void setRepRlsDate(String repRlsDate) {
+		this.repRlsDate = repRlsDate;
 	}
-	public String getActor() {
-		return actor;
+	public String getPoster() {
+		return poster;
 	}
-	public void setActor(String actor) {
-		this.actor = actor;
+	public void setPoster(String poster) {
+		this.poster = poster;
 	}
-	public String getMcontent() {
-		return mcontent;
+	public int getRuntime() {
+		return runtime;
 	}
-	public void setMcontent(String mcontent) {
-		this.mcontent = mcontent;
+	public void setRuntime(int runtime) {
+		this.runtime = runtime;
+	}
+	public String getRating_grade() {
+		return rating_grade;
+	}
+	public void setRating_grade(String rating_grade) {
+		this.rating_grade = rating_grade;
 	}
 	public int getRating() {
 		return rating;

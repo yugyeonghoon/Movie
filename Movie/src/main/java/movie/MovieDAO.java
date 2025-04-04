@@ -7,36 +7,42 @@ import db.DBManager;
 
 public class MovieDAO extends DBManager {
 	//영화 한 건 조회
-	//select * from movie where no = ?;
+	//select * from movie where id = ?;
 	public MovieVO view(String id) {
 		driverLoad();
 		DBConnect();
 		
-		String sql = "select * from movie where no = " + id;
+		String sql = "select * from movie_db where docid ='"+id+"'";
 		executeQuery(sql);
 		
 		if(next()) {
-			String movieid = getString("id");
-			String releaseDate = getString("releaseDate");
+			String docid = getString("docid");
+			String title = getString("title");
+			String director = getString("directors");
+			String actor = getString("actors");
 			String nation = getString("nation");
 			String genre = getString("genre");
-			String mtitle = getString("mtitle");
-			String director = getString("director");
-			String actor = getString("actor");
-			String mcontent = getString("mcontent");
+			String plots = getString("plots");
+			String repRlsDate = getString("repRlsDate");
+			String poster = getString("poster");
+			int runtime = getInt("runtime");
+			String ratingGrade = getString("rating_grade");
 			int rating = getInt("rating");
 			
 			MovieVO vo = new MovieVO();
-			vo.setId(movieid);
-			vo.setReleaseDate(releaseDate);
+			vo.setDocid(docid);
+			vo.setRepRlsDate(repRlsDate);
 			vo.setNation(nation);
 			vo.setGenre(genre);
-			vo.setMtitle(mtitle);
-			vo.setDirector(director);
-			vo.setActor(actor);
-			vo.setMcontent(mcontent);
+			vo.setTitle(title);
+			vo.setDirectors(director);
+			vo.setActors(actor);
+			vo.setPlots(plots);
+			vo.setPoster(poster);
 			vo.setRating(rating);
-			
+			vo.setRuntime(runtime);
+			vo.setRating_grade(ratingGrade);
+
 			DBDisConnect();
 			return vo;
 			
@@ -47,29 +53,134 @@ public class MovieDAO extends DBManager {
 	}
 	
 	//영화 여러 건 조회
-	//select * from movie where moviekeyword = ?;
-	public List<MovieVO> listView(String mkeyword) {
+	//select * from movie = ?;
+	public List<MovieVO> listView() {
 		driverLoad();
 		DBConnect();
 		
-		String sql = "select * from movie";
-		if(mkeyword != null) {
-			sql += " and '%"+mkeyword+"%'";
-		}
+		String sql = "select * from movie_db where repRlsDate > 20250320 and repRlsDate < 20250414";
+		
 		executeQuery(sql);
 		
 		List<MovieVO> list = new ArrayList<>();
 		while(next()) {
-			String mid = getString("id");
-			String mtitle = getString("mtitle");
+			String docid = getString("docid");
+			String title = getString("title");
+			String poster = getString("poster");
 			
 			MovieVO vo = new MovieVO();
-			vo.setId(mid);
-			vo.setMtitle(mtitle);
+			vo.setDocid(docid);
+			vo.setTitle(title);
+			vo.setPoster(poster);
 			
 			list.add(vo);
 		}
 		DBDisConnect();
 		return list;
 	}
+	
+	//평점 7.0 이상 영화 목록
+	public List<MovieVO> popularView() {
+		driverLoad();
+		DBConnect();
+		
+		String sql = "select * from movie_db where rating >= 7.0 and repRlsDate > 20100101";
+		
+		executeQuery(sql);
+		
+		List<MovieVO> list = new ArrayList<>();
+		while(next()) {
+			String docid = getString("docid");
+			String title = getString("title");
+			String poster = getString("poster");
+			
+			MovieVO vo = new MovieVO();
+			vo.setDocid(docid);
+			vo.setTitle(title);
+			vo.setPoster(poster);
+			
+			list.add(vo);
+		}
+		DBDisConnect();
+		return list;
+	}
+	
+	//개봉 예정 영화
+	public List<MovieVO> soonView() {
+		driverLoad();
+		DBConnect();
+		
+		String sql = "select * from movie_db where repRlsDate > 20250414";
+		
+		executeQuery(sql);
+		
+		List<MovieVO> list = new ArrayList<>();
+		while(next()) {
+			String docid = getString("docid");
+			String title = getString("title");
+			String poster = getString("poster");
+			
+			MovieVO vo = new MovieVO();
+			vo.setDocid(docid);
+			vo.setTitle(title);
+			vo.setPoster(poster);
+			
+			list.add(vo);
+		}
+		DBDisConnect();
+		return list;
+	}
+	
+	//장르별 영화 선택
+	public List<MovieVO> selectByGenre(String genre) {
+	    driverLoad();
+	    DBConnect();
+	    
+	    String sql = "select * from movie_db where poster != 'aa.jpg' and genre like '%"+genre+"%'";
+	    
+	    executeQuery(sql);
+	    
+	    List<MovieVO> list = new ArrayList<>();
+	    while (next()) {
+	        String docid = getString("docid");
+	        String title = getString("title");
+	        String poster = getString("poster");
+	        
+	        MovieVO vo = new MovieVO();
+	        vo.setDocid(docid);
+	        vo.setTitle(title);
+	        vo.setPoster(poster);
+	        
+	        list.add(vo);
+	    }
+	    DBDisConnect();
+	    return list;
+	}
+	
+	//장르별 인기 영화 선택
+	public List<MovieVO> popularGenre(String genre) {
+	    driverLoad();
+	    DBConnect();
+	    
+	    String sql = "select * from movie_db where poster != 'aa.jpg' and genre like '%"+genre+"%' and rating >= 7";
+	    
+	    executeQuery(sql);
+	    
+	    List<MovieVO> list = new ArrayList<>();
+	    while (next()) {
+	        String docid = getString("docid");
+	        String title = getString("title");
+	        String poster = getString("poster");
+	        
+	        MovieVO vo = new MovieVO();
+	        vo.setDocid(docid);
+	        vo.setTitle(title);
+	        vo.setPoster(poster);
+	        
+	        list.add(vo);
+	    }
+	    DBDisConnect();
+	    return list;
+	} 
+
 }
