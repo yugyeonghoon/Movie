@@ -35,16 +35,17 @@ public class BoardDAO extends DBManager{
 	}
 	
 	//글 조회(여러건)
-	public List<BoardVO> listView(String bno){
+	public List<BoardVO> listView(String searchType, String keyword, int startNum, int limitSize, int bno){
 		driverLoad();
 		DBConnect();
 		
-		String sql = "select * from board where board_type = 0 or board_type= "+bno+" order by board_type ASC";
-		/*
-		 * if(searchType != null && keyword != null) { sql +=
-		 * " and "+searchType+" like '%"+keyword+"%'"; }
-		 */
-		//sql += " limit " + startNum + ", " + limitSize;
+		String sql = "select * from board where (board_type = 0 or board_type= "+bno+") and board_type != 99";
+		
+		if(searchType != null && keyword != null){
+			sql += " and "+searchType+ " like '%"+keyword+"%'"; 
+		}
+		
+		sql += " order by board_type ASC limit " + startNum + ", " + limitSize;
 		executeQuery(sql);
 		
 		List<BoardVO> list = new ArrayList<>();
@@ -67,6 +68,25 @@ public class BoardDAO extends DBManager{
 		DBDisConnect();
 		return list;
 	}
+	//개시글 개수 조회
+	public int getCount(String searchType, String keyword, int bno){
+		driverLoad();
+		DBConnect();
+		
+		String sql = "select count(*) as cnt from board where board_type ="+ bno;
+		if(searchType != null && keyword != null) {
+			sql += "and" + searchType + "like '%" + keyword + "%'";
+		}
+		executeQuery(sql);
+		if(next()) {
+			int count = getInt("cnt");
+			DBConnect();
+			return count;
+		}else {
+			DBDisConnect();
+			return 0;
+		}
+	};
 	
 	//글 조회(단건)
 	public BoardVO view(String bno) {
