@@ -44,37 +44,18 @@
 			margin-left: 8%;
 		}
 		.first {
-			float: left;
-			margin-right: 10px;
-			/* margin-left: 8%; */
-			width: 15%;
-			align-content: center;
-			}
-		.second{
-			float: left;
-			margin-right: 10px;
-			width:10%;
-			box-sizing: border-box;	
-			}
-	
-		.third{
-			float: left;
-			margin-right: 10px;
-			width:10%;
-			box-sizing: border-box;
-			}
-
-		.force {
-			float: left;
-			margin-right: 10px;
-			width:10%;
-			box-sizing: border-box;
+		    float: left;
+		    margin-right: 10px;
+		    width: 15%;
+		    height: 320px;
+		    text-align: center;
+		    overflow: hidden;
 		}
-		.five {
-			float: left;
-			margin-right: 10px;
-			width:10%;
-			box-sizing: border-box;
+		.first img {
+		    width: 100%;
+		    height: 340px;
+		    object-fit: cover;
+		    display: block;
 		}
 		.carousel-item{
 			margin-left: 11%;
@@ -107,7 +88,7 @@
 			</div>
 		   <%
 					for(int idx = 0; idx < list.size(); idx += 5){
-						int lastIndex = idx + 4  > list.size() ? list.size() - 1 : idx +  4;
+						int lastIndex = idx + 4  >= list.size() ? list.size() - 1 : idx +  4;
 					
 				%>
 				    <div class="carousel-item<%= idx == 0 ? " active" : "" %>" data-bs-interval="4000">
@@ -119,7 +100,7 @@
 				    			String poster = vo.getPoster();
 			        	%>
 							<div class="first">
-					    		<a href="movieDetail.jsp?no=<%= no %>"><img src="<%= poster %>" style="max-width: 100%; height: auto;" class="d-block w-100" alt="..."></a>
+					    		<a href="movieDetail.jsp?no=<%= no %>"><img src="<%= poster %>" alt="..."></a>
 					    	</div>
 						<%
 				        	}
@@ -146,20 +127,20 @@
 			  </h4>
 			</div>
 		    <%
-					for(int idx = 0; idx < list.size(); idx += 5){
-						int lastIndex = idx + 4  > list.size() ? list.size() - 1 : idx +  4;
+					for(int idx = 0; idx < plist.size(); idx += 5){
+						int lastIndex = idx + 4  >= plist.size() ? plist.size() - 1 : idx +  4;
 					
 				%>
 				    <div class="carousel-item<%= idx == 0 ? " active" : "" %>" data-bs-interval="4000">
 				    <%
 				        	for(int i = idx; i <= lastIndex; i++){
-				    			MovieVO vo = list.get(i);
+				    			MovieVO vo = plist.get(i);
 				    			String no = vo.getDocid();
 				    			String title = vo.getTitle();
 				    			String poster = vo.getPoster();
 			        	%>
 							<div class="first">
-					    		<a href="movieDetail.jsp?no=<%= no %>"><img src="<%= poster %>" style="max-width: 100%; height: auto;" class="d-block w-100" alt="..."></a>
+					    		<a href="movieDetail.jsp?no=<%= no %>"><img src="<%= poster %>" alt="..."></a>
 					    	</div>
 						<%
 				        	}
@@ -182,12 +163,12 @@
 		  <div class="carousel-inner">
 			<div class="title">
 			  <h4>
-			  	<span>수상작 <%= genre %> 영화</span>
+			  	<span>미정 <%= genre %> 영화</span>
 			  </h4>
 			</div>
 		    <%
 					for(int idx = 0; idx < list.size(); idx += 5){
-						int lastIndex = idx + 4  > list.size() ? list.size() - 1 : idx +  4;
+						int lastIndex = idx + 4  >= list.size() ? list.size() - 1 : idx +  4;
 					
 				%>
 				    <div class="carousel-item<%= idx == 0 ? " active" : "" %>" data-bs-interval="4000">
@@ -199,7 +180,7 @@
 				    			String poster = vo.getPoster();
 			        	%>
 							<div class="first">
-					    		<a href="movieDetail.jsp?no=<%= no %>"><img src="<%= poster %>" style="max-width: 100%; height: auto;" class="d-block w-100" alt="..."></a>
+					    		<a href="movieDetail.jsp?no=<%= no %>"><img src="<%= poster %>" alt="..."></a>
 					    	</div>
 						<%
 				        	}

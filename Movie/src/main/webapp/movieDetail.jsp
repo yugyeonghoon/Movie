@@ -20,6 +20,7 @@
 	int runtime = vo.getRuntime();
 	String ratingGrade = vo.getRating_grade();
 	int rating = vo.getRating();
+	int ratingPeople = vo.getRating_people();
 	
 %>
 <!DOCTYPE html>
@@ -79,6 +80,9 @@
 	        .advertising-container{
 	        	margin-left: 45%;
 	        }
+	        .ratingPeople {
+	        	color : gray;
+	        }
 	    </style>
 	</head>
 	<body>
@@ -96,7 +100,7 @@
 		            <p><strong>연령: </strong><span id="age" class="age"><%= ratingGrade %></span></p>
 		            <p><strong>감독: </strong><span id="director" class="director"><%= director %></span></p>
 		            <p><strong>배우: </strong><span id="actors" class="actors"><%= actor %></span></p>
-		            <p class="rating"><strong>평점:</strong><span id="rating"><%= rating %></span>/10</p>
+		            <p class="rating"><strong>평점:</strong><span id="rating"><%= rating %></span>/10 | <span class="ratingPeople"><%= ratingPeople %>명 참여</span></p>
 	            <div class="plot">
 	                <h3>줄거리</h3>
 	                <p id="plot"><%= plots %></p>
