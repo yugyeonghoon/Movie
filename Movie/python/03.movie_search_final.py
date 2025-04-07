@@ -16,9 +16,9 @@ rvs_list = []
 print(df)
 
 start_index = 0
-last_index = 1000
+last_index = 10
 
-for i, t in enumerate(df["title"][start_index:last_index]):
+for i, t in enumerate(df["title"][start_index:]):
   title = f"영화 {t} 관람평"
 
   index = i + start_index
@@ -30,10 +30,13 @@ for i, t in enumerate(df["title"][start_index:last_index]):
 
   try:
     rvs = driver.find_element(By.XPATH, '//*[@class="main_pack"]/div[3]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/ul/li[1]/div[1]/div[1]/span[1]')
+    rvp = driver.find_element(By.XPATH, '//*[@class="main_pack"]/div[3]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/ul/li[1]/div[1]/div[1]/span[3]')
     print(rvs.text)
+    print(rvp.text)
     df.loc[index, "rating"] = rvs.text
+    df.loc[index, "ratingPeople"] = rvp.text
     time.sleep(2)
   except Exception as e:
     print(e)
   
-df.to_csv("03.movie_with_rating_1.csv", index=False)
+df.to_csv("final_movie_db.csv", index=False)
