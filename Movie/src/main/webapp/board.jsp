@@ -188,7 +188,7 @@
         	%>
         	
   			<div class="action">
-	            <button onclick="location.href='write.jsp'">글쓰기</button>
+	            <button onclick="location.href='write.jsp?boardType=2'">글쓰기</button>
 	        </div>
 	        <%
 	        }

@@ -47,13 +47,13 @@
 		    float: left;
 		    margin-right: 10px;
 		    width: 15%;
-		    height: 320px;
+		    height: 360px;
 		    text-align: center;
 		    overflow: hidden;
 		}
 		.first img {
 		    width: 100%;
-		    height: 340px;
+		    height: 360px;
 		    object-fit: cover;
 		    display: block;
 		}

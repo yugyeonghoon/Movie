@@ -60,7 +60,7 @@ public class MovieDAO extends DBManager {
 		driverLoad();
 		DBConnect();
 		
-		String sql = "select * from movie_db where repRlsDate > 20250320 and repRlsDate < 20250414 and poster != 'aa.jpg'";
+		String sql = "select * from movie_db where repRlsDate > 20250320 and repRlsDate < 20250411 and poster != 'aa.jpg'";
 		
 		executeQuery(sql);
 		
@@ -86,7 +86,7 @@ public class MovieDAO extends DBManager {
 		driverLoad();
 		DBConnect();
 		
-		String sql = "select * from movie_db where rating >= 7.0 and repRlsDate > 20100101 and poster != 'aa.jpg'";
+		String sql = "select * from movie_db where rating >= 7.0 and repRlsDate > 20100101 and poster != 'aa.jpg' and rating_people > 500 order by rating desc";
 		
 		executeQuery(sql);
 		
@@ -112,7 +112,7 @@ public class MovieDAO extends DBManager {
 		driverLoad();
 		DBConnect();
 		
-		String sql = "select * from movie_db where repRlsDate > 20250414 and poster != 'aa.jpg'";
+		String sql = "select * from movie_db where repRlsDate > 20250411 and poster != 'aa.jpg'";
 		
 		executeQuery(sql);
 		
@@ -164,7 +164,7 @@ public class MovieDAO extends DBManager {
 	    driverLoad();
 	    DBConnect();
 	    
-	    String sql = "select * from movie_db where poster != 'aa.jpg' and genre like '%"+genre+"%' and rating >= 7";
+	    String sql = "select * from movie_db where poster != 'aa.jpg' and genre like '%"+genre+"%' and rating >= 7 and rating_people > 500 order by rating desc";
 	    
 	    executeQuery(sql);
 	    
