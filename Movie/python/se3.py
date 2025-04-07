@@ -2,7 +2,7 @@
 import subprocess
 #서브에서 동작하는 코드
 
-#데이터 저장
+#데이터 저장 csv
 import pandas as pd
 
 import time
