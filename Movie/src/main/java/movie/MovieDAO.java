@@ -28,6 +28,7 @@ public class MovieDAO extends DBManager {
 			int runtime = getInt("runtime");
 			String ratingGrade = getString("rating_grade");
 			int rating = getInt("rating");
+			int ratingPeople = getInt("rating_people");
 			
 			MovieVO vo = new MovieVO();
 			vo.setDocid(docid);
@@ -42,6 +43,7 @@ public class MovieDAO extends DBManager {
 			vo.setRating(rating);
 			vo.setRuntime(runtime);
 			vo.setRating_grade(ratingGrade);
+			vo.setRating_people(ratingPeople);
 
 			DBDisConnect();
 			return vo;
@@ -52,13 +54,13 @@ public class MovieDAO extends DBManager {
 		}
 	}
 	
-	//영화 여러 건 조회
+	//현재 상영작
 	//select * from movie = ?;
 	public List<MovieVO> listView() {
 		driverLoad();
 		DBConnect();
 		
-		String sql = "select * from movie_db where repRlsDate > 20250320 and repRlsDate < 20250414";
+		String sql = "select * from movie_db where repRlsDate > 20250320 and repRlsDate < 20250411 and poster != 'aa.jpg'";
 		
 		executeQuery(sql);
 		
@@ -84,7 +86,7 @@ public class MovieDAO extends DBManager {
 		driverLoad();
 		DBConnect();
 		
-		String sql = "select * from movie_db where rating >= 7.0 and repRlsDate > 20100101";
+		String sql = "select * from movie_db where rating >= 7.0 and repRlsDate > 20100101 and poster != 'aa.jpg' and rating_people > 500 order by rating desc";
 		
 		executeQuery(sql);
 		
@@ -110,7 +112,7 @@ public class MovieDAO extends DBManager {
 		driverLoad();
 		DBConnect();
 		
-		String sql = "select * from movie_db where repRlsDate > 20250414";
+		String sql = "select * from movie_db where repRlsDate > 20250411 and poster != 'aa.jpg'";
 		
 		executeQuery(sql);
 		
@@ -162,7 +164,7 @@ public class MovieDAO extends DBManager {
 	    driverLoad();
 	    DBConnect();
 	    
-	    String sql = "select * from movie_db where poster != 'aa.jpg' and genre like '%"+genre+"%' and rating >= 7";
+	    String sql = "select * from movie_db where poster != 'aa.jpg' and genre like '%"+genre+"%' and rating >= 7 and rating_people > 500 order by rating desc";
 	    
 	    executeQuery(sql);
 	    
@@ -181,6 +183,32 @@ public class MovieDAO extends DBManager {
 	    }
 	    DBDisConnect();
 	    return list;
-	} 
+	}
+	
+	//영화 검색?
+	public List<MovieVO> searchMovies(String keyword) {
+	    driverLoad();
+	    DBConnect();
+	    
+	    String sql = "select * from movie_db where poster != 'aa.jpg' and title like '%" + keyword + "%'";
+	    executeQuery(sql);
+	    
+	    List<MovieVO> list = new ArrayList<>();
+	    while (next()) {
+	        MovieVO vo = new MovieVO();
+	        vo.setDocid(getString("docid"));
+	        vo.setTitle(getString("title"));
+	        vo.setPoster(getString("poster"));
+	        vo.setGenre(getString("genre"));
+	        vo.setDirectors(getString("directors"));
+	        vo.setActors(getString("actors"));
+	        vo.setRepRlsDate(getString("repRlsDate"));
+	        vo.setRating(getInt("rating"));
+	        
+	        list.add(vo);
+	    }
+	    DBDisConnect();
+	    return list;
+	}
 
 }

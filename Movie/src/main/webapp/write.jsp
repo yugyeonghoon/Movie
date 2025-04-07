@@ -1,11 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>+
+    pageEncoding="UTF-8"%>
 <%@ include file="header.jsp" %>
 <%
 	String referer = request.getHeader("Referer");
 	//System.out.println(referer);
 	String last = referer.substring(referer.lastIndexOf('/') + 1);
 	//System.out.println(last);
+	
+	String boardType = request.getParameter("boardType");
+    if (boardType == null) boardType = ""; 
+    
 %>
 <!DOCTYPE html>
 <html>
@@ -100,9 +104,9 @@
 				<input type="hidden" name="refer" value="<%= last %>">
 				<div class="search-bar">
 	                <select name="boardType">
-	                	<option>게시판 타입을 선택해주세요.</option>
-	                    <option value="1">영화 토론</option>
-	                    <option value="2">자유 게시판</option>
+	                	<option value="">게시판 타입을 선택해주세요.</option>
+	                    <option value="1" <%= "1".equals(boardType) ? "selected" : "" %>>영화 토론</option>
+    					<option value="2" <%= "2".equals(boardType) ? "selected" : "" %>>자유 게시판</option>
 	                </select>
 		        </div>
 				<table class="t1" border="0">

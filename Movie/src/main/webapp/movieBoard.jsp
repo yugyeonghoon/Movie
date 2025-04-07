@@ -5,11 +5,39 @@
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp" %>
 <%
-	BoardDAO dao = new BoardDAO();
-/* 	String searchType = request.getParameter("searchType");
-	String keyword = request.getParameter("keyword"); */
+	String pageNum = request.getParameter("page");
+	if(pageNum == null){
+		pageNum = "1";
+	}
+	int currentPage = Integer.parseInt(pageNum);
 	
-	List<BoardVO> list = dao.listView("1");
+	int startNum = (currentPage -1) * 10;
+	
+	int limitPerPage = 10;
+	
+	String searchType = request.getParameter("searchType");
+	String keyword = request.getParameter("searchKeyword");
+	
+	BoardDAO dao = new BoardDAO();
+	List<BoardVO> list = dao.listView(searchType, keyword, startNum, limitPerPage, 1);
+	
+	int totalCount = dao.getCount(searchType, keyword, 1);
+	
+	int pageGroupSize = 10;
+	int startPage = ((currentPage - 1) / pageGroupSize) * pageGroupSize +1;
+	
+	int totalPage = 
+			(int)Math.ceil(totalCount / (double)limitPerPage);
+	
+	int endPage = 
+			Math.min(startPage + pageGroupSize -1, totalPage);
+	
+	if(searchType == null) {
+		searchType = "";
+	}
+	if(keyword == null) {
+		keyword = "";
+	}
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -155,25 +183,54 @@
 	        	}
 			%>
         </ul>
+  		<%
+        	if(user != null){
+        		%>
   			<div class="action">
-	            <button onclick="location.href='write.jsp'">글쓰기</button>
+	            <button onclick="location.href='write.jsp?boardType=1'">글쓰기</button>
 	        </div>
+        		<%
+        	}
+        %>
         <div class="pagination">
-			<a href="">&lt;&lt;</a>
-			<a href="">&lt;</a>
-	        <a class="active" href="">1</a>
-	        <a href="">2</a>
-		    <a href="">&gt;</a>
-		    <a href="">&lt;&lt;</a>
+		<%
+       		if(currentPage > 1){
+        	%>
+			<a href="board.jsp?page=1<%= searchType != "" ? "&searchType="+searchType : "" %><%= keyword != "" ? "&searchKeyword="+keyword : "" %>">&lt;&lt;</a>
+			<a href="board.jsp?page=<%= currentPage - 1 %><%= searchType != "" ? "&searchType="+searchType : "" %><%= keyword != "" ? "&searchKeyword="+keyword : "" %>">&lt;</a>
+		<%
+        	}
+		%>
+        <%
+           	for(int i = startPage; i <= endPage; i ++){
+           		if(i == currentPage){
+           			%>
+            			<a class="active" href="board.jsp?page=<%= i %><%= searchType != "" ? "&searchType="+searchType : "" %><%= keyword != "" ? "&searchKeyword="+keyword : "" %>"><%= i %></a>
+            		<%
+           		}else{
+           			%>
+            			<a href="board.jsp?page=<%= i %><%= searchType != "" ? "&searchType="+searchType : "" %><%= keyword != "" ? "&searchKeyword="+keyword : "" %>"><%= i %></a>
+            		<%
+           		}
+           	}
+         %>
+         <%
+          	if(currentPage < totalPage) {
+         %>
+            <a href="board.jsp?page=<%= currentPage + 1 %><%= searchType != "" ? "&searchType="+searchType : "" %><%= keyword != "" ? "&searchKeyword="+keyword : "" %>">&gt;</a>
+            <a href="board.jsp?page=<%= totalPage %><%= searchType != "" ? "&searchType="+searchType : "" %><%= keyword != "" ? "&searchKeyword="+keyword : "" %>">&gt;&gt;</a>
+         <%
+          	}
+          %>	
         </div>
         <div class="search-bar">
-            <form action="board.jsp" method="get">
+            <form action="movieBoard.jsp" method="get">
                 <select name="searchType">
-                    <option value="title" >제목</option>
-                    <option value="content">본문</option>
-                    <option value="author">작성자</option>
+                    <option value="title" <%= searchType.equals("title") ? "seleted" : "" %>>제목</option>
+                    <option value="content" <%= searchType.equals("content") ? "selected" : "" %>>본문</option>
+                    <option value="author" <%= searchType.equals("author") ? "seleted" : "" %>>작성자</option>
                 </select>
-            	<input value="" type="text" name="searchKeyword" placeholder="검색어를 입력하세요">
+            	<input value="<%=keyword %>" type="text" name="searchKeyword" placeholder="검색어를 입력하세요">
                 <button type="submit">검색</button>
             </form>
         </div>
