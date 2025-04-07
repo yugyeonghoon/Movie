@@ -147,7 +147,6 @@
 						<li><a class="dropdown-item" name="genre" href="genreaction.jsp?genre=범죄">범죄</a></li>
 						<li><a class="dropdown-item" name="genre" href="genreaction.jsp?genre=SF">SF</a></li>
 						<li><a class="dropdown-item" name="genre" href="genreaction.jsp?genre=스릴러">스릴러</a></li>
-						<li><a class="dropdown-item" name="genre" href="genreaction.jsp?genre=범죄">범죄</a></li>
 						<li><a class="dropdown-item" name="genre" href="genreaction.jsp?genre=코메디">코미디</a></li>
 						<li><a class="dropdown-item" name="genre" href="genreaction.jsp?genre=멜로">멜로</a></li>
 						<li><a class="dropdown-item" name="genre" href="genreaction.jsp?genre=공포">공포</a></li>
