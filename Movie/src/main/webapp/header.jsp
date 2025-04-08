@@ -174,6 +174,7 @@
 								if(user.getUserType() == 0){
 									%>
 										<li><a class="dropdown-item" href="user_management.jsp">회원관리</a></li>
+										<li><a class="dropdown-item" href="advertisement.jsp">광고관리</a></li>
 									<%
 								}
 							%>
