@@ -129,7 +129,7 @@ public class UserDAO extends DBManager{
 		}
 	}
 	//회원목록조회
-	public List<UserVO> gettAllUser(){
+	public List<UserVO> getAllUser(){
 		driverLoad();
 		DBConnect();
 		
@@ -140,7 +140,7 @@ public class UserDAO extends DBManager{
 		while(next()) {
 			String id = getString("id");
 			String nick = getString("nick");
-			String email = getString("nick");
+			String email = getString("email");
 			int userType = getInt("user_type");
 			
 			UserVO vo = new UserVO();

@@ -22,7 +22,12 @@
 	vo.setBoardType(boardTypeNum);
 	
 	int no = dao.write(vo);
-	response.sendRedirect("post.jsp?no="+ no);
+	
+	if(boardTypeNum == 1) {
+		response.sendRedirect("moviePost.jsp?no="+ no);
+	} else {
+		response.sendRedirect("post.jsp?no="+ no);
+	}
 	
 	/* if (refer != null) {
 	    response.sendRedirect(refer);
