@@ -48,7 +48,26 @@ print("벡터화 완료")
 
 from sklearn.metrics.pairwise import cosine_similarity
 
-scores = cosine_similarity(x_tfidf, x_tfidf)
+def cos_sim(A, B, batch_size=1000):
+    """
+    A: (N, D) 크기의 numpy 배열
+    B: (M, D) 크기의 numpy 배열
+    batch_size: A를 몇 개씩 나눠서 계산할지 크기 (기본값 1000)
+    
+    리턴: (N, M) 크기의 코사인 유사도 행렬
+    """
+    n = A.shape[0]
+    m = B.shape[0]
+    result = np.memmap("movie_sim.dat", mode="w+", shape=(n, m), dtype=np.float32)
+
+    for i in range(0, n, batch_size):
+        end_i = min(i + batch_size, n)
+        print(f"{i} ~ {end_i}행 계산 중...")
+        result[i:end_i] = cosine_similarity(A[i:end_i], B)
+
+    return result
+
+scores = cos_sim(x_tfidf, x_tfidf)
 print("코사인 유사도 계산 완료")
 
 movie_code = df["DOCID"].to_numpy()
