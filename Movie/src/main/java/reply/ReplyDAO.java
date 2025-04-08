@@ -83,8 +83,8 @@ public class ReplyDAO extends DBManager{
 			vo.setRno(rno);
 			vo.setRauthor(rauthor);
 			vo.setRcontent(rcontent);
-			vo.setCreateDate(createDate);
-			vo.setUpdateDate(updateDate);
+			vo.setRcreate_date(createDate);
+			vo.setRupdate_date(updateDate);
 			list.add(vo);
 			
 		}

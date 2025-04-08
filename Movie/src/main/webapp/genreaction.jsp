@@ -10,6 +10,7 @@
 	MovieDAO dao = new MovieDAO();
 	List<MovieVO> list = dao.selectByGenre(genre);
 	List<MovieVO> plist = dao.popularGenre(genre);
+	List<MovieVO> alist = dao.recommenMovie(genre);
 %>
 <!DOCTYPE html>
 <html>
@@ -43,7 +44,7 @@
 		.title {
 			margin-left: 8%;
 		}
-		.first {
+		.first, .item {
 		    float: left;
 		    margin-right: 10px;
 		    width: 15%;
@@ -51,13 +52,13 @@
 		    text-align: center;
 		    overflow: hidden;
 		}
-		.first img {
+		.first img, .item {
 		    width: 100%;
 		    height: 360px;
 		    object-fit: cover;
 		    display: block;
 		}
-		.carousel-item{
+		.carousel-item, .item {
 			margin-left: 11%;
 		}	
 	</style>
@@ -163,41 +164,26 @@
 		  <div class="carousel-inner">
 			<div class="title">
 			  <h4>
-			  	<span>미정 <%= genre %> 영화</span>
+			  	<span>추천 <%= genre %> 영화</span>
 			  </h4>
 			</div>
-		    <%
-					for(int idx = 0; idx < list.size(); idx += 5){
-						int lastIndex = idx + 4  >= list.size() ? list.size() - 1 : idx +  4;
-					
-				%>
-				    <div class="carousel-item<%= idx == 0 ? " active" : "" %>" data-bs-interval="4000">
+			   <div class="item">
+				    <% 
+				        for(int i = 0; i < Math.min(5, alist.size()); i++){
+				            MovieVO vo = alist.get(i);
+				            String no = vo.getDocid();
+				            String title = vo.getTitle();
+				            String poster = vo.getPoster();
+				            int movieType = vo.getMovie_type();
+				    %>
+		                <div class="first">
+		                    <a href="movieDetail.jsp?no=<%= no %>"><img src="<%= poster %>" alt="<%= title %>"></a>
+		                </div>
 				    <%
-				        	for(int i = idx; i <= lastIndex; i++){
-				    			MovieVO vo = list.get(i);
-				    			String no = vo.getDocid();
-				    			String title = vo.getTitle();
-				    			String poster = vo.getPoster();
-			        	%>
-							<div class="first">
-					    		<a href="movieDetail.jsp?no=<%= no %>"><img src="<%= poster %>" alt="..."></a>
-					    	</div>
-						<%
-				        	}
-						%>    
-				    </div>
-			    <%
-			    }			    
-			    %>
+				        }
+				    %>
+				</div>
 		  </div>
-		  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouchingthird" data-bs-slide="prev">
-		    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-		    <span class="visually-hidden">Previous</span>
-		  </button>
-		  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouchingthird" data-bs-slide="next">
-		    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-		    <span class="visually-hidden">Next</span>
-		  </button>
 		</div>
 	</div>
 	</body>

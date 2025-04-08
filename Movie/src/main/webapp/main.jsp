@@ -67,8 +67,14 @@
 		.carousel-item{
 			margin-left: 9%;
 		}
-		img {
+		img{
 		    width: 100%;
+		    height: 300px;
+		    object-fit: cover;
+		}
+		.item{
+			margin-left: 10.5%;
+			width: 96.1%;
 		    height: 300px;
 		    object-fit: cover;
 		}
@@ -166,45 +172,38 @@
 			    <span class="visually-hidden">Next</span>
 			  </button>
 			</div>
-			<div id="carouselExampleDarkthird" class="carousel carousel-dark slide" data-bs-ride="carousel">
-			  <div class="carousel-inner">
+			<div id="carouselExampleDarkthird">
+			  <div>
 				<div class="title">
 				  <h4>
-				  	<span>관리자 추천 상영작</span>
+				  	<span>관리자 추천작</span>
 				  </h4>
 				</div>
+				    <div class="item">
 				    <%
-						for(int idx = 0; idx < plist.size(); idx += 4){
-							int lastIndex = idx + 3  >= plist.size() ? plist.size() - 1 : idx +  3;
-						
-					%>
-					    <div class="carousel-item<%= idx == 0 ? " active" : "" %>" data-bs-interval="4000">
-					    <%
-					        	for(int i = idx; i <= lastIndex; i++){
-					    			MovieVO vo = plist.get(i);
-					    			String no = vo.getDocid();
-					    			String title = vo.getTitle();
-					    			String poster = vo.getPoster();
-				        	%>
-								<div class="third">
-						    		<a href="movieDetail.jsp?no=<%= no %>"><img src="<%= poster %>" style="max-width: 100%; height: auto;" class="d-block w-100" alt="..."></a>
-						    	</div>
-							<%
-					        	}
-							%>    
-					    </div>
-				    <%
-				    }			    
-				    %>
+				        	for(int i = 0; i < Math.min(4, plist.size()); i++){
+				    			MovieVO vo = plist.get(i);
+				    			String no = vo.getDocid();
+				    			String title = vo.getTitle();
+				    			String poster = vo.getPoster();
+				    			int movieType = vo.getMovie_type();
+			        	%>
+							<div class="third">
+					    		<a href="movieDetail.jsp?no=<%= no %>"><img src="<%= poster %>" style="max-width: 100%; height: auto;" class="d-block w-100" alt="..."></a>
+					    	</div>
+						<%
+				        	}
+						%>    
+				    </div>
 			  </div>
-			  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDarkthird" data-bs-slide="prev">
+			  <!-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDarkthird" data-bs-slide="prev">
 			    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
 			    <span class="visually-hidden">Previous</span>
 			  </button>
 			  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDarkthird" data-bs-slide="next">
 			    <span class="carousel-control-next-icon" aria-hidden="true"></span>
 			    <span class="visually-hidden">Next</span>
-			  </button>
+			  </button> -->
 			</div>
 		</div>
 	</body>

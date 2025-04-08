@@ -88,7 +88,7 @@ public class MovieDAO extends DBManager {
 		driverLoad();
 		DBConnect();
 		
-		String sql = "select * from movie_db where rating >= 7.0 and repRlsDate > 20100101 and poster != 'aa.jpg' and rating_people > 500 order by rating desc";
+		String sql = "select * from movie_recommendation where movie_type = 1";
 		
 		executeQuery(sql);
 		
@@ -214,11 +214,16 @@ public class MovieDAO extends DBManager {
 	}
 	
 	//관리자 추천작
-	public List<MovieVO> recommenMovie(){
+	public List<MovieVO> recommenMovie(String genre){
 		driverLoad();
 		DBConnect();
 		
-		String sql = "select * from movie_recommendation";
+		String sql = "";
+		if(genre != null) {
+			sql = "select * from movie_recommendation where genre like '%"+genre+"%' and movie_type = 1";
+		}else {
+			sql = "select * from movie_recommendation";
+		}
 		executeQuery(sql);
 		
 		 List<MovieVO> list = new ArrayList<>();
@@ -232,12 +237,35 @@ public class MovieDAO extends DBManager {
 		        vo.setActors(getString("actors"));
 		        vo.setRepRlsDate(getString("repRlsDate"));
 		        vo.setRating(getInt("rating"));
+		        vo.setMovie_type(getInt("movie_type"));
 		        
 		        list.add(vo);
 		    }
 		    DBDisConnect();
 		    return list;
 		
+	}
+	
+	//추천 영화 추가
+	public void insertMovie(String title) {
+		driverLoad();
+		DBConnect();
+		
+		String sql = "insert into movie_recommendation select * from movie_db where poster != 'aa.jpg' and title = '"+title+"'";
+		
+		executeQuery(sql);
+		DBDisConnect();
+	}
+	
+	//추천 영화 등록
+	public void updateMovieType(String docid, int no) {
+		driverLoad();
+		DBConnect();
+		
+		String sql = "update movie_recommendation set movie_type = "+no+" where docid = '"+docid+"'";
+		
+		executeUpdate(sql);
+		DBDisConnect();
 	}
 
 }
