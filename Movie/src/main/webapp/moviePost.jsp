@@ -10,7 +10,7 @@
 	String no = request.getParameter("no");
 	
 	if(no == null){
-		response.sendRedirect("board.jsp");
+		response.sendRedirect("movieBoard.jsp");
 		return;
 	}
 		
@@ -371,7 +371,7 @@
 		console.log(no);
 		let result = confirm("삭제하시겠습니까?");
 		if(result == true){
-			location.href = "delete.jsp?no="+no;
+			location.href = "postDelete.jsp?no="+no;
 		}
 	}
 	</script>

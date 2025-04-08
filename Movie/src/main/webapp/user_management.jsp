@@ -1,6 +1,17 @@
+<%@page import="java.util.List"%>
+<%@page import="user.UserDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp" %>
+<%
+	if(user == null || user.getUserType() != 0){
+		response.sendRedirect("main.jsp");
+		return;
+	}
+	
+	UserDAO dao = new UserDAO();
+	List<UserVO> list = dao.getAllUser();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,26 +92,34 @@
 				<tr>
 					<th>번호</th>
 					<th>아이디</th>
-					<th>이름</th>
 					<th>닉네임</th>
 					<th>이메일</th>
 					<th>관리</th>
 				</tr>
 			</thead>
 			<tbody>
-					<tr style="color: black">
-						<td>1</td>
-						<td>hong</td>	
-							<input type="hidden" name="id" value="">			
-						<td> 홍길동</td>
-						<td>닉네임</td>
-						<td>11@nvaer.cpm</td>
+				<%
+					for(int i = 0; i < list.size(); i++){
+						UserVO vo = list.get(i);
+						int userType = vo.getUserType();
+						String id = vo.getId();						
+						String nick = vo.getNick();
+						String email = vo.getEmail();
+				%>
+					<tr style="color:<%= userType == 1 ? "black" : "red" %>;">
+						<td><%= i+1 %></td>
+						<td><%= id %></td>	
+							<input type="hidden" name="id" value="<%= id %>">			
+						<td><%= nick %></td>
+						<td><%= email %></td>
 						<td class="action-buttons">
-							<button onclick="location.href='user_update.jsp?id='">수정</button>
-							<button id="delete-user" class="delete" onclick="deleteUser('')">삭제</button>
+							<button onclick="location.href='user_update.jsp?id=<%= id %>'">수정</button>
+							<button id="delete-user" class="delete" onclick="deleteUser('<%= id %>')">삭제</button>
 						</td>
 					</tr>				
-				
+				<%
+					}
+			%>
 			</tbody>
 		</table>
 	</div>
@@ -108,9 +127,7 @@
 <script>
 	function deleteUser(userId){
 		confirm("삭제하시겠습니까?")
-		location.href = "userOut.jsp?userId="+userId;
+		location.href = "user_out.jsp?userId="+userId;
 	}
-	
-	
 </script>
 </html>

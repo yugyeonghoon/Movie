@@ -69,11 +69,13 @@ public class MovieDAO extends DBManager {
 			String docid = getString("docid");
 			String title = getString("title");
 			String poster = getString("poster");
+			String genre = getString("genre");
 			
 			MovieVO vo = new MovieVO();
 			vo.setDocid(docid);
 			vo.setTitle(title);
 			vo.setPoster(poster);
+			vo.setGenre(genre);
 			
 			list.add(vo);
 		}
@@ -209,6 +211,33 @@ public class MovieDAO extends DBManager {
 	    }
 	    DBDisConnect();
 	    return list;
+	}
+	
+	//관리자 추천작
+	public List<MovieVO> recommenMovie(){
+		driverLoad();
+		DBConnect();
+		
+		String sql = "select * from movie_recommendation";
+		executeQuery(sql);
+		
+		 List<MovieVO> list = new ArrayList<>();
+		    while (next()) {
+		        MovieVO vo = new MovieVO();
+		        vo.setDocid(getString("docid"));
+		        vo.setTitle(getString("title"));
+		        vo.setPoster(getString("poster"));
+		        vo.setGenre(getString("genre"));
+		        vo.setDirectors(getString("directors"));
+		        vo.setActors(getString("actors"));
+		        vo.setRepRlsDate(getString("repRlsDate"));
+		        vo.setRating(getInt("rating"));
+		        
+		        list.add(vo);
+		    }
+		    DBDisConnect();
+		    return list;
+		
 	}
 
 }

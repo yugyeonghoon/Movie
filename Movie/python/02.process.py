@@ -12,7 +12,7 @@ df.dropna(subset=["plots"], inplace=True)
 
 print(df.info())
 
-df["poster"].fillna("aa.jpg", inplace=True)
+df["poster"].fillna("./aa.jpg", inplace=True)
 print(df.info())
 
 print(df["genre"] == "에로")
@@ -33,7 +33,7 @@ df["runtime"].fillna(0, inplace=True)
 
 df["ratingGrade"].fillna("자료없음", inplace=True)
 
-df["repRlsDate"].fillna(20250403, inplace=True)
+df["repRlsDate"].fillna(20000101, inplace=True)
 
 df["repRlsDate"] = df["repRlsDate"].astype(int)
 
@@ -44,5 +44,9 @@ df["runtime"] = df["runtime"].astype(int)
 print(df.info())
 
 df["rating"] = "0"
+
+df["ratingPeople"] = "0명 참여"
+
+df["ratingPeople"] = df["ratingPeople"].str.extract('(\d+)')
 
 df.to_csv("02.edit_movie.csv", index=False)

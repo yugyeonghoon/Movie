@@ -36,39 +36,46 @@ public class BoardDAO extends DBManager{
 	
 	//글 조회(여러건)
 	public List<BoardVO> listView(String searchType, String keyword, int startNum, int limitSize, int bno){
-		driverLoad();
-		DBConnect();
-		
-		String sql = "select * from board where (board_type = 0 or board_type= "+bno+") and board_type != 99";
-		
-		if(searchType != null && keyword != null){
-			sql += " and "+searchType+ " like '%"+keyword+"%'"; 
-		}
-		
-		sql += " order by board_type ASC limit " + startNum + ", " + limitSize;
-		executeQuery(sql);
-		
-		List<BoardVO> list = new ArrayList<>();
-		while(next()) {
-			int no = getInt("no");
-			String title = getString("title");
-			String author = getString("author");
-			String createDate = getString("create_date");
-			int boardType = getInt("board_type");
-			
-			BoardVO vo = new BoardVO();
-			vo.setNo(no);
-			vo.setTitle(title);
-			vo.setAuthor(author);
-			vo.setCreateDate(createDate);
-			vo.setBoardType(boardType);
-			
-			list.add(vo);
-		}
-		DBDisConnect();
-		return list;
+	    driverLoad();
+	    DBConnect();
+
+	    String sql = "select * from board where board_type != 99";
+
+	    if(searchType != null && keyword != null){
+	        sql += " and "+searchType+ " like '%"+keyword+"%'"; 
+	    }
+
+	    if(bno != 0){
+	        sql += " and (board_type = 0 or board_type = " + bno + ")";
+	    }
+	    
+	    sql += " order by board_type ASC limit " + startNum + ", " + limitSize;
+	    executeQuery(sql);
+	    
+	    List<BoardVO> list = new ArrayList<>();
+	    while(next()) {
+	        int no = getInt("no");
+	        String title = getString("title");
+	        String content = getString("content");
+	        String author = getString("author");
+	        String createDate = getString("create_date");
+	        int boardType = getInt("board_type");
+	        
+	        BoardVO vo = new BoardVO();
+	        vo.setNo(no);
+	        vo.setTitle(title);
+	        vo.setContent(content);
+	        vo.setAuthor(author);
+	        vo.setCreateDate(createDate);
+	        vo.setBoardType(boardType);
+	        
+	        list.add(vo);
+	    }
+	    DBDisConnect();
+	    return list;
 	}
-	//개시글 개수 조회
+
+	//게시글 개수 조회
 	public int getCount(String searchType, String keyword, int bno){
 		driverLoad();
 		DBConnect();
