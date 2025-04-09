@@ -187,25 +187,52 @@ public class MovieDAO extends DBManager {
 	    return list;
 	}
 	
-	//영화 검색?
-	public List<MovieVO> searchMovies(String keyword) {
+	//영화 검색
+	public List<MovieVO> searchMovies(String title, String actors) {
 	    driverLoad();
 	    DBConnect();
 	    
-	    String sql = "select * from movie_db where poster != 'aa.jpg' and title like '%" + keyword + "%'";
+	    String sql = "select * from movie_db where poster != 'aa.jpg' and rating > 8 and rating_people > 2000 ";
+	    sql += "and (title like '%"+title+"%' or actors like '%"+actors+"%')";
+	    		 
 	    executeQuery(sql);
 	    
 	    List<MovieVO> list = new ArrayList<>();
 	    while (next()) {
+	    	String docid = getString("docid");
+	        String poster = getString("poster");
+	    	
 	        MovieVO vo = new MovieVO();
-	        vo.setDocid(getString("docid"));
-	        vo.setTitle(getString("title"));
-	        vo.setPoster(getString("poster"));
-	        vo.setGenre(getString("genre"));
-	        vo.setDirectors(getString("directors"));
-	        vo.setActors(getString("actors"));
-	        vo.setRepRlsDate(getString("repRlsDate"));
-	        vo.setRating(getInt("rating"));
+	        vo.setDocid(docid);
+	        vo.setPoster(poster);
+	        
+	        list.add(vo);
+	    }
+	    DBDisConnect();
+	    return list;
+	}
+	
+	//상세 정보 영화 추천작
+	public List<MovieVO> similarityMovie(String id){
+		driverLoad();
+		DBConnect();
+		
+		String sql = "select * from movie_similarity ms";
+		sql += " left join movie_db md on ms.target_movie_docid = md.docid ";
+		sql += " where similarity != 0 and similarity != 1 and base_movie_docid = '"+id+"' limit 5";
+		
+		executeQuery(sql);
+		
+		List<MovieVO> list = new ArrayList<>();
+		while (next()) {
+	    	String docid = getString("docid");
+	    	String title = getString("title");
+	        String poster = getString("poster");
+	    	
+	        MovieVO vo = new MovieVO();
+	        vo.setDocid(docid);
+	        vo.setTitle(title);
+	        vo.setPoster(poster);
 	        
 	        list.add(vo);
 	    }
@@ -267,5 +294,5 @@ public class MovieDAO extends DBManager {
 		executeUpdate(sql);
 		DBDisConnect();
 	}
-
+	
 }
