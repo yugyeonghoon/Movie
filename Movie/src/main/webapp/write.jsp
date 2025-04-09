@@ -104,7 +104,14 @@
 				<input type="hidden" name="refer" value="<%= last %>">
 				<div class="search-bar">
 	                <select name="boardType">
-	                	<option value="">게시판 타입을 선택해주세요.</option>
+	                <%
+	                	if(user.getUserType() == 0){
+	                		%>
+	                			<option value="" <%= "0".equals(boardType) ? "selected" : "" %>>게시판 타입을 선택해주세요.</option>
+	                			<option value="0">공지 사항</option>
+	                			<%
+	                			}
+	                %>
 	                    <option value="1" <%= "1".equals(boardType) ? "selected" : "" %>>영화 토론</option>
     					<option value="2" <%= "2".equals(boardType) ? "selected" : "" %>>자유 게시판</option>
 	                </select>

@@ -10,7 +10,7 @@
 	String no = request.getParameter("no");
 	
 	if(no == null){
-		response.sendRedirect("board.jsp");
+		response.sendRedirect("movieBoard.jsp");
 		return;
 	}
 		
@@ -197,7 +197,7 @@
             		String rno = rvo.getRno();
             		String rcontent = rvo.getRcontent();
             		String rauthor = rvo.getRauthor();
-            		String rcreateDate = rvo.getCreateDate();
+            		String rcreateDate = rvo.getRcreate_date();
             		%>
           	<div class="comment">
                 <div class="meta">작성자: <%= rauthor %> | 작성일: <%= rcreateDate %></div>
@@ -371,7 +371,7 @@
 		console.log(no);
 		let result = confirm("삭제하시겠습니까?");
 		if(result == true){
-			location.href = "delete.jsp?no="+no;
+			location.href = "postDelete.jsp?no="+no;
 		}
 	}
 	</script>

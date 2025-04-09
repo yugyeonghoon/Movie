@@ -5,8 +5,8 @@ public class ReplyVO {
 	private String no;
 	private String rauthor;
 	private String rcontent;
-	private String createDate;
-	private String updateDate;
+	private String rcreate_date;
+	private String rupdate_date;
 	
 	public String getRno() {
 		return rno;
@@ -32,16 +32,18 @@ public class ReplyVO {
 	public void setRcontent(String rcontent) {
 		this.rcontent = rcontent;
 	}
-	public String getCreateDate() {
-		return createDate;
+	public String getRcreate_date() {
+		return rcreate_date;
 	}
-	public void setCreateDate(String createDate) {
-		this.createDate = createDate;
+	public void setRcreate_date(String rcreate_date) {
+		this.rcreate_date = rcreate_date;
 	}
-	public String getUpdateDate() {
-		return updateDate;
+	public String getRupdate_date() {
+		return rupdate_date;
 	}
-	public void setUpdateDate(String updateDate) {
-		this.updateDate = updateDate;
+	public void setRupdate_date(String rupdate_date) {
+		this.rupdate_date = rupdate_date;
 	}
+	
+	
 }
