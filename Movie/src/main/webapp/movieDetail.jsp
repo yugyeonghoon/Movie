@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="movie.MovieVO"%>
 <%@page import="movie.MovieDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -5,6 +6,7 @@
 <%@ include file="header.jsp" %>
 <%
 	String no = request.getParameter("no");
+	String Genre = request.getParameter("genre");
 
 	MovieDAO dao = new MovieDAO();
 	MovieVO vo = dao.view(no);
@@ -21,6 +23,8 @@
 	String ratingGrade = vo.getRating_grade();
 	int rating = vo.getRating();
 	int ratingPeople = vo.getRating_people();
+
+	List<MovieVO> list = dao.similarityMovie(no);
 	
 %>
 <!DOCTYPE html>
@@ -83,6 +87,33 @@
 	        .ratingPeople {
 	        	color : gray;
 	        }
+	        
+	        .genre {
+			margin-left: 9%;
+			}
+			.carousel-inner {
+			padding: 2rem;
+			}
+			.title {
+			margin-left: 11%;
+			}
+			.first {
+		    float: left;
+		    margin-right: 10px;
+		    width: 15%;
+		    height: 360px;
+		    text-align: center;
+		    /* overflow: hidden; */
+			}
+			.first img {
+		    width: 100%;
+		    height: 360px;
+		    object-fit: cover;
+		    display: block;
+			}
+			.carousel-item{
+			margin-left: 11%;
+			}
 	    </style>
 	</head>
 	<body>
@@ -107,8 +138,35 @@
 	            </div>
 	        </div>
 	    </div>
+	    <div class="genre">
+		 	<div id="carouselExampleControlsNoTouchingfirst" class="carousel carousel-dark slide">
+			  <div class="carousel-inner">
+				<div class="title">
+				  <h4>
+				  	<span>영화 추천작</span>
+				  </h4>
+				</div>
+				<div class="carousel-item active">
+			    <%
+				    for(int i = 0; i < list.size(); i++){
+		    			MovieVO listVo = list.get(i);
+		    			String listNo = listVo.getDocid();
+		    			String listTitle = listVo.getTitle();
+		    			String listPoster = listVo.getPoster();
+			    %>
+				    <div class="first">
+				    	<a href="movieDetail.jsp?no=<%= listNo%>"><img src="<%=listPoster %>" alt="..."></a><h5><span><%= listTitle %></span></h5>
+				    </div>
+				    <%
+				    	}
+				    %>
+			    </div>
+			</div>
+	</div>
+	</div>
 	    <div class="advertising-container">
 	    	<!-- <a class="linkfirst" href="https://www.netflix.com/kr/" target="_blank"><img alt="링크이미지1" src="netfilx1.jpg" style="max-width:100%;"></a> -->
 	    </div>
+	    
 	</body>
 </html>
