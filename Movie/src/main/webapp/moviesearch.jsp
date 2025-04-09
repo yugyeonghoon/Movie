@@ -1,12 +1,21 @@
+<%@page import="movie.MovieVO"%>
+<%@page import="java.util.List"%>
+<%@page import="movie.MovieDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="header.jsp" %>
 <%
-	String search = request.getParameter("movieKeyword");
-	System.out.println(search);
+	String title = request.getParameter("movieKeyword");
+	String actors = request.getParameter("movieKeyword");
+	
+	MovieDAO dao = new MovieDAO();
+	List<MovieVO> list = dao.searchMovies(title, actors);
 
-	if(search == null) {
-		search = "";
+	if(title == null) {
+		title = "";
+	}
+	if(actors == null) {
+		actors = "";
 	}
 %>
 <!DOCTYPE html>
@@ -21,7 +30,7 @@
 	}
 	
 	#content {
-		width: 1800px;
+		/* width: 1800px; */
     	margin-left: 0;
     	margin-right: auto;
 	}
@@ -31,42 +40,19 @@
 	}
 	
 	.title {
-		margin-left: 8%;
+		/* margin-left: 8%; */
 	}
 	
 	.first {
-		float: left;
+		/* float: left;
 		margin-right: 10px;
 		margin-left: 8%;
-		width:15%;
+		width:15%; */
 		}
-
-	.second{
-		float: left;
+		
+	img {
 		margin-right: 10px;
-		width: 15%;
-		box-sizing: border-box;	
-		}
-
-	.third{
-		float: left;
-		margin-right: 10px;
-		width: 15%;
-		box-sizing: border-box;
-		}
-	
-	.force {
-		float: left;
-		margin-right: 10px;
-		width:15%;
-		box-sizing: border-box;
-	}
-	
-	.five {
-		float: left;
-		margin-right: 10px;
-		width:15%;
-		box-sizing: border-box;
+    	margin-bottom: 10px;
 	}
 </style>
 </head>
@@ -82,56 +68,31 @@
 			  <div class="carousel-inner">
 				<div class="title">
 				  <h4>
-				  	<span><%=search %> 검색 영화</span>
+				  	<span>영화</span>
 				  </h4>
 				</div>
 			    <div class="carousel-item active">
-				    <div class="first">
-				    	<img src="https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20250319_123%2F1742370056144UwYpI_JPEG%2Fmovie_image.jpg" style="max-width: 100%; height: auto;" class="d-block w-100" alt="...">
-				    </div>
-				    <div class="second">
-				    	<img src="https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20250310_156%2F174159345420275O5n_JPEG%2Fmovie_image.jpg" style="max-width: 100%; height: auto;" class="d-block w-100" alt="...">
-				    </div>
-				    <div class="third">
-				    	<img src="https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20250304_132%2F1741064558179jh12a_JPEG%2Fmovie_image.jpg" style="max-width: 100%; height: auto;" class="d-block w-100" alt="...">
-				    </div>
-				    <div class="force">
-				    	<img src="https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20250221_149%2F1740118679052Pi7wI_JPEG%2Fmovie_image.jpg" style="max-width: 100%; height: auto;" class="d-block w-100" alt="...">
-				    </div>
-				    <div class="five">
-			    		<img src="https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20210311_155%2F1615423409170FPnKV_JPEG%2Fmovie_image.jpg" style="max-width: 100%; height: auto;" class="d-block w-100" alt="...">
-			    	</div>
+			    <div class="first">
+			    <%
+				    for(int i = 0; i < list.size(); i++){
+		    			MovieVO vo = list.get(i);
+		    			String no = vo.getDocid();
+		    			String poster = vo.getPoster();
+			    %>
+				    
+				    	<a href="movieDetail.jsp?no=<%= no %>"><img src="<%=poster %>" alt="..."></a>
+				    
+				    <%
+				    	}
+				    %>
+				 </div>
 			    </div>
 			  </div>
-			</div>
-	
-		<div id="carouselExampleControlsNoTouchingfirst" class="carousel carousel-dark slide" data-bs-touch="false" data-bs-interval="false">
-			  <div class="carousel-inner">
-				<div class="title">
-				  <h4>
-				  	<span><%=search %> 검색어와 비슷한 영화 추천작</span>
-				  </h4>
-				</div>
-			    <div class="carousel-item active">
-				    <div class="first">
-				    	<img src="https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20250319_123%2F1742370056144UwYpI_JPEG%2Fmovie_image.jpg" style="max-width: 100%; height: auto;" class="d-block w-100" alt="...">
-				    </div>
-				    <div class="second">
-				    	<img src="https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20250310_156%2F174159345420275O5n_JPEG%2Fmovie_image.jpg" style="max-width: 100%; height: auto;" class="d-block w-100" alt="...">
-				    </div>
-				    <div class="third">
-				    	<img src="https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20250304_132%2F1741064558179jh12a_JPEG%2Fmovie_image.jpg" style="max-width: 100%; height: auto;" class="d-block w-100" alt="...">
-				    </div>
-				    <div class="force">
-				    	<img src="https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20250221_149%2F1740118679052Pi7wI_JPEG%2Fmovie_image.jpg" style="max-width: 100%; height: auto;" class="d-block w-100" alt="...">
-				    </div>
-				    <div class="five">
-			    		<img src="https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20210311_155%2F1615423409170FPnKV_JPEG%2Fmovie_image.jpg" style="max-width: 100%; height: auto;" class="d-block w-100" alt="...">
-			    	</div>
-			    </div>
-			  </div>
-			</div>
+		</div>
 	</div>
+	<div class="advertising-container">
+	    	<a class="linkfirst" href="https://www.netflix.com/kr/" target="_blank"><img alt="링크이미지1" src="netfilx1.jpg" style="max-width:100%;"></a>
+	    </div>
 </div>
 </body>
 </html>
