@@ -49,7 +49,7 @@ public class BoardDAO extends DBManager{
 	        sql += " and (board_type = 0 or board_type = " + bno + ")";
 	    }
 	    
-	    sql += " order by board_type ASC limit " + startNum + ", " + limitSize;
+	    sql += " order by board_type asc, create_date desc limit " + startNum + ", " + limitSize;
 	    executeQuery(sql);
 	    
 	    List<BoardVO> list = new ArrayList<>();
