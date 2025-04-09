@@ -179,18 +179,20 @@
 					<button type="button" class="btn1" onclick="location.href='board.jsp'">목록으로</button>
 				</div>
 		</div>
-		<%
+		 
+        
+        <div class="reply-container">
+        <%
         	if(user != null){
         		%>
+        		<h5>댓글</h5>	
         			<div class="comment-form">
 			            <input id="rcontent" type="text" placeholder="댓글을 입력하세요...">
 			            <button class="reply-btn" type="button" id="replyBtn">댓글 작성</button>
 			        </div>
         		<%
         	}
-        %>  
-        <h5>댓글</h5>
-        <div class="reply-container">
+        %> 
             <%
             	for(int i = 0; i < list.size(); i ++){
             		ReplyVO rvo = list.get(i);
@@ -202,7 +204,7 @@
           	<div class="comment">
                 <div class="meta">작성자: <%= rauthor %> | 작성일: <%= rcreateDate %></div>
                 <p><%= rcontent %></p>
-                
+
                 <%
                 	if(user != null && (user.getId().equals(rauthor) || user.getUserType() == 0)){
                 		%>

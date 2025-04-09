@@ -186,12 +186,11 @@
 					<button type="button" class="btn1" onclick="location.href='movieBoard.jsp'">목록으로</button>
 				</div>
 		</div>
-        
         <div class="reply-container">
-        <h5>댓글</h5>
         <%
         	if(user != null){
         		%>
+        		<h5>댓글</h5>
         			<div class="comment-form">
 			            <input id="rcontent" type="text" placeholder="댓글을 입력하세요...">
 			            <button class="reply-btn" type="button" id="replyBtn">댓글 작성</button>
