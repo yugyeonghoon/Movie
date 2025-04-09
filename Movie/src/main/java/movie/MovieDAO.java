@@ -195,12 +195,11 @@ public class MovieDAO extends DBManager {
 	}
 	
 	//영화 검색
-	public List<MovieVO> searchMovies(String title, String actors) {
+	public List<MovieVO> searchMovies(String title) {
 	    driverLoad();
 	    DBConnect();
 	    
-	    String sql = "select * from movie_db where poster != 'aa.jpg' and rating > 8 and rating_people > 2000 ";
-	    sql += "and (title like '%"+title+"%' or actors like '%"+actors+"%')";
+	    String sql = "select * from movie_db where poster != 'aa.jpg' and title like '%"+title+"%'";
 	    		 
 	    executeQuery(sql);
 	    
@@ -226,7 +225,7 @@ public class MovieDAO extends DBManager {
 		
 		String sql = "select * from movie_similarity ms";
 		sql += " left join movie_db md on ms.target_movie_docid = md.docid ";
-		sql += " where similarity != 0 and similarity != 1 and base_movie_docid = '"+id+"' limit 5";
+		sql += " where similarities_movies != 0 and similarities_movies != 1 and base_movie_docid = '"+id+"' limit 5";
 		
 		executeQuery(sql);
 		
