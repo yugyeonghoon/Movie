@@ -16,7 +16,7 @@ public class UserDAO extends DBManager{
 		DBConnect();
 		
 		String sql = "";
-		sql += "insert into user(id, pw, email, nick)";
+		sql += "insert into user(id, password, email, nickname)";
 		sql += " value ('"+id+"', '"+pw+"', '"+email+"', '"+nick+"')";
 		executeUpdate(sql);
 		
@@ -31,7 +31,7 @@ public class UserDAO extends DBManager{
 		DBConnect();
 		
 		String sql = "";
-		sql += "select * from user where id = '"+id+"' and pw = '"+pw+"' and user_type not in(98, 99)";
+		sql += "select * from user where id = '"+id+"' and password = '"+pw+"' and user_type not in(98, 99)";
 		executeQuery(sql);
 		
 		if(next()) {
@@ -64,7 +64,7 @@ public class UserDAO extends DBManager{
 		DBConnect();
 		
 		String sql = "";
-		sql += "update user set pw = '"+pw+"', nick = '"+nick+"',";
+		sql += "update user set password = '"+pw+"', nickname = '"+nick+"',";
 		sql += " update_date = now() where id = '"+id+"'";
 		executeUpdate(sql);
 		DBDisConnect();
@@ -117,7 +117,7 @@ public class UserDAO extends DBManager{
 		DBConnect();
 		
 		String sql = "";
-		sql += "select count(*) as cnt from user where nick = '"+nick+"'";
+		sql += "select count(*) as cnt from user where nickname = '"+nick+"'";
 		executeQuery(sql);
 		if(next()) {
 			int cnt = getInt("cnt");
@@ -178,7 +178,7 @@ public class UserDAO extends DBManager{
 		DBConnect();
 		
 		String sql = "";
-		sql += "update user set pw = '"+pw+"', update_date = now() where id = '"+id+"'";
+		sql += "update user set password = '"+pw+"', update_date = now() where id = '"+id+"'";
 		executeUpdate(sql);
 		DBDisConnect();
 	}

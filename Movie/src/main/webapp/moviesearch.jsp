@@ -6,16 +6,12 @@
 <%@include file="header.jsp" %>
 <%
 	String title = request.getParameter("movieKeyword");
-	String actors = request.getParameter("movieKeyword");
 	
 	MovieDAO dao = new MovieDAO();
-	List<MovieVO> list = dao.searchMovies(title, actors);
+	List<MovieVO> list = dao.searchMovies(title);
 
 	if(title == null) {
 		title = "";
-	}
-	if(actors == null) {
-		actors = "";
 	}
 %>
 <!DOCTYPE html>
@@ -53,7 +49,7 @@
 	img {
 		margin-right: 10px;
     	margin-bottom: 10px;
-	}
+    	}
 </style>
 </head>
 <body>

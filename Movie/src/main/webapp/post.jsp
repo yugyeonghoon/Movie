@@ -179,18 +179,20 @@
 					<button type="button" class="btn1" onclick="location.href='board.jsp'">목록으로</button>
 				</div>
 		</div>
-		<%
+		 
+        
+        <div class="reply-container">
+        <%
         	if(user != null){
         		%>
+        		<h5>댓글</h5>	
         			<div class="comment-form">
 			            <input id="rcontent" type="text" placeholder="댓글을 입력하세요...">
 			            <button class="reply-btn" type="button" id="replyBtn">댓글 작성</button>
 			        </div>
         		<%
         	}
-        %>  
-        <h5>댓글</h5>
-        <div class="reply-container">
+        %> 
             <%
             	for(int i = 0; i < list.size(); i ++){
             		ReplyVO rvo = list.get(i);
@@ -202,7 +204,7 @@
           	<div class="comment">
                 <div class="meta">작성자: <%= rauthor %> | 작성일: <%= rcreateDate %></div>
                 <p><%= rcontent %></p>
-                
+
                 <%
                 	if(user != null && (user.getId().equals(rauthor) || user.getUserType() == 0)){
                 		%>
@@ -258,43 +260,44 @@
 	}
 	
 	$("#replyBtn").click(function(){
-		$.ajax({
-			url : "replyok.jsp",
-			type : "post",
-			data : {
-				no : "<%= no %>",
-				rauthor : userId,
-				rcontent : $("#rcontent").val()
-			},
-			success : function(result){
-				let time = getTime();
-				console.log(result);
-				if(result.trim() != "0"){
-					let rcontent = $("#rcontent");
-					
-					let html = "";
-					html += "<div class='comment'>";
-					html += 	"<div class='meta'>작성자: "+userId+" | 작성일: "+time+"</div>";
-					html += 	"<p>"+rcontent.val()+"</p>";
-					html += 	"<div class='comment-actions'>";
-					html += 		"<button onclick='replyBtn(this)'>수정</button>";
-					html +=			"<input type='hidden'>"
-					html +=			"<button class='dpnone' onclick='modifyReply("+result.trim()+", this)'>확인</button>"
-					html +=			"<button class='dpnone' onclick='cancelBtn(this, `"+rcontent.val()+"`)'>취소</button>"
-					html +=			"<button onclick='deleteReply("+result.trim()+", this)'>삭제</button>";
-					html += 	"</div>";
-					html += "</div>";
-					$(".reply-container").prepend(html);
-					
-					rcontent.val("");
-				}else{
-				}
-			},
-			error : function(){
-				console.log("에러 발생");
-			}
-		});
-		
+	    $.ajax({
+	        url : "replyok.jsp",
+	        type : "post",
+	        data : {
+	            no : "<%= no %>",
+	            rauthor : userId,
+	            rcontent : $("#rcontent").val()
+	        },
+	        success : function(result){
+	            let time = getTime();
+	            console.log(result);
+	            if(result.trim() != "0"){
+	                let rcontent = $("#rcontent");
+	                
+	                let html = "";
+	                html += "<div class='comment'>";
+	                html += 	"<div class='meta'>작성자: "+userId+" | 작성일: "+time+"</div>";
+	                html += 	"<p>"+rcontent.val()+"</p>";
+	                html += 	"<div class='comment-actions'>";
+	                html += 		"<button onclick='replyBtn(this)'>수정</button>";
+	                html +=			"<input type='hidden'>"
+	                html +=			"<button class='dpnone' onclick='modifyReply("+result.trim()+", this)'>확인</button>"
+	                html +=			"<button class='dpnone' onclick='cancelBtn(this, `"+rcontent.val()+"`)'>취소</button>"
+	                html +=			"<button onclick='deleteReply("+result.trim()+", this)'>삭제</button>";
+	                html += 	"</div>";
+	                html += "</div>";
+	                
+	                $(".reply-container").append(html);
+	                
+	                rcontent.val("");
+	            } else {
+	                console.log("댓글 작성 실패");
+	            }
+	        },
+	        error : function(){
+	            console.log("에러 발생");
+	        }
+	    });
 	});
 	
 	//댓글 수정
