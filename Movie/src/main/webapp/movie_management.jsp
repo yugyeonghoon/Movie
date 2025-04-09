@@ -136,6 +136,14 @@
             color: white;
             pointer-events: none;
         }
+         table tr td
+         {
+         	overflow:hidden;
+			white-space:nowrap;
+			text-overflow:ellipsis;
+			max-width:130px;
+         }
+
     </style>
 	</head>
 	<body>
@@ -174,7 +182,7 @@
 	            <td><%= i + 1 + startNum %></td>
 	            <td><a href="movieDetail.jsp?no=<%= docid %>"><%= docid %></a></td>
 	            <input type="hidden" name="id" value="<%= docid %>">
-	            <td><%= title %></td>
+	            <td maxlength='10'><%= title %></td>
 	            <td><%= genre %></td>
 	            <td class="action-buttons">
 	                <button class="one" onclick="return one('<%= docid %>')">등록</button>

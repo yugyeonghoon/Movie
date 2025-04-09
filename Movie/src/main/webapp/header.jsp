@@ -185,7 +185,7 @@
 								}else{
 									%>
 									<li><a class="dropdown-item" href="login.jsp">로그인</a></li>
-									<li><a class="dropdown=item" href="signup.jsp">회원가입</a></li>
+									<li><a class="dropdown=item" href="signup.jsp">&nbsp;&nbsp;회원가입</a></li>
 									<%
 								}
 							%>				

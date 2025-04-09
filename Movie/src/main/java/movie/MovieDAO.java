@@ -92,7 +92,7 @@ public class MovieDAO extends DBManager {
 		if(genre != null) {
 			sql = "select * from movie_db where genre like '%"+genre+"%' and movie_type = 1 order by rating desc";
 		}else {
-			sql = "select * from movie_db order by rating desc";
+			sql = "select * from movie_db where movie_type = 1 order by rating desc";
 		}
 		executeQuery(sql);
 		
@@ -305,7 +305,7 @@ public class MovieDAO extends DBManager {
 		driverLoad();
 		DBConnect();
 		
-		String sql = "update movie_recommendation set movie_type = "+no+" where docid = '"+docid+"'";
+		String sql = "update movie_db set movie_type = "+no+" where docid = '"+docid+"'";
 		
 		executeUpdate(sql);
 		DBDisConnect();
