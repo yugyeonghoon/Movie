@@ -10,7 +10,7 @@
 	MovieDAO dao = new MovieDAO();
 	List<MovieVO> list = dao.selectByGenre(genre);
 	List<MovieVO> plist = dao.popularGenre(genre);
-	List<MovieVO> alist = dao.recommenMovie(genre);
+	List<MovieVO> alist = dao.popularView(genre);
 %>
 <!DOCTYPE html>
 <html>

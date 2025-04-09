@@ -84,29 +84,36 @@ public class MovieDAO extends DBManager {
 	}
 	
 	//평점 7.0 이상 영화 목록
-	public List<MovieVO> popularView() {
+	public List<MovieVO> popularView(String genre) {
 		driverLoad();
 		DBConnect();
 		
-		String sql = "select * from movie_recommendation where movie_type = 1";
-		
+		String sql = "";
+		if(genre != null) {
+			sql = "select * from movie_db where genre like '%"+genre+"%' and movie_type = 1 order by rating desc";
+		}else {
+			sql = "select * from movie_db order by rating desc";
+		}
 		executeQuery(sql);
 		
-		List<MovieVO> list = new ArrayList<>();
-		while(next()) {
-			String docid = getString("docid");
-			String title = getString("title");
-			String poster = getString("poster");
-			
-			MovieVO vo = new MovieVO();
-			vo.setDocid(docid);
-			vo.setTitle(title);
-			vo.setPoster(poster);
-			
-			list.add(vo);
-		}
-		DBDisConnect();
-		return list;
+		 List<MovieVO> list = new ArrayList<>();
+		    while (next()) {
+		        MovieVO vo = new MovieVO();
+		        vo.setDocid(getString("docid"));
+		        vo.setTitle(getString("title"));
+		        vo.setPoster(getString("poster"));
+		        vo.setGenre(getString("genre"));
+		        vo.setDirectors(getString("directors"));
+		        vo.setActors(getString("actors"));
+		        vo.setRepRlsDate(getString("repRlsDate"));
+		        vo.setRating(getInt("rating"));
+		        vo.setMovie_type(getInt("movie_type"));
+		        
+		        list.add(vo);
+		    }
+		    DBDisConnect();
+		    return list;
+		
 	}
 	
 	//개봉 예정 영화
