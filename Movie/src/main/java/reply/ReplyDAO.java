@@ -16,7 +16,7 @@ public class ReplyDAO extends DBManager{
 		driverLoad();
 		DBConnect();
 		
-		String sql = "insert into reply(rauthor, no, rcontent) ";
+		String sql = "insert into reply(reply_author, board_no, reply_content) ";
 		sql += "values('"+rauthor+"', '"+no+"', '"+rcontent+"')";
 		
 		String selectSql = "select last_insert_id() as rno";
@@ -42,8 +42,8 @@ public class ReplyDAO extends DBManager{
 		driverLoad();
 		DBConnect();
 		
-		String sql = "update reply set rcontent = '"+rcontent+"', ";
-		sql += "update_date = now() where rno = " + rno;
+		String sql = "update reply set reply_content = '"+rcontent+"', ";
+		sql += "reply_update_date = now() where reply_no = " + rno;
 		
 		executeUpdate(sql);
 		DBDisConnect();
@@ -54,7 +54,7 @@ public class ReplyDAO extends DBManager{
 		driverLoad();
 		DBConnect();
 		
-		String sql = "delete from reply where rno = " + rno;
+		String sql = "delete from reply where reply_no = " + rno;
 		executeUpdate(sql);
 		DBDisConnect();
 	}
@@ -65,8 +65,8 @@ public class ReplyDAO extends DBManager{
 		driverLoad();
 		DBConnect();
 		
-		String sql = "select * from reply where no = " + no;
-		sql += " order by rno desc";
+		String sql = "select * from reply where board_no = " + no;
+		sql += " order by reply_no desc";
 		
 		executeQuery(sql);
 		
