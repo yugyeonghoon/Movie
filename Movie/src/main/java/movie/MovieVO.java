@@ -14,6 +14,7 @@ public class MovieVO {
 	private String rating_grade;
 	private int rating;
 	private int rating_people;
+	private int movie_type;
 	
 	public String getDocid() {
 		return docid;
@@ -93,5 +94,13 @@ public class MovieVO {
 	public void setRating_people(int rating_people) {
 		this.rating_people = rating_people;
 	}
+	public int getMovie_type() {
+		return movie_type;
+	}
+	public void setMovie_type(int movie_type) {
+		this.movie_type = movie_type;
+	}
+	
+	
 	
 }
