@@ -119,18 +119,20 @@
 					<th id ="category">카테고리</th>
 					<th id ="img">이미지</th>
 					<th id ="link">링크</th>
-					<th id = "date">광고기간</th>
+					<th id = "startDate">광고시작일</th>
+					<th id = "endDate">광고종료일</th>
 					<th>관리</th>
 				</tr>
 			</thead>
 		</table>
-		<form action="adupdate.jsp">
+		<form action="ad_updateok.jsp">
 			<input type="text" id = "adnum" name = "adnum" value="<%=ad.getAdnum() %>" readonly>	
 			<input type="text" id ="title" name= "title" value="<%= ad.getAdTitle() %>">
 			<input type="text" id ="category" name="category" value="<%= ad.getAdCat() %>" >
 			<input type="text" id ="img"  name="img" value="<%= ad.getAdImg() %>" >
 			<input type="text" id ="link" name="link" value="<%= ad.getAdLink() %>" >
-			<input type="text" id = "date" name="date" value="2025-04-07 ~ 2025-05-08">
+			<input type="text" id = "startDate" name="startDate" value="<%= ad.getStartDate()%>">
+			<input type="text" id = "endDate" name="endDate" value="<%= ad.getEndDate()%>">
 			<label class="action-buttons">
 				<button type="submit">수정</button>
 				<button id="delete-ad" class="delete" onclick="deleteAd('<%= adnum%>')">삭제</button>

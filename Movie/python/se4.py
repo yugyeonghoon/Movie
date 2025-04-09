@@ -34,7 +34,7 @@ print(links)
 # 데이터 저장
 data = []
 
-for link in links[125:]:
+for link in links:
     driver.get(link)
     print(link)
     print("인덱스", links.index(link))
@@ -68,13 +68,22 @@ for link in links[125:]:
         # 카테고리 가져오기
         try:
             cat1 = driver.find_element(By.CSS_SELECTOR, "#breadcrumb > span:nth-child(2)").text
-            cat2 = driver.find_element(By.CSS_SELECTOR, "#breadcrumb > span:nth-child(3) > a").text
-            cat3 = driver.find_element(By.CSS_SELECTOR, "#breadcrumb > span:nth-child(4) > a").text
-            cat4 = driver.find_element(By.CSS_SELECTOR, "#breadcrumb > span:nth-child(5) > a").text
         except Exception as e:
-            cat1, cat2, cat3, cat4 = "", "", "", ""
-        print(cat1)
-        print(cat2)
+            cat1 = ""
+        try:
+            cat2 = driver.find_element(By.CSS_SELECTOR, "#breadcrumb > span:nth-child(3) > a").text
+        except:
+            cat2 = ""
+        try:
+            cat3 = driver.find_element(By.CSS_SELECTOR, "#breadcrumb > span:nth-child(4) > a").text
+        except:
+            cat3 = ""
+        try:
+            cat4 = driver.find_element(By.CSS_SELECTOR, "#breadcrumb > span:nth-child(5) > a").text
+        except:
+            cat4 = ""
+        print(f"Category: {cat1} > {cat2} > {cat3} > {cat4}")
+        
         data.append({
             "title": title,
             "cat1": cat1,

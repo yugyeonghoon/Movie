@@ -13,11 +13,12 @@ public class AdDAO extends DBManager {
 		String img = vo.getAdImg();
 		String link = vo.getAdLink();
 		String category = vo.getAdCat();
+		String endDate = vo.getEndDate();
 		driverLoad();
 		DBConnect();
 		
-		String sql = "insert into advertisement(advertisement_title, advertisement_img, advertisement_cat, advertisement_link)";
-		sql += " values('"+title+"', '"+img+"', '"+link+"', '"+category+"')";
+		String sql = "insert into advertisement(advertisement_title, advertisement_img, advertisement_cat, advertisement_link, end_date)";
+		sql += " values('"+title+"', '"+img+"', '"+link+"', '"+category+"', '"+endDate+"')";
 		executeUpdate(sql);
 		DBConnect();
 	}
@@ -29,10 +30,11 @@ public class AdDAO extends DBManager {
 		String link = vo.getAdLink();
 		String category = vo.getAdCat();
 		int adnum = vo.getAdnum();
+		String endDate = vo.getEndDate();
 		driverLoad();
 		DBConnect();
 		
-		String sql = "update advertisement set advertisement_title = '"+title+"', advertisement_img = '"+img+"', advertisement_cat = '"+category+"', advertisement_link = '"+link+"'";
+		String sql = "update advertisement set advertisement_title = '"+title+"', advertisement_img = '"+img+"', advertisement_cat = '"+category+"', advertisement_link = '"+link+"', end_date = '"+endDate+"'";
 		sql += " where advertisement_num = "+ adnum;
 		executeUpdate(sql);
 		DBConnect();
@@ -50,11 +52,17 @@ public class AdDAO extends DBManager {
 	}
 	
 	//4. 광고 리스트 조회
-	public List<AdVO> adList(){
+	public List<AdVO> adList(String searchType, String keyword, int startNum, int limitSize){
 		driverLoad();
 		DBConnect();
 		
 		String sql = "select * from advertisement";
+		
+		if(searchType != null && keyword != null){
+	        sql += " where "+searchType+ " like '%"+keyword+"%'"; 
+	    }
+		sql += " limit " + startNum + ", " + limitSize;
+	    executeQuery(sql);
 		
 		executeQuery(sql);
 		List<AdVO> list = new ArrayList<>();
@@ -64,13 +72,18 @@ public class AdDAO extends DBManager {
 			String img = getString("advertisement_img");
 			String link = getString("advertisement_link");
 			String category = getString("advertisement_cat");
+			String startDate = getString("start_date");
+			String endDate = getString("end_date");
 			
 			AdVO vo = new AdVO();
+			
 			vo.setAdnum(adnum);
 			vo.setAdTitle(title);
 			vo.setAdImg(img);
 			vo.setAdLink(link);
 			vo.setAdCat(category);
+			vo.setStartDate(startDate);
+			vo.setEndDate(endDate);
 			
 			list.add(vo);
 					
@@ -93,13 +106,17 @@ public class AdDAO extends DBManager {
 			String img = getString("advertisement_img");
 			String link = getString("advertisement_link");
 			String category = getString("advertisement_cat");
+			String startDate = getString("start_date");
+			String endDate = getString("end_date");
 			
 			AdVO vo = new AdVO();
-			vo.setAdnum(adnum);
+			vo.setAdnum(adnum1);
 			vo.setAdTitle(title);
 			vo.setAdImg(img);
 			vo.setAdLink(link);
 			vo.setAdCat(category);
+			vo.setStartDate(startDate);
+			vo.setEndDate(endDate);
 			DBDisConnect();
 			return vo;
 		}else {
@@ -107,4 +124,24 @@ public class AdDAO extends DBManager {
 			return null;
 		}
 	}
+	
+	//광고 개수 조회
+	public int getCount(String searchType, String keyword){
+		driverLoad();
+		DBConnect();
+		
+		String sql = "select count(*) as cnt from advertisement ";
+		if(searchType != null && keyword != null) {
+			sql += "where" + searchType + "like '%" + keyword + "%'";
+		}
+		executeQuery(sql);
+		if(next()) {
+			int count = getInt("cnt");
+			DBConnect();
+			return count;
+		}else {
+			DBDisConnect();
+			return 0;
+		}
+	};
 }

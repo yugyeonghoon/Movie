@@ -15,137 +15,120 @@
 <meta charset="UTF-8">
 <title>광고 관리</title>
 <style>
-	body{
-		font-family: 'Source Sans Pro', sans-serif;
+	body {
+		font-family : 'Source Sans Pro', sans-serif; 
 		background: white;
 		margin: 0;
 		padding: 0;
 		color: #333;
 	}
-	.user-container{
-		padding: 10px;
-	    margin: 40px auto;
-	    max-width : 1800px;
-	    background: white;
-	    border-radius: 10px;
-	    box-shadow: 0 2px 10px rgb(30 88 139 / 20%);
-	    border: 2px solid #a9a9a9;
-	   }
+	.update-container{
+		padding: 20px;
+		max-width: 1200px;
+		margin: 40px auto;
+		background: #ffffff;
+		border-radius: 10px;
+		box-shadow: 0 2px 10px rgb(30 88 139 / 20%);
+		border: 2px solid #a9a9a9;
+	}
 	h2{
 		color: #000000;
 		text-align: center;
 		margin-bottom: 20px;
 		font-size: 27px;
 	}
-	table{
-		width: 100%;
-		margin-top:20px;
+	.update-field{
+		margin-bottom:15px;
+	}
+	.update-field label{
+		font-weight: bold;
+		margin-bottom: 5px;
+		display: block;
+		color: black;
+		font-size: 17px;
+	}
+	.update-field input{
+		width: 95%;
+		padding: 8px;
+		border: 1px solid black;
+	    height: 20px;
+	    font-size: 15px;
+	    padding-left: 10px;
+	    box-shadow: 0 1px 10px rgb(30 88 139 / 20%);
 		border-radius: 12px;
 		border-style: hidden;
-		border-collapse: collapse;
 	}
-	th,td {
-		text-align: center;
-		padding: 6px;
-		font-size: 14px;
-		border-radius: 12px;
+	.feedback{
+		font-size: 0.9rem;
+		color: red;
+		margin-bottom: 10px;
 	}
-	th{
-		background-color:#edebeb;
-		color: #3d3838;
-		font-size: 16px;
+	.feedback.success{
+		color: green;
 	}
-	.action-buttons{
-		text-align: center;
+	.update-actions {
+		display: flex;
+ 		justify-content: space-between;
 	}
-	.action-buttons button{
+	.update-actions button{
 		background: #000000;
-		color: white;
+		color: #ffffff;
 		border: none;
+		padding: 10px 20px;
 		border-radius: 5px;
 		cursor: pointer;
+		transition: background 0.3s ease;
+		margin: 0 64px;
 		font-size: 14px;
-		transition: background 0.3s;
 		font-weight: bold;
-		padding: 8px 8px;
 	}
-	.action-buttons button:hover {
-		background:#283552;
+	.update-actions button:hover {
+	        background: #1a5fc4;
 	}
-	.action-buttons button.delete {
-		background: #ff1a1a;
+	.feedback{
+		font-size: 1rem;
+		color: red;
+		margin-bottom: 10px;
+		display : none;
 	}
-	.action-buttons button.delete:hover{
-		background: #e60000;
+	.feedback.success{
+		color: green;
 	}
-
 </style>
 </head>
 <body>
-	<div class="user-container">
+	<div class="update-container">
 		<h2>광고 추가</h2>
-		<table>
-			<thead>
-				<tr>
-					<th>번호</th>
-					<th>광고제목</th>
-					<th>카테고리</th>
-					<th>이미지</th>
-					<th>링크</th>
-					<th>광고기간</th>
-					<th>관리</th>
-				</tr>
-			</thead>
-			<tbody>
-				<%
-					for(int i = 0; i < list.size(); i++){
-						AdVO vo = list.get(i);
-						int adnum = vo.getAdnum();
-						String title = vo.getAdTitle();
-						String category = vo.getAdCat();
-						String img = vo.getAdImg();
-						String link = vo.getAdLink();
-				%>
-					<tr style="color: black">
-						<td><%=adnum %></td>		
-						<td><%= title %></td>
-						<td><%= category %></td>
-						<td><%= img %></td>
-						<td><%= link %></td>
-						<td>2025-04-07 ~ 2025-05-08</td>
-						<td class="action-buttons">
-							<button onclick="location.href='ad_update.jsp?adnum=<%= adnum%>'">수정</button>
-							<button id="delete-ad" class="delete" onclick="deleteAd('<%= adnum%>')">삭제</button>
-						</td>
-					</tr>		
-				<%
-					}
-				%>		
-			</tbody>
-		</table>
+			<form method="post" action="adAddok.jsp" onsubmit="return formCheck()">
+				<div class="update-field">
+					<label for="title">광고 제목</label>
+					<input type="text" id="title" name="title" placeholder="광고 제목" >
+				</div>
+				<div class="update-field">
+					<label for="category">카테고리</label>
+					<input type="text" id="category" name="category" placeholder="카테고리" >
+				</div>
+				<div class="update-field">
+					<label for="img">광고 이미지</label>
+					<input type="text" id="img" name="img" placeholder="이미지">
+				</div>
+				<div class="update-field">
+					<label for="link">링크주소</label>
+					<input type="text" id="link" name="link" placeholder="링크주소" >
+				</div>
+				<div class="update-field">
+					<label for="startDate">광고 시작일</label>
+					<input type="text" id="startDate" name="startDate" placeholder="광고 시작일">
+				</div>
+				<div class="update-field">
+					<label for="endDate">광고 종료일</label>
+					<input type="text" id="endDate" name="endDate" placeholder="광고 종료일">
+				</div>
+				<div class="update-actions">
+					<button type="submit">등록</button>
+					<button type="button" onclick="location.href='adventisement.jsp'">취소</button>
+				</div>
+			</form>
 	</div>
 </body>
-<script>
-	function deleteAd(adnum){
-		let result = confirm("삭제하시겠습니까?")
-		if(result == true){
-			$.ajax({
-				url : "adout.jsp",
-				type : "post",
-				date : {
-					adnum : adnum
-				},
-				success : function(result){
-					if(result.trim() == "success"){
-						alert("광고를 삭제하셨습니다.");
-						location.href = "advertisement.jsp"
-					}
-				},
-				error : function(){
-					console.log("error");
-				}
-			});
-		}
-	}
-</script>
 </html>
