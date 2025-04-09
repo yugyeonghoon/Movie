@@ -197,7 +197,7 @@
             		String rno = rvo.getRno();
             		String rcontent = rvo.getRcontent();
             		String rauthor = rvo.getRauthor();
-            		String rcreateDate = rvo.getCreateDate();
+            		String rcreateDate = rvo.getRcreate_date();
             		%>
           	<div class="comment">
                 <div class="meta">작성자: <%= rauthor %> | 작성일: <%= rcreateDate %></div>

@@ -175,6 +175,8 @@
 									%>
 										<li><a class="dropdown-item" href="user_management.jsp">회원관리</a></li>
 										<li><a class="dropdown-item" href="advertisement.jsp">광고관리</a></li>
+										<li><a class="dropdown-item" href="movie_management.jsp">영화관리</a></li>
+										<li><a class="dropdown-item" href="board_management.jsp">게시판관리</a></li>
 									<%
 								}
 							%>

@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp" %>
+<%
+	request.setCharacterEncoding("utf-8");
+	String id = user.getId();
+	if(user == null){
+		response.sendRedirect("main.jsp");
+		return;
+	}
+%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -94,20 +102,20 @@
 			<form method="post" action="profileok.jsp" onsubmit="return formCheck()">
 				<div class="profile-field">
 					<label for="username">아이디</label>
-					<input type="text" id="username" name="username" value="아이디" readonly>
+					<input type="text" id="username" name="username" value="<%= user.getId() %>" readonly>
 				</div>
-				<div class="profile-field">
+				<!-- <div class="profile-field">
 					<label for="name">이름</label>
 					<input type="text" id="name" name="name" value="네임" readonly>
-				</div>
+				</div> -->
 				<div class="profile-field">
 					<label for="nickname">닉네임</label>
-					<input type="text" id="nickname" name="nickname" value="닉네임">
+					<input type="text" id="nickname" name="nickname" value="<%= user.getNick() %>" readonly>
 					<!-- <div class="feedback">닉네임 중복확인을 해주세요. </div> -->
 				</div>
 				<div class="profile-field">
 					<label for="email">이메일</label>
-					<input type="text" id="email" name="email" value="이메일" readonly>
+					<input type="text" id="email" name="email" value="<%= user.getEmail() %>" readonly>
 				</div>
 				<div class="profile-field">
 					<label for="password">새 비밀번호</label>

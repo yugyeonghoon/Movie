@@ -241,48 +241,57 @@ public class MovieDAO extends DBManager {
 	}
 	
 	//관리자 추천작
-	public List<MovieVO> recommenMovie(String genre){
-		driverLoad();
-		DBConnect();
-		
-		String sql = "";
-		if(genre != null) {
-			sql = "select * from movie_recommendation where genre like '%"+genre+"%' and movie_type = 1";
-		}else {
-			sql = "select * from movie_recommendation";
-		}
-		executeQuery(sql);
-		
-		 List<MovieVO> list = new ArrayList<>();
-		    while (next()) {
-		        MovieVO vo = new MovieVO();
-		        vo.setDocid(getString("docid"));
-		        vo.setTitle(getString("title"));
-		        vo.setPoster(getString("poster"));
-		        vo.setGenre(getString("genre"));
-		        vo.setDirectors(getString("directors"));
-		        vo.setActors(getString("actors"));
-		        vo.setRepRlsDate(getString("repRlsDate"));
-		        vo.setRating(getInt("rating"));
-		        vo.setMovie_type(getInt("movie_type"));
-		        
-		        list.add(vo);
-		    }
-		    DBDisConnect();
-		    return list;
-		
+	public List<MovieVO> recommenMovie(String searchType, String keyword, int startNum, int limitSize) {
+	    driverLoad();
+	    DBConnect();
+
+	    String sql = "select * from movie_db";
+
+	    if (searchType != null && keyword != null && !searchType.isEmpty() && !keyword.isEmpty()) {
+	        sql += " where " + searchType + " like '%" + keyword + "%'";
+	    }
+
+	    sql += " order by movie_type = 1 desc";
+	    sql += " limit " + startNum + ", " + limitSize;
+
+	    executeQuery(sql);
+
+	    List<MovieVO> list = new ArrayList<>();
+	    while (next()) {
+	        MovieVO vo = new MovieVO();
+	        vo.setDocid(getString("docid"));
+	        vo.setTitle(getString("title"));
+	        vo.setGenre(getString("genre"));
+	        vo.setRating(getInt("rating"));
+	        vo.setMovie_type(getInt("movie_type"));
+
+	        list.add(vo);
+	    }
+
+	    return list;
 	}
 	
-	//추천 영화 추가
-	public void insertMovie(String title) {
-		driverLoad();
-		DBConnect();
-		
-		String sql = "insert into movie_recommendation select * from movie_db where poster != 'aa.jpg' and title = '"+title+"'";
-		
-		executeQuery(sql);
-		DBDisConnect();
+	public int getCount(String searchType, String keyword) {
+	    driverLoad();
+	    DBConnect();
+
+	    String sql = "select count(*) as cnt from movie_db";
+	    if (searchType != null && keyword != null && !searchType.isEmpty() && !keyword.isEmpty()) {
+	        sql += " and " + searchType + " like '%" + keyword + "%'";
+	    }
+
+	    executeQuery(sql);
+
+	    if (next()) {
+	        int count = getInt("cnt");
+	        DBDisConnect();
+	        return count;
+	    } else {
+	        DBDisConnect();
+	        return 0;
+	    }
 	}
+	
 	
 	//추천 영화 등록
 	public void updateMovieType(String docid, int no) {
