@@ -20,8 +20,8 @@
 	
 	ReplyDAO dao = new ReplyDAO();
 	ReplyVO vo = new ReplyVO();
-	vo.setRno(rno);
-	vo.setRcontent(rcontent);
+	vo.setReply_no(rno);
+	vo.setReply_content(rcontent);
 	
 	dao.modify(vo);
 	
