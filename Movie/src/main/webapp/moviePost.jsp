@@ -9,6 +9,16 @@
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp" %>    
 <%
+	String menuid = "게시글 상세페이지";
+	if (menuid != null) {
+		   
+	    IpDAO ipDao = new IpDAO();
+	    IpVO ipVo = new IpVO();
+	
+	    ipVo.setIp(ip);
+	    ipVo.setMenu_id(menuid);
+	    ipDao.insert(ipVo);
+	}
 	String no = request.getParameter("no");
 	
 	if(no == null){
@@ -182,7 +192,7 @@
 				<h4><%= title %></h4>
 				 	<div>작성자 : <%= author %> | 작성일 : <%= createDate %></div>
 				<div class="content-container">
-					<p><%= content %></p>
+					<pre><%= content %></pre>
 				</div>
 				<%
 		        	if(user != null && (user.getId().equals(author) || user.getUserType() == 0)){

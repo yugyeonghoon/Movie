@@ -13,12 +13,13 @@ public class AdDAO extends DBManager {
 		String img = vo.getAdImg();
 		String link = vo.getAdLink();
 		String category = vo.getAdCat();
+		String startDate = vo.getStartDate();
 		String endDate = vo.getEndDate();
 		driverLoad();
 		DBConnect();
 		
-		String sql = "insert into advertisement(advertisement_title, advertisement_img, advertisement_cat, advertisement_link, end_date)";
-		sql += " values('"+title+"', '"+img+"', '"+link+"', '"+category+"', '"+endDate+"')";
+		String sql = "insert into advertisement(advertisement_title, advertisement_img, advertisement_cat, advertisement_link, start_date ,end_date)";
+		sql += " values('"+title+"', '"+img+"', '"+link+"', '"+category+"', '"+startDate+"' ,'"+endDate+"')";
 		executeUpdate(sql);
 		DBConnect();
 	}
@@ -132,7 +133,7 @@ public class AdDAO extends DBManager {
 		
 		String sql = "select count(*) as cnt from advertisement ";
 		if(searchType != null && keyword != null) {
-			sql += "where" + searchType + "like '%" + keyword + "%'";
+			sql += "where " + searchType + " like '%" + keyword + "%'";
 		}
 		executeQuery(sql);
 		if(next()) {

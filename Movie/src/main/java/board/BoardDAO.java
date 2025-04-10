@@ -82,7 +82,7 @@ public class BoardDAO extends DBManager{
 		
 		String sql = "select count(*) as cnt from board where board_type ="+ bno;
 		if(searchType != null && keyword != null) {
-			sql += "and" + searchType + "like '%" + keyword + "%'";
+			sql += " and " + searchType + " like '%" + keyword + "%'";
 		}
 		executeQuery(sql);
 		if(next()) {

@@ -20,6 +20,7 @@ ad_df = pd.read_csv("ad01.csv")
 print(ad_df["cat1"] + ad_df["cat2"] + ad_df["cat3"] + ad_df["cat4"])
 
 ad_df["ad_sim"] = ad_df["title"].astype(str) + " " +ad_df["cat1"].astype(str) + " " + ad_df["cat2"].astype(str) + " " + ad_df["cat3"].astype(str) + " " + ad_df["cat4"].astype(str)
+
 from konlpy.tag import Okt
 
 okt = Okt()

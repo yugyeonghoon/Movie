@@ -5,6 +5,18 @@
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp" %>
 <%
+	String menuid = "자유게시판";
+	
+	if (menuid != null) {
+	   
+	    IpDAO ipDao = new IpDAO();
+	    IpVO ipVo = new IpVO();
+	
+	    ipVo.setIp(ip);
+	    ipVo.setMenu_id(menuid);
+	    ipDao.insert(ipVo);
+	}
+	
 	String pageNum = request.getParameter("page");
 	if(pageNum == null){
 		pageNum = "1";

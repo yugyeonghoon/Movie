@@ -6,14 +6,13 @@
 <%@ include file="header.jsp" %>
 <%
 	AdDAO dao = new AdDAO();
-	List<AdVO> list = dao.adList();
 	
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>광고 관리</title>
+<title>광고 추가</title>
 <style>
 	body {
 		font-family : 'Source Sans Pro', sans-serif; 

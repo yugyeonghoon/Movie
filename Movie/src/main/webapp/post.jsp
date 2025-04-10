@@ -182,7 +182,7 @@
 				<h4><%= title %></h4>
 				 	<div>작성자 : <%= author %> | 작성일 : <%= createDate %></div>
 				<div class="content-container">
-					<p><%= content %></p>
+					<pre><%= content %></pre>
 				</div>
 				<%
 		        	if(user != null && (user.getId().equals(author) || user.getUserType() == 0)){

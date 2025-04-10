@@ -1,3 +1,6 @@
+<%@page import="ip.IpVO"%>
+<%@page import="ip.IpDAO"%>
+<%@page import="ip.ip.IpUtil"%>
 <%@page import="user.UserVO"%>
 <%@page import="user.UserDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -6,6 +9,16 @@
 	String id = request.getParameter("id");
 	String pw = request.getParameter("password");
 	String check = request.getParameter("checkId");
+	
+	String ip = IpUtil.getClientIp(request);
+    System.out.println(ip);
+    String menuid = "로그인";
+    IpDAO ipDao = new IpDAO();
+    IpVO ipVo = new IpVO();
+    System.out.println(menuid);
+    ipVo.setIp(ip);
+    ipVo.setMenu_id(menuid);
+    ipDao.insert(ipVo);
 	
 	if(id == null || pw == null){
 		response.sendRedirect("login.jsp");
