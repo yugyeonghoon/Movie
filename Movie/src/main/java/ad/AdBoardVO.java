@@ -7,7 +7,7 @@ public class AdBoardVO {
 	private String board_title;
 	private String advertisement_link;
 	private String advertisement_img;
-	private int advertisement_board_similarity;
+	private String advertisement_board_similarity;
 	
 	public int getNo() {
 		return no;
@@ -45,10 +45,10 @@ public class AdBoardVO {
 	public void setAdvertisement_img(String advertisement_img) {
 		this.advertisement_img = advertisement_img;
 	}
-	public int getAdvertisement_board_similarity() {
+	public String getAdvertisement_board_similarity() {
 		return advertisement_board_similarity;
 	}
-	public void setAdvertisement_board_similarity(int advertisement_board_similarity) {
+	public void setAdvertisement_board_similarity(String advertisement_board_similarity) {
 		this.advertisement_board_similarity = advertisement_board_similarity;
 	}
 	

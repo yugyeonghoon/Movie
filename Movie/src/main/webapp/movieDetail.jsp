@@ -1,3 +1,5 @@
+<%@page import="ad.MovieAdVO"%>
+<%@page import="ad.AdDAO"%>
 <%@page import="java.util.List"%>
 <%@page import="movie.MovieVO"%>
 <%@page import="movie.MovieDAO"%>
@@ -37,6 +39,9 @@
 
 	List<MovieVO> list = dao.similarityMovie(no);
 	
+	AdDAO adao = new AdDAO();
+	List<MovieAdVO> adlist = adao.movieAdvertisement(no);
+	
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,7 +53,7 @@
 	        body {
 	            font-family: Arial, sans-serif;
 	            margin: 20px;
-	            background-color: white;
+	            background-color: #dee2e6;
 	        }
 	        h3 {
 	        	text-align: center;
@@ -98,9 +103,8 @@
 	        .ratingPeople {
 	        	color : gray;
 	        }
-	        
 	        .genre {
-			margin-left: 9%;
+			margin-left: 3%;
 			}
 			.carousel-inner {
 			padding: 2rem;
@@ -125,6 +129,31 @@
 			.carousel-item{
 			margin-left: 11%;
 			}
+			.ad{
+        	display: flex;
+   			justify-content: space-between;
+	        }
+	        .adlist{
+        	/* margin-left: 10px; */ 
+        	margin-top: -350px;
+	        }
+	        .adtitle{
+	        font-size: 1rem;
+	        width: 100%;
+	        text-align: center;
+	        }
+	        .adlist span {
+	        display: inline-block;
+	        width: 200px; 
+	        white-space: nowrap; 
+	        overflow: hidden; 
+	        text-overflow: ellipsis;
+  			}
+  			.ad img {
+	        width: 250px;
+	        height: 300px;
+	        object-fit: cover; 
+	    	}
 	    </style>
 	</head>
 	<body>
@@ -149,6 +178,22 @@
 	            </div>
 	        </div>
 	    </div>
+	    <div class="ad">
+	    	<%
+	    		for(int i = 0; i < adlist.size(); i++ ){
+	    			MovieAdVO advo = adlist.get(i);
+	    			String img = advo.getAdvertisement_img();
+	    			String link = advo.getAdvertisement_link();
+	    			String adtitle = advo.getAdvertisement_title();
+	    	%>
+	    		<div class="adlist">
+		 			<a href="<%= link %>"><img src="<%= img %>"></a><br>
+		 			<span class="adtitle"><%= adtitle %></span>
+		 		</div>
+	    	<%
+	    		}
+	    	%>
+	    </div>
 	    <div class="genre">
 		 	<div id="carouselExampleControlsNoTouchingfirst" class="carousel carousel-dark slide">
 			  <div class="carousel-inner">
@@ -166,7 +211,7 @@
 		    			String listPoster = listVo.getPoster();
 			    %>
 				    <div class="first">
-				    	<a href="movieDetail.jsp?no=<%= listNo%>"><img src="<%=listPoster %>" alt="..."></a><h5><span><%= listTitle %></span></h5>
+				    	<a href="movieDetail.jsp?no=<%= listNo %>"><img src="<%=listPoster %>" alt="..."></a><h5><span><%= listTitle %></span></h5>
 				    </div>
 				    <%
 				    	}

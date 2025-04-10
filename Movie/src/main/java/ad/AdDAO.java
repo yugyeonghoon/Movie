@@ -159,11 +159,11 @@ public class AdDAO extends DBManager {
 				AdBoardVO vo = new AdBoardVO();
 				vo.setNo(getInt("no"));
 				vo.setBoard_no(getInt("board_no"));
-				vo.setAdvertisement_title(getString("advadvertisement_title"));
+				vo.setAdvertisement_title(getString("advertisement_title"));
 				vo.setBoard_title(getString("board_title"));
 				vo.setAdvertisement_link(getString("advertisement_link"));
 				vo.setAdvertisement_img(getString("advertisement_img"));
-				vo.setAdvertisement_board_similarity(getInt("advertisement_board_similarity"));
+				vo.setAdvertisement_board_similarity(getString("advertisement_board_similarity"));
 				
 				list.add(vo);
 			}
@@ -171,4 +171,54 @@ public class AdDAO extends DBManager {
 			return list;
 		
 	}
+	//광고 유사도
+	public List<AdBoardVO> adSim(String no) {
+		driverLoad();
+		DBConnect();
+		
+		String sql = "select * from ad_board_similarity where board_no = " + no;
+		sql += " order by advertisement_board_similarity desc limit 3";
+		executeQuery(sql);
+		
+		List<AdBoardVO> list = new ArrayList<>();
+			while (next()) {
+				AdBoardVO vo = new AdBoardVO();
+				vo.setNo(getInt("no"));
+				vo.setBoard_no(getInt("board_no"));
+				vo.setAdvertisement_title(getString("advertisement_title"));
+				vo.setBoard_title(getString("board_title"));
+				vo.setAdvertisement_link(getString("advertisement_link"));
+				vo.setAdvertisement_img(getString("advertisement_img"));
+				vo.setAdvertisement_board_similarity(getString("advertisement_board_similarity"));
+				
+				list.add(vo);
+			}
+			DBDisConnect();
+			return list;	
+	}
+	
+	//영화 광고 출력
+		public List<MovieAdVO> movieAdvertisement(String no) {
+			driverLoad();
+			DBConnect();
+			
+			String sql = "select * from movie_ad where docid = '"+no+"' ";
+			sql += " order by movie_advertisement_similarity desc limit 2";
+			executeQuery(sql);
+			
+			List<MovieAdVO> list = new ArrayList<>();
+				while (next()) {
+					MovieAdVO vo = new MovieAdVO();
+					vo.setNo(getInt("no"));
+					vo.setDocid(getString("docid")); 
+					vo.setAdvertisement_title(getString("advertisement_title"));
+					vo.setAdvertisement_img(getString("advertisement_img"));
+					vo.setAdvertisement_link(getString("advertisement_link"));
+					vo.setMovie_advertisement_similarity(getInt("movie_advertisement_similarity"));
+					
+					list.add(vo);
+				}
+				DBDisConnect();
+				return list;
+		}
 }

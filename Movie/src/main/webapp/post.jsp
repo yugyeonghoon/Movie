@@ -174,6 +174,23 @@
 	        .adlist{
 	        	margin-left: 10px; 
 	        }
+	        .adtitle{
+		        font-size: 1rem;
+		        width: 100%;
+		        text-align: center;
+	        }
+	        .adlist span {
+		        display: inline-block;
+		        width: 200px; 
+		        white-space: nowrap; 
+		        overflow: hidden; 
+		        text-overflow: ellipsis;
+  			}
+  			.ad img {
+	        width: 250px; 
+	        height: 300px;
+	        object-fit: cover;
+	    	}
 		</style>
 	</head>
 	<body>
@@ -204,9 +221,11 @@
 		 			AdBoardVO advo = adlist.get(i);
 		 			String img = advo.getAdvertisement_img();
 		 			String link = advo.getAdvertisement_link();
+		 			String adtitle = advo.getAdvertisement_title();
 		 	%>
 		 		<span class="adlist">
-		 			<a href="<%= link %>"><img src="<%= img %>"></a>
+		 			<a href="<%= link %>"><img src="<%= img %>"></a><br>
+		 			<span class="adtitle"><%= adtitle %></span>
 		 		</span>
 		 		
 		 	<%
