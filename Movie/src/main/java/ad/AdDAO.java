@@ -13,12 +13,13 @@ public class AdDAO extends DBManager {
 		String img = vo.getAdImg();
 		String link = vo.getAdLink();
 		String category = vo.getAdCat();
+		String startDate = vo.getStartDate();
 		String endDate = vo.getEndDate();
 		driverLoad();
 		DBConnect();
 		
-		String sql = "insert into advertisement(advertisement_title, advertisement_img, advertisement_cat, advertisement_link, end_date)";
-		sql += " values('"+title+"', '"+img+"', '"+link+"', '"+category+"', '"+endDate+"')";
+		String sql = "insert into advertisement(advertisement_title, advertisement_img, advertisement_cat, advertisement_link, start_date ,end_date)";
+		sql += " values('"+title+"', '"+img+"', '"+link+"', '"+category+"', '"+startDate+"' ,'"+endDate+"')";
 		executeUpdate(sql);
 		DBConnect();
 	}
@@ -132,7 +133,7 @@ public class AdDAO extends DBManager {
 		
 		String sql = "select count(*) as cnt from advertisement ";
 		if(searchType != null && keyword != null) {
-			sql += "where" + searchType + "like '%" + keyword + "%'";
+			sql += "where " + searchType + " like '%" + keyword + "%'";
 		}
 		executeQuery(sql);
 		if(next()) {
@@ -144,4 +145,30 @@ public class AdDAO extends DBManager {
 			return 0;
 		}
 	};
+	
+	public List<AdBoardVO> ad(String no) {
+		driverLoad();
+		DBConnect();
+		
+		String sql = "select * from ad_board_similarity where board_no = " + no;
+		sql += " order by advertisement_board_similarity desc limit 2";
+		executeQuery(sql);
+		
+		List<AdBoardVO> list = new ArrayList<>();
+			while (next()) {
+				AdBoardVO vo = new AdBoardVO();
+				vo.setNo(getInt("no"));
+				vo.setBoard_no(getInt("board_no"));
+				vo.setAdvertisement_title(getString("advadvertisement_title"));
+				vo.setBoard_title(getString("board_title"));
+				vo.setAdvertisement_link(getString("advertisement_link"));
+				vo.setAdvertisement_img(getString("advertisement_img"));
+				vo.setAdvertisement_board_similarity(getInt("advertisement_board_similarity"));
+				
+				list.add(vo);
+			}
+			DBDisConnect();
+			return list;
+		
+	}
 }

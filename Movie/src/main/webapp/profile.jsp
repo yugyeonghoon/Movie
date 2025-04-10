@@ -2,9 +2,21 @@
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp" %>
 <%
+	String menuid = "마이페이지";
+
+	if (menuid != null) {
+	   
+	    IpDAO ipDao = new IpDAO();
+	    IpVO ipVo = new IpVO();
+	
+	    ipVo.setIp(ip);
+	    ipVo.setMenu_id(menuid);
+	    ipDao.insert(ipVo);
+	}
 	request.setCharacterEncoding("utf-8");
 	String id = user.getId();
-	if(user == null){
+	
+	if(id == null){
 		response.sendRedirect("main.jsp");
 		return;
 	}

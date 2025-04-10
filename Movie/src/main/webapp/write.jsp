@@ -2,6 +2,18 @@
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp" %>
 <%
+	String menuid = "글쓰기";
+
+	if (menuid != null) {
+	   
+	    IpDAO ipDao = new IpDAO();
+	    IpVO ipVo = new IpVO();
+	
+	    ipVo.setIp(ip);
+	    ipVo.setMenu_id(menuid);
+	    ipDao.insert(ipVo);
+	}
+	
 	String referer = request.getHeader("Referer");
 	//System.out.println(referer);
 	String last = referer.substring(referer.lastIndexOf('/') + 1);

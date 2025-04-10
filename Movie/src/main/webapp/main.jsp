@@ -1,3 +1,4 @@
+<%@page import="ip.ip.IpUtil"%>
 <%@page import="java.util.List"%>
 <%@page import="movie.MovieVO"%>
 <%@page import="movie.MovieDAO"%>
@@ -9,6 +10,7 @@
 	List<MovieVO> list = dao.listView();	
 	List<MovieVO> plist = dao.popularView(null);	
 	List<MovieVO> slist = dao.soonView();
+	
 %>
 <!DOCTYPE html>
 <html>

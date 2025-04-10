@@ -1,3 +1,5 @@
+<%@page import="ad.AdBoardVO"%>
+<%@page import="ad.AdDAO"%>
 <%@page import="java.util.List"%>
 <%@page import="reply.ReplyDAO"%>
 <%@page import="reply.ReplyVO"%>
@@ -7,6 +9,16 @@
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp" %>    
 <%
+	String menuid = "게시글 상세페이지";
+	if (menuid != null) {
+		   
+	    IpDAO ipDao = new IpDAO();
+	    IpVO ipVo = new IpVO();
+	
+	    ipVo.setIp(ip);
+	    ipVo.setMenu_id(menuid);
+	    ipDao.insert(ipVo);
+	}
 	String no = request.getParameter("no");
 	
 	if(no == null){
@@ -20,6 +32,9 @@
 	String author = vo.getAuthor();
 	String content = vo.getContent();
 	String createDate = vo.getCreateDate();
+	
+	AdDAO ado = new AdDAO();
+	List<AdBoardVO> adlist = ado.ad(no);
 	
 	ReplyDAO rdao = new ReplyDAO();
 	List<ReplyVO> list = rdao.select(no);
@@ -162,6 +177,13 @@
 	        .dpnone{
 	        	display : none;
 	        }
+	        .ad{
+	        	display: flex;
+    			justify-content: space-between;
+	        }
+	        .adlist{
+	        	margin-left: 10px; 
+	        }
 		</style>
 	</head>
 	<body>
@@ -186,6 +208,21 @@
 					<button type="button" class="btn1" onclick="location.href='movieBoard.jsp'">목록으로</button>
 				</div>
 		</div>
+		<div class="ad">
+		 	<%
+		 		for(int i = 0; i < adlist.size(); i++ ){
+		 			AdBoardVO advo = adlist.get(i);
+		 			String img = advo.getAdvertisement_img();
+		 			String link = advo.getAdvertisement_link();
+		 	%>
+		 		<span class="adlist">
+		 			<a href="<%= link %>"><img src="<%= img %>"></a>
+		 		</span>
+		 		
+		 	<%
+		 		}
+		 	%>
+		 </div>
         <div class="reply-container">
         <%
         	if(user != null){
@@ -199,12 +236,12 @@
         	}
         %>
             <%
-            	for(int i = 0; i < list.size(); i ++){
-            		ReplyVO rvo = list.get(i);
-            		String rno = rvo.getRno();
-            		String rcontent = rvo.getRcontent();
-            		String rauthor = rvo.getRauthor();
-            		String rcreateDate = rvo.getRcreate_date();
+            for(int i = 0; i < list.size(); i ++){
+        		ReplyVO rvo = list.get(i);
+        		String rno = rvo.getReply_no();
+        		String rcontent = rvo.getReply_content();
+        		String rauthor = rvo.getReply_author();
+        		String rcreateDate = rvo.getReply_create_date();
             		%>
           	<div class="comment">
                 <div class="meta">작성자: <%= rauthor %> | 작성일: <%= rcreateDate %></div>

@@ -11,7 +11,9 @@
 	String link = request.getParameter("link");
 	String endDate = request.getParameter("endDate");
 	String startDate = request.getParameter("startDate");
-	
+	System.out.println(title);
+	System.out.println(link);
+	System.out.println(startDate);
 	if(title == null || img == null || category == null || link == null || startDate == null || endDate == null){
 		response.sendRedirect("ad_update.jsp");
 		return;
@@ -30,6 +32,7 @@
 	vo.setAdCat(category);
 	vo.setAdImg(img);
 	vo.setAdLink(link);
+	vo.setStartDate(startDate);
 	vo.setEndDate(endDate);
 	dao.addAd(vo);
 	response.sendRedirect("advertisement.jsp");

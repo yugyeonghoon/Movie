@@ -5,12 +5,23 @@
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp" %>
 <%
+	String menuid = "영화 상세페이지";
+	if (menuid != null) {
+		   
+	    IpDAO ipDao = new IpDAO();
+	    IpVO ipVo = new IpVO();
+	
+	    ipVo.setIp(ip);
+	    ipVo.setMenu_id(menuid);
+	    ipDao.insert(ipVo);
+	}
+
 	String no = request.getParameter("no");
 	String Genre = request.getParameter("genre");
 
 	MovieDAO dao = new MovieDAO();
 	MovieVO vo = dao.view(no);
-	
+		
 	String title = vo.getTitle();
 	String director = vo.getDirectors();
 	String actor = vo.getActors();
