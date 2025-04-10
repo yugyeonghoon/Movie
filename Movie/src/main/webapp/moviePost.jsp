@@ -117,10 +117,10 @@
 	        }
 	        h5 {
 	            color: black;
-	            text-align: center;
+	            /* text-align: center; */
 	            font-size: 1.4rem;
 	            margin-bottom: 20px;
-	            margin-top: 200px;
+	            /* margin-top: 200px; */
 	        }
 	        .comment {
 	            padding: 15px;
@@ -154,11 +154,12 @@
 	            transition: color 0.3s ease;
 	        }
 	        .comment-form {
-	            margin-top: 100px;
+	            /* margin-top: 100px; */
 	            display: flex;
 	            gap: 10px;
 	            max-width: 1200px;
-	            margin: 100px auto;
+	            /* margin: 100px auto; */
+	            padding-bottom: 100px;
 	        }
 	        .comment-form input {
 	            flex: 1;
