@@ -35,7 +35,10 @@
 		    background-color: white;
 			padding:1px 30px;
 			border-bottom :2px solid gray;
-			position:relative;
+			/* position:relative; */
+			position: sticky;
+    		top: 0;
+    		z-index: 10;
 		}
 		body {
 		    margin: 0;
@@ -164,7 +167,7 @@
 				<li><a href="board.jsp">자유 게시판</a></li>
 			</ul>
 			<form action="moviesearch.jsp" method="get">
-				<input value="<%=mkeyword %>" type="text" name="movieKeyword" placeholder="검색어를 입력해주세요">
+				<input value="<%=mkeyword %>" type="text" name="movieKeyword" placeholder="제목을 입력해주세요">
 				<button type="submit">검색</button>
 			</form>
 			<ul class="navbar_icons">

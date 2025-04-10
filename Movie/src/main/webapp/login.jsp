@@ -45,8 +45,9 @@
 	  position: absolute;
 	  text-align: center;
 	  transform: translateX(-50%);
-	  background-color: coral; 
-	  opacity : 0.8;
+	  /* background-color: coral; */
+	  background-color: #252525;
+	  /* opacity : 0.8; */
 	  border-radius: 9px;
 	  border-top: 2px solid gray;
 	  border-bottom: 2px solid gray;
@@ -54,12 +55,13 @@
 	  border-left:2px solid gray;
 	  width: 400px;
 	  height: 500px;
-	  opacity : 0.8;
+	  /* opacity : 0.8; */
 	}
 	
 	.box h4 {
 	  font-family: 'Source Sans Pro', sans-serif;
-	  color: #000000;
+	  /* color: #000000; */
+	  color: #fff;
 	  font-size: 18px;
 	  margin-top:94px;;
 	}
@@ -81,7 +83,8 @@
 	.box input[type = "text"],.box input[type = "password"] {
 	  display: block;
 	  margin: 20px auto;
-	  background: #C2E9F3;
+	  /* background: #C2E9F3; */
+	  background-color: #2f2f2f;
 	  border: 0;
 	  border-radius: 5px;
 	  padding: 14px 10px;
@@ -100,12 +103,13 @@
 	}
 	
 	.box input[type = "text"]:focus,.box input[type = "password"]:focus {
-	  border: 1px solid #000000;
+	  /* border: 1px solid #000000; */
 	  
 	}
 	
 	a{
-	  color: #000000;
+	  /* color: #000000; */
+	  color: #a5a5a5;
 	  text-decoration: none;
 	}
 	
@@ -131,8 +135,10 @@
 	
 	.btn1 {
 	  border:0;
-	  background: #C2E9F3;
-	  color: #000000;
+	  /* background: #C2E9F3; */
+	  background: #1351f9;
+	  /* color: #000000; */
+	  color: #fff;
 	  border-radius: 100px;
 	  width: 340px;
 	  height: 49px;
@@ -145,14 +151,15 @@
 	}
 	
 	.btn1:hover {
-	  background: #C2E9F3;
+	 /* background: #C2E9F3; */
 	}
 	
 	.rmb {
 	  position: absolute;
 	  margin-left: -20%;
 	  margin-top: 0px;
-	  color: #000000;
+	  /* color: #000000; */
+	  color: #a5a5a5;
 	  font-size: 13px;
 	}
 	
@@ -181,7 +188,8 @@
 	    content: "v";
 	    position: absolute;
 	    top: -12px;
-	    color: black;
+	    /* color: black; */
+	    color: #fff;
 	    left: -1px;
 	    width: 15px;
 	}
@@ -237,14 +245,25 @@
 	
 	.bounceInDown::before{
 		content: "";
-		background: #f5fffd;
-	    background-size: 100% 100%;
-	    opacity: 0.5;
+		/* background: #f5fffd; */
+		background: url(./movie.jpg) no-repeat; 
+		background-size: 100% 100%;
+	    /* opacity: 0.5; */
+	    opacity: 0.8;
 	    position: absolute;
 	    top: 0px;
 	    left: 0px;
 	    right: 0px;
 	    bottom: 0px;
+	}
+	input::placeholder {
+		color: #a5a5a5;
+	}
+	#id {
+		color: #fff;
+	}
+	#pw {
+		color: #fff;
 	}
 	</style>
 </head>

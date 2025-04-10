@@ -26,7 +26,8 @@
 		    background-color: white;
 			padding:1px 30px;
 			border-bottom :2px solid gray;
-			position:relative;
+			/* position:relative; */
+			position: sticky;
 		}
 		#content {
 			width: 1500px;
@@ -79,6 +80,12 @@
 			width: 96.1%;
 		    height: 300px;
 		    object-fit: cover;
+		}
+		a img {
+			transition: all 0.2s linear;
+		}
+		a:hover img {
+			transform: scale(1.1);
 		}
 	</style>
 	</head>

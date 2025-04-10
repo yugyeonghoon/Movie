@@ -56,7 +56,7 @@
 		width:15%; */
 		}
 		
-	img {
+	#poster {
 			margin-right: 10px;
 	    	margin-bottom: 10px;
 	    	width: 250px;
@@ -93,7 +93,7 @@
 		    			String poster = vo.getPoster();
 			    %>
 				    
-				    	<a href="movieDetail.jsp?docid=<%= docid %>"><img src="<%=poster %>" alt="..."></a>
+				    	<a href="movieDetail.jsp?docid=<%= docid %>"><img id="poster" src="<%=poster %>" alt="..."></a>
 				    
 				    <%
 				    	}

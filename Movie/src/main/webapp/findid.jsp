@@ -20,7 +20,9 @@
 		position: absolute;
 		text-align: center;
 		transform: translateX(-50%);
-		background-color: #b1dbe900;
+		/* background-color: #b1dbe900; */
+		background-color: #252525;
+	  	/* opacity : 0.8; */
 		border-radius: 9px;
 		border-top: 2px solid gray;
 		border-bottom: 2px solid gray;
@@ -39,7 +41,8 @@
 	h1{
 		text-align: center;
 		margin-bottom: 20px;
-		color: black;
+		/* color: black; */
+		color: #fff;
 		font-family: 'Seoul 1980', sans-serif;
 	}
 	.btn{
@@ -47,8 +50,10 @@
 		cursor: pointer;
 		margin-top: 10px;
 		border: 0;
-		background: #C2E9F3;
-		color: #000000;
+		/* background: #C2E9F3; */
+		background: #1351f9;
+		/* color: #000000; */
+		color: #fff;
 		border-radius: 60px;
 		width: 50px;
 		height: 35px;
@@ -60,8 +65,10 @@
 		margin-top: 10px;
 		margin-left: 15px;
 		border: 0;
-		background: #C2E9F3;
-		color: #000000;
+		/* background: #C2E9F3; */
+		background: #1351f9;
+		/* color: #000000; */
+		color: #fff;
 		border-radius: 100px;
 		width: 130px;
 		height: 35px;
@@ -75,7 +82,8 @@
 	}
 	input{
 		margin: 10px auto;
-		background: #C2E9F3;
+		/* background: #C2E9F3; */
+		background-color: #2f2f2f;
 		border: 0;
 		border-radius: 5px;
 		outline: none;
@@ -94,7 +102,8 @@
 		color: #000000;
 	}
 	.fi1{
-		color: black;
+		/* color: black; */
+		color: #fff;
 	}
 	::-webkit-input-placeholder {
 	  color: #000000;
@@ -106,14 +115,23 @@
 	
 	.bounceInDown::before{
 		content: "";
-		background-color: white;
+		/* background-color: white; */
+		background: url(./movie.jpg) no-repeat;
 	    background-size: 100% 100%;
-	    opacity: 0.5;
+	    /* opacity: 0.5; */
+	    opacity: 0.8;
 	    position: absolute;
 	    top: 0px;
 	    left: 0px;
 	    right: 0px;
 	    bottom: 0px;
+	}
+	
+	input::placeholder {
+		color: #a5a5a5;
+	}
+	#email {
+		color: #fff;
 	}
 </style>
 </head>
