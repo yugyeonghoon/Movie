@@ -1,52 +1,16 @@
-<%@page import="ip.ip.IpUtil"%>
 <%@page import="movie.MovieVO"%>
 <%@page import="java.util.List"%>
 <%@page import="movie.MovieDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="header.jsp"%>
-<%	
-	String menuid = request.getParameter("menuid");
-	
+<%
 	String genre = request.getParameter("genre");
-	if(genre.equals("액션")){
-		menuid = "장르 액션";
-	}else if(genre.equals("범죄")){
-		menuid = "장르 범죄";
-	}else if(genre.equals("SF")){
-		menuid = "장르 SF";
-	}else if(genre.equals("스릴러")){
-		menuid = "장르 스릴러";
-	}else if(genre.equals("코미디")){
-		menuid = "장르 코미디";
-	}else if(genre.equals("멜로")){
-		menuid = "장르 멜로";
-	}else if(genre.equals("공포")){
-		menuid = "장르 공포";
-	}else if(genre.equals("뮤지컬")){
-		menuid = "장르 뮤지컬";
-	}else if(genre.equals("드라마")){
-		menuid = "장르 드라마";
-	};
-	
-    if (menuid != null) {
-       
-        IpDAO ipDao = new IpDAO();
-        IpVO ipVo = new IpVO();
 
-        ipVo.setIp(ip);
-        ipVo.setMenu_id(menuid);
-        ipDao.insert(ipVo);
-    }
-	
-
-		
-	
 	MovieDAO dao = new MovieDAO();
 	List<MovieVO> list = dao.selectByGenre(genre);
 	List<MovieVO> plist = dao.popularGenre(genre);
 	List<MovieVO> alist = dao.popularView(genre);
-
 %>
 <!DOCTYPE html>
 <html>
