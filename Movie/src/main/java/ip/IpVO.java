@@ -4,7 +4,14 @@ public class IpVO {
 	private String ip;
 	private String menu_id;
 	private String loginTime;
+	private String id;
 	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getIp() {
 		return ip;
 	}
