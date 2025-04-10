@@ -9,9 +9,9 @@ public class ReplyDAO extends DBManager{
 
 	//1. 댓글 쓰기
 	public int write(ReplyVO vo) {
-		String rauthor = vo.getRauthor();
-		String no = vo.getNo();
-		String rcontent = vo.getRcontent();
+		String rauthor = vo.getReply_author();
+		String no = vo.getBoard_no();
+		String rcontent = vo.getReply_content();
 		
 		driverLoad();
 		DBConnect();
@@ -36,8 +36,8 @@ public class ReplyDAO extends DBManager{
 	
 	//2. 댓글 수정
 	public void modify(ReplyVO vo) {
-		String rcontent = vo.getRcontent();
-		String rno = vo.getRno();
+		String rcontent = vo.getReply_content();
+		String rno = vo.getReply_no();
 		
 		driverLoad();
 		DBConnect();
@@ -73,18 +73,18 @@ public class ReplyDAO extends DBManager{
 		List<ReplyVO> list = new ArrayList<>();
 		
 		while(next()) {
-			String rno = getString("rno");
-			String rauthor = getString("rauthor");
-			String rcontent = getString("rcontent");
-			String createDate = getString("create_date");
-			String updateDate = getString("update_date");
+			String rno = getString("reply_no");
+			String rauthor = getString("reply_author");
+			String rcontent = getString("reply_content");
+			String createDate = getString("reply_create_date");
+			String updateDate = getString("reply_update_date");
 			
 			ReplyVO vo = new ReplyVO();
-			vo.setRno(rno);
-			vo.setRauthor(rauthor);
-			vo.setRcontent(rcontent);
-			vo.setRcreate_date(createDate);
-			vo.setRupdate_date(updateDate);
+			vo.setReply_no(rno);
+			vo.setReply_author(rauthor);
+			vo.setReply_content(rcontent);
+			vo.setReply_create_date(createDate);
+			vo.setReply_update_date(updateDate);
 			list.add(vo);
 			
 		}

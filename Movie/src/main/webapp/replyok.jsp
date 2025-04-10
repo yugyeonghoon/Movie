@@ -20,9 +20,9 @@
 	
 	ReplyDAO dao = new ReplyDAO();
 	ReplyVO vo = new ReplyVO();
-	vo.setNo(no);
-	vo.setRauthor(rauthor);
-	vo.setRcontent(rcontent);
+	vo.setReply_no(no);
+	vo.setReply_author(rauthor);
+	vo.setReply_content(rcontent);
 	
 	int result = dao.write(vo);
 	
