@@ -20,7 +20,7 @@
 	
 	ReplyDAO dao = new ReplyDAO();
 	ReplyVO vo = new ReplyVO();
-	vo.setReply_no(no);
+	vo.setBoard_no(no);
 	vo.setReply_author(rauthor);
 	vo.setReply_content(rcontent);
 	

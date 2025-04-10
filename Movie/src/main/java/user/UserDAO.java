@@ -36,7 +36,7 @@ public class UserDAO extends DBManager{
 		
 		if(next()) {
 			String uid = getString("id");
-			String nick = getString("nick");
+			String nick = getString("nickname");
 			int userType = getInt("user_type");
 			String email = getString("email");
 			
@@ -193,7 +193,7 @@ public class UserDAO extends DBManager{
 		
 		if(next()) {
 			String uid = getString("id");
-			String nick = getString("nick");
+			String nick = getString("nickname");
 			String email = getString("email");
 			int userType = getInt("user_type");
 			

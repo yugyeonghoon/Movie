@@ -282,7 +282,7 @@ public class MovieDAO extends DBManager {
 	    driverLoad();
 	    DBConnect();
 
-	    String sql = "select count(*) as cnt from movie_db";
+	    String sql = "select count(*) as cnt from movie_db where 1 = 1";
 	    if (searchType != null && keyword != null && !searchType.isEmpty() && !keyword.isEmpty()) {
 	        sql += " and " + searchType + " like '%" + keyword + "%'";
 	    }
