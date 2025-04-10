@@ -139,7 +139,7 @@ public class UserDAO extends DBManager{
 		List<UserVO> list = new ArrayList<>();
 		while(next()) {
 			String id = getString("id");
-			String nick = getString("nick");
+			String nick = getString("nickname");
 			String email = getString("email");
 			int userType = getInt("user_type");
 			
