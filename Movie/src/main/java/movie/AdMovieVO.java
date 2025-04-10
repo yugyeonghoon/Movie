@@ -1,6 +1,6 @@
-package ad;
+package movie;
 
-public class MovieAdVO {
+public class AdMovieVO {
 	private int no;
 	private String docid;
 	private String advertisement_title;

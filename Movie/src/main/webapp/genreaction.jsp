@@ -132,12 +132,12 @@
 				    <%
 				        	for(int i = idx; i <= lastIndex; i++){
 				    			MovieVO vo = list.get(i);
-				    			String no = vo.getDocid();
+				    			String docid = vo.getDocid();
 				    			String title = vo.getTitle();
 				    			String poster = vo.getPoster();
 			        	%>
 							<div class="first">
-					    		<a href="movieDetail.jsp?no=<%= no %>"><img src="<%= poster %>" alt="..."></a>
+					    		<a href="movieDetail.jsp?docid=<%= docid %>"><img src="<%= poster %>" alt="..."></a>
 					    	</div>
 						<%
 				        	}
@@ -172,12 +172,12 @@
 				    <%
 				        	for(int i = idx; i <= lastIndex; i++){
 				    			MovieVO vo = plist.get(i);
-				    			String no = vo.getDocid();
+				    			String docid = vo.getDocid();
 				    			String title = vo.getTitle();
 				    			String poster = vo.getPoster();
 			        	%>
 							<div class="first">
-					    		<a href="movieDetail.jsp?no=<%= no %>"><img src="<%= poster %>" alt="..."></a>
+					    		<a href="movieDetail.jsp?docid=<%= docid %>"><img src="<%= poster %>" alt="..."></a>
 					    	</div>
 						<%
 				        	}
@@ -207,13 +207,13 @@
 				    <% 
 				        for(int i = 0; i < Math.min(5, alist.size()); i++){
 				            MovieVO vo = alist.get(i);
-				            String no = vo.getDocid();
+				            String docid = vo.getDocid();
 				            String title = vo.getTitle();
 				            String poster = vo.getPoster();
 				            int movieType = vo.getMovie_type();
 				    %>
 		                <div class="first">
-		                    <a href="movieDetail.jsp?no=<%= no %>"><img src="<%= poster %>" alt="<%= title %>"></a>
+		                    <a href="movieDetail.jsp?docid=<%= docid %>"><img src="<%= poster %>" alt="<%= title %>"></a>
 		                </div>
 				    <%
 				        }
