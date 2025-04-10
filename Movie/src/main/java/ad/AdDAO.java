@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import db.DBManager;
+import movie.AdMovieVO;
 
 public class AdDAO extends DBManager {
 	
@@ -159,7 +160,7 @@ public class AdDAO extends DBManager {
 				AdBoardVO vo = new AdBoardVO();
 				vo.setNo(getInt("no"));
 				vo.setBoard_no(getInt("board_no"));
-				vo.setAdvertisement_title(getString("advertisement_title"));
+				vo.setAdvertisement_title(getString("advadvertisement_title"));
 				vo.setBoard_title(getString("board_title"));
 				vo.setAdvertisement_link(getString("advertisement_link"));
 				vo.setAdvertisement_img(getString("advertisement_img"));
@@ -171,7 +172,7 @@ public class AdDAO extends DBManager {
 			return list;
 		
 	}
-	//광고 유사도
+	//게시물 광고 유사도
 	public List<AdBoardVO> adSim(String no) {
 		driverLoad();
 		DBConnect();
@@ -194,11 +195,11 @@ public class AdDAO extends DBManager {
 				list.add(vo);
 			}
 			DBDisConnect();
-			return list;	
+			return list;
+		
 	}
-	
 	//영화 광고 출력
-		public List<MovieAdVO> movieAdvertisement(String no) {
+		public List<AdMovieVO> movieAdvertisement(String no) {
 			driverLoad();
 			DBConnect();
 			
@@ -206,19 +207,54 @@ public class AdDAO extends DBManager {
 			sql += " order by movie_advertisement_similarity desc limit 2";
 			executeQuery(sql);
 			
-			List<MovieAdVO> list = new ArrayList<>();
+			List<AdMovieVO> list = new ArrayList<>();
 				while (next()) {
-					MovieAdVO vo = new MovieAdVO();
+					AdMovieVO vo = new AdMovieVO();
 					vo.setNo(getInt("no"));
 					vo.setDocid(getString("docid")); 
 					vo.setAdvertisement_title(getString("advertisement_title"));
 					vo.setAdvertisement_img(getString("advertisement_img"));
 					vo.setAdvertisement_link(getString("advertisement_link"));
-					vo.setMovie_advertisement_similarity(getInt("movie_advertisement_similarity"));
+					vo.setMovie_advertisement_similarity(getString("movie_advertisement_similarity"));
 					
 					list.add(vo);
 				}
 				DBDisConnect();
 				return list;
 		}
+
+		
+	//영화 광고 유사도 
+	public List<MovieAdVO> AdMovieSim(String docid){
+		driverLoad();
+		DBConnect();
+		
+		String sql = "SELECT \r\n"
+				+ "    ma.no,\r\n"
+				+ "    ma.movie_advertisement_similarity,\r\n"
+				+ "    ma.DOCID,\r\n"
+				+ "    ma.advertisement_title,\r\n"
+				+ "    movie_db.title AS base_movie_title\r\n"
+				+ "FROM \r\n"
+				+ "    movie_ad ma\r\n"
+				+ "JOIN \r\n"
+				+ "    movie_db ON ma.DOCID = movie_db.docid\r\n"
+				+ "WHERE \r\n"
+				+ "    ma.DOCID = '"+docid+"' limit 3;";
+		executeQuery(sql);
+		
+		List<MovieAdVO> list = new ArrayList<>();
+		
+			while(next()) {
+				
+				MovieAdVO vo = new MovieAdVO();
+				vo.setAdvertisement_title(getString("advertisement_title"));
+				vo.setBase_movie_title(getString("base_movie_title"));
+				vo.setMovie_advertisement_similarity(getString("movie_advertisement_similarity"));
+				vo.setDocid(getString("docid"));
+				list.add(vo);
+			}
+			DBDisConnect();
+			return list;
+	}
 }

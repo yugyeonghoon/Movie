@@ -110,12 +110,12 @@
 				    <%
 				        	for(int i = idx; i <= lastIndex; i++){
 				    			MovieVO vo = list.get(i);
-				    			String no = vo.getDocid();
+				    			String docid = vo.getDocid();
 				    			String title = vo.getTitle();
 				    			String poster = vo.getPoster();
 			        	%>
 							<div class="first">
-					    		<a href="movieDetail.jsp?no=<%= no %>"><img src="<%= poster %>" style="max-width: 100%; height: auto;" class="d-block w-100" alt="..."></a>
+					    		<a href="movieDetail.jsp?docid=<%= docid %>"><img src="<%= poster %>" style="max-width: 100%; height: auto;" class="d-block w-100" alt="..."></a>
 					    	</div>
 						<%
 				        	}
@@ -150,12 +150,12 @@
 					    <%
 					        	for(int i = idx; i <= lastIndex; i++){
 					    			MovieVO vo = slist.get(i);
-					    			String no = vo.getDocid();
+					    			String docid = vo.getDocid();
 					    			String title = vo.getTitle();
 					    			String poster = vo.getPoster();
 				        	%>
 								<div class="second">
-						    		<a href="movieDetail.jsp?no=<%= no %>"><img src="<%= poster %>" class="img-fluid d-block w-100" style="height: auto; object-fit: cover;" alt="..."></a>
+						    		<a href="movieDetail.jsp?docid=<%= docid %>"><img src="<%= poster %>" class="img-fluid d-block w-100" style="height: auto; object-fit: cover;" alt="..."></a>
 						    	</div>
 							<%
 					        	}
@@ -185,13 +185,13 @@
 				    <%
 				        	for(int i = 0; i < Math.min(4, plist.size()); i++){
 				    			MovieVO vo = plist.get(i);
-				    			String no = vo.getDocid();
+				    			String docid = vo.getDocid();
 				    			String title = vo.getTitle();
 				    			String poster = vo.getPoster();
 				    			int movieType = vo.getMovie_type();
 			        	%>
 							<div class="third">
-					    		<a href="movieDetail.jsp?no=<%= no %>"><img src="<%= poster %>" style="max-width: 100%; height: auto;" class="d-block w-100" alt="..."></a>
+					    		<a href="movieDetail.jsp?docid=<%= docid %>"><img src="<%= poster %>" style="max-width: 100%; height: auto;" class="d-block w-100" alt="..."></a>
 					    	</div>
 						<%
 				        	}

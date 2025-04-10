@@ -219,12 +219,13 @@
 		 	<%
 		 		for(int i = 0; i < adlist.size(); i++ ){
 		 			AdBoardVO advo = adlist.get(i);
+		 			int bno = advo.getBoard_no();
 		 			String img = advo.getAdvertisement_img();
 		 			String link = advo.getAdvertisement_link();
 		 			String adtitle = advo.getAdvertisement_title();
 		 	%>
 		 		<span class="adlist">
-		 			<a href="<%= link %>"><img src="<%= img %>"></a><br>
+		 			<a href="view.jsp?no=<%= bno%>"><img src="<%= img %>"></a><br>
 		 			<span class="adtitle"><%= adtitle %></span>
 		 		</span>
 		 		

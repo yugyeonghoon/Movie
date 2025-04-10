@@ -1,3 +1,4 @@
+<%@page import="movie.AdMovieVO"%>
 <%@page import="ad.MovieAdVO"%>
 <%@page import="ad.AdDAO"%>
 <%@page import="java.util.List"%>
@@ -18,11 +19,11 @@
 	    ipDao.insert(ipVo);
 	}
 
-	String no = request.getParameter("no");
+	String docid = request.getParameter("docid");
 	String Genre = request.getParameter("genre");
 
 	MovieDAO dao = new MovieDAO();
-	MovieVO vo = dao.view(no);
+	MovieVO vo = dao.view(docid);
 		
 	String title = vo.getTitle();
 	String director = vo.getDirectors();
@@ -37,10 +38,11 @@
 	int rating = vo.getRating();
 	int ratingPeople = vo.getRating_people();
 
-	List<MovieVO> list = dao.similarityMovie(no);
+	List<MovieVO> list = dao.similarityMovie(docid);
 	
 	AdDAO adao = new AdDAO();
-	List<MovieAdVO> adlist = adao.movieAdvertisement(no);
+	AdMovieVO avo = new AdMovieVO();
+	List<AdMovieVO> adlist = adao.movieAdvertisement(docid);
 	
 %>
 <!DOCTYPE html>
@@ -181,13 +183,13 @@
 	    <div class="ad">
 	    	<%
 	    		for(int i = 0; i < adlist.size(); i++ ){
-	    			MovieAdVO advo = adlist.get(i);
+	    			AdMovieVO advo = adlist.get(i);
 	    			String img = advo.getAdvertisement_img();
 	    			String link = advo.getAdvertisement_link();
 	    			String adtitle = advo.getAdvertisement_title();
 	    	%>
 	    		<div class="adlist">
-		 			<a href="<%= link %>"><img src="<%= img %>"></a><br>
+		 			<a href="view.jsp?docid=<%= docid %>"><img src="<%= img %>"></a><br>
 		 			<span class="adtitle"><%= adtitle %></span>
 		 		</div>
 	    	<%
@@ -206,12 +208,12 @@
 			    <%
 				    for(int i = 0; i < list.size(); i++){
 		    			MovieVO listVo = list.get(i);
-		    			String listNo = listVo.getDocid();
+		    			String docid2 = listVo.getDocid();
 		    			String listTitle = listVo.getTitle();
 		    			String listPoster = listVo.getPoster();
 			    %>
 				    <div class="first">
-				    	<a href="movieDetail.jsp?no=<%= listNo %>"><img src="<%=listPoster %>" alt="..."></a><h5><span><%= listTitle %></span></h5>
+				    	<a href="movieDetail.jsp?docid=<%= docid2 %>"><img src="<%=listPoster %>" alt="..."></a><h5><span><%= listTitle %></span></h5>
 				    </div>
 				    <%
 				    	}

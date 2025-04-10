@@ -8,15 +8,15 @@ import db.DBManager;
 public class MovieDAO extends DBManager {
 	//영화 한 건 조회
 	//select * from movie where id = ?;
-	public MovieVO view(String id) {
+	public MovieVO view(String docid) {
 		driverLoad();
 		DBConnect();
 		
-		String sql = "select * from movie_db where docid ='"+id+"'";
+		String sql = "select * from movie_db where docid ='"+docid+"'";
 		executeQuery(sql);
 		
 		if(next()) {
-			String docid = getString("docid");
+			String docid2 = getString("docid");
 			String title = getString("title");
 			String director = getString("directors");
 			String actor = getString("actors");
@@ -31,7 +31,7 @@ public class MovieDAO extends DBManager {
 			int ratingPeople = getInt("rating_people");
 			
 			MovieVO vo = new MovieVO();
-			vo.setDocid(docid);
+			vo.setDocid(docid2);
 			vo.setRepRlsDate(repRlsDate);
 			vo.setNation(nation);
 			vo.setGenre(genre);
@@ -234,6 +234,7 @@ public class MovieDAO extends DBManager {
 	    	String docid = getString("docid");
 	    	String title = getString("title");
 	        String poster = getString("poster");
+	        
 	    	
 	        MovieVO vo = new MovieVO();
 	        vo.setDocid(docid);
@@ -309,5 +310,52 @@ public class MovieDAO extends DBManager {
 		executeUpdate(sql);
 		DBDisConnect();
 	}
+	
+	//상세 정보 영화 추천작(유사도 표시)
+		public List<AdMovieVO> simMovie(String docid){
+			driverLoad();
+			DBConnect();
+			
+			String sql = "SELECT \r\n"
+					+ "    ms.no,\r\n"
+					+ "    ms.base_movie_docid,\r\n"
+					+ "    ms.target_movie_docid,\r\n"
+					+ "    ms.similarities_movies,\r\n"
+					+ "    base_movie.title AS base_movie_title,\r\n"
+					+ "    target_movie.title AS target_movie_title\r\n"
+					+ "FROM \r\n"
+					+ "    movie_similarity ms\r\n"
+					+ "JOIN \r\n"
+					+ "    movie_db base_movie ON ms.base_movie_docid = base_movie.docid\r\n"
+					+ "JOIN \r\n"
+					+ "    movie_db target_movie ON ms.target_movie_docid = target_movie.docid\r\n"
+					+ "WHERE \r\n"
+					+ "    ms.base_movie_docid = '"+docid+"' limit 5";
+			executeQuery(sql);
+			
+			List<AdMovieVO> list = new ArrayList<>();
+			
+			while (next()) {
+		    	String docid2 = getString("docid");
+		    	String basemovie = getString("base_movie_docid");
+		        String movieSim = getString("similarities_movies");
+		        String targetmovie = getString("target_movie_docid");
+		        String targetTitle = getString("target_movie_title");
+		        String baseTitle = getString("base_movie_title");
+		        
+		    	
+		        AdMovieVO vo = new AdMovieVO();
+		        vo.setDocid(docid2);
+		        vo.setBase_movie_docid(basemovie);
+		        vo.setSimilarities_movies(movieSim);
+		        vo.setTarget_movie_docid(targetmovie);
+		        vo.setTarget_movie_title(targetTitle);
+		        vo.setBase_movie_title(baseTitle);
+		        list.add(vo);
+		        
+		    }
+		    DBDisConnect();
+		    return list;
+		}
 	
 }
