@@ -134,8 +134,8 @@
         }
         .pagination a {
             display: block;
-            padding: 10px 15px;
-            margin: 0 5px;
+            padding: 5px 10px;
+            margin: 3px 4px;
             text-decoration: none;
             color: #2575fc;
             border: 1px solid #ddd;

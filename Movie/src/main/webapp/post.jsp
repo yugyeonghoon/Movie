@@ -74,9 +74,6 @@
 			    border-radius: 9px;
 		    }
 		    .btn1{
-			    position: absolute;
-			    margin-top: 30px;
-			    margin-left: 57%;
 			    background-color: white;
 			    color: black;
 			    width: 100px;
@@ -86,13 +83,11 @@
 		    .post-btn1{
 		    	background-color: white;
 		    	border-radius: 9px;
-		    	position: absolute;
-		    	margin-left: 56%;
+		    	margin-left: 82%;
 		    }
 		    .post-btn2{
 		    	background-color: white;
 		    	border-radius: 9px;
-		    	margin-left: 95%;
 		    }	
 		    .reply-container {
 	            margin-top: 40px;
@@ -110,11 +105,11 @@
 	            text-align: center;
 	            font-size: 1.4rem;
 	            margin-bottom: 20px;
-	            /* margin-top: 200px; */
+	            margin-top: -225px;
 	        }
 	        .comment {
 	            padding: 15px;
-	            margin-bottom: 5px;
+	            margin-bottom: 1px;
 	            background: #ffffff;
 	            border-radius: 10px;
 	            border: 1px solid #ddd;
@@ -146,9 +141,8 @@
 	        .comment-form {
 	            margin-top: 100px;
 	            display: flex;
-	            gap: 10px;
 	            max-width: 1200px;
-	            margin: 100px auto;
+	            margin: 1px auto;
 	        }
 	        .comment-form input {
 	            flex: 1;
@@ -207,13 +201,11 @@
 		        <div class="post-actions">
 		            <button class="post-btn1" onclick="location.href='modify.jsp?no=<%=no %>'">수정</button>
 		            <button class="post-btn2" onclick="deletePost(<%=no %>)">삭제</button>
+		            <button type="button" class="btn1" onclick="location.href='board.jsp'">목록으로</button>
 		        </div>
 		        		<%
 		        	}
 		        %>
-				<div>
-					<button type="button" class="btn1" onclick="location.href='board.jsp'">목록으로</button>
-				</div>
 		</div>
 		 <div class="ad">
 		 	<%

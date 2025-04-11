@@ -7,7 +7,6 @@
 <%@include file="header.jsp"%>
 <%	
 	String menuid = request.getParameter("menuid");
-	
 	String genre = request.getParameter("genre");
 	if(genre.equals("액션")){
 		menuid = "장르 액션";
@@ -36,6 +35,7 @@
 
         ipVo.setIp(ip);
         ipVo.setMenu_id(menuid);
+
         ipDao.insert(ipVo);
     }
 	
