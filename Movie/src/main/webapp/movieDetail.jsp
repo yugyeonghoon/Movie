@@ -55,7 +55,7 @@
 	        body {
 	            font-family: Arial, sans-serif;
 	            margin: 20px;
-	            background-color: #dee2e6;
+	            background-color: white;
 	        }
 	        h3 {
 	        	text-align: center;
@@ -131,31 +131,26 @@
 			.carousel-item{
 			margin-left: 11%;
 			}
-			.ad{
-        	display: flex;
-   			justify-content: space-between;
-	        }
-	        .adlist{
-        	/* margin-left: 10px; */ 
-        	margin-top: -350px;
-	        }
-	        .adtitle{
-	        font-size: 1rem;
-	        width: 100%;
-	        text-align: center;
-	        }
-	        .adlist span {
-	        display: inline-block;
-	        width: 200px; 
-	        white-space: nowrap; 
-	        overflow: hidden; 
-	        text-overflow: ellipsis;
-  			}
-  			.ad img {
-	        width: 250px;
-	        height: 300px;
-	        object-fit: cover; 
-	    	}
+			 .first-ad, .second-ad {
+			    position: fixed;
+			    top: 350px;
+			    width: 250px;
+			    z-index: 999;
+			    text-align: center;
+			}
+			.first-ad {
+			    left: 10px;
+			}	
+			.second-ad {
+			    right: 10px;
+			}
+			.first-ad img, .second-ad img {
+			    width: 100%;
+			    height: auto;
+			    object-fit: cover;
+			    border-radius: 8px;
+			    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+			}
 	    </style>
 	</head>
 	<body>
@@ -181,20 +176,28 @@
 	        </div>
 	    </div>
 	    <div class="ad">
-	    	<%
-	    		for(int i = 0; i < adlist.size(); i++ ){
-	    			AdMovieVO advo = adlist.get(i);
-	    			String img = advo.getAdvertisement_img();
-	    			String link = advo.getAdvertisement_link();
-	    			String adtitle = advo.getAdvertisement_title();
-	    	%>
-	    		<div class="adlist">
-		 			<a href="view.jsp?docid=<%= docid %>"><img src="<%= img %>"></a><br>
-		 			<span class="adtitle"><%= adtitle %></span>
-		 		</div>
-	    	<%
-	    		}
-	    	%>
+	    	<div class="first-ad">
+	    		<%
+	    			if(adlist.size() > 0) {
+	    				AdMovieVO advo = adlist.get(0);	
+	    		%>
+	    			<a href="view.jsp?docid=<%= docid %>"><img src="<%= advo.getAdvertisement_img() %>"></a><br>
+		 			<div class="adtitle"><%= advo.getAdvertisement_title() %></div>
+		 		<%
+	    			}
+		 		%>
+		 	</div>
+	    	<div class="second-ad">
+	    		<%
+	    			if(adlist.size() > 1) {
+	    				AdMovieVO advo = adlist.get(1);	
+	    		%>
+	    			<a href="view.jsp?docid=<%= docid %>"><img src="<%= advo.getAdvertisement_img() %>"></a><br>
+		 			<span class="adtitle"><%= advo.getAdvertisement_title() %></span>
+		 		<%
+	    			}
+		 		%>
+		 	</div>
 	    </div>
 	    <div class="genre">
 		 	<div id="carouselExampleControlsNoTouchingfirst" class="carousel carousel-dark slide">

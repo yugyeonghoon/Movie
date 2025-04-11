@@ -219,9 +219,7 @@
 					if(adlist.size() > 0){
 						AdBoardVO advo = adlist.get(0);
 				%>
-					<a href="view.jsp?no=<%= advo.getBoard_no() %>">
-						<img src="<%= advo.getAdvertisement_img() %>" alt="왼쪽 광고">
-					</a><br>
+					<a href="view.jsp?no=<%= advo.getBoard_no() %>"><img src="<%= advo.getAdvertisement_img() %>" alt="왼쪽 광고"></a><br>
 					<div class="adtitle"><%= advo.getAdvertisement_title() %></div>
 				<%
 					}
@@ -232,9 +230,7 @@
 					if(adlist.size() > 1){
 						AdBoardVO advo = adlist.get(1);
 				%>
-					<a href="view.jsp?no=<%= advo.getBoard_no() %>">
-						<img src="<%= advo.getAdvertisement_img() %>" alt="오른쪽 광고">
-					</a><br>
+					<a href="view.jsp?no=<%= advo.getBoard_no() %>"><img src="<%= advo.getAdvertisement_img() %>" alt="오른쪽 광고"></a><br>
 					<div class="adtitle"><%= advo.getAdvertisement_title() %></div>
 				<%
 					}
