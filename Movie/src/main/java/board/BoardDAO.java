@@ -74,6 +74,42 @@ public class BoardDAO extends DBManager{
 	    DBDisConnect();
 	    return list;
 	}
+	
+	public List<BoardVO> listAllView(String searchType, String keyword, int startNum, int limitSize){
+	    driverLoad();
+	    DBConnect();
+
+	    String sql = "select * from board where board_type != 99";
+
+	    if(searchType != null && keyword != null){
+	        sql += " and "+searchType+ " like '%"+keyword+"%'"; 
+	    }
+	    
+	    sql += " order by board_type asc, create_date desc limit " + startNum + ", " + limitSize;
+	    executeQuery(sql);
+	    
+	    List<BoardVO> list = new ArrayList<>();
+	    while(next()) {
+	        int no = getInt("no");
+	        String title = getString("title");
+	        String content = getString("content");
+	        String author = getString("author");
+	        String createDate = getString("create_date");
+	        int boardType = getInt("board_type");
+	        
+	        BoardVO vo = new BoardVO();
+	        vo.setNo(no);
+	        vo.setTitle(title);
+	        vo.setContent(content);
+	        vo.setAuthor(author);
+	        vo.setCreateDate(createDate);
+	        vo.setBoardType(boardType);
+	        
+	        list.add(vo);
+	    }
+	    DBDisConnect();
+	    return list;
+	}
 
 	//게시글 개수 조회
 	public int getCount(String searchType, String keyword, int bno){
@@ -86,6 +122,26 @@ public class BoardDAO extends DBManager{
 		} else {
 		    sql += " and board_type = 0"; 
 		}
+		if(searchType != null && keyword != null) {
+			sql += " and " + searchType + " like '%" + keyword + "%'";
+		}
+		executeQuery(sql);
+		if(next()) {
+			int count = getInt("cnt");
+			DBConnect();
+			return count;
+		}else {
+			DBDisConnect();
+			return 0;
+		}
+	};
+	
+	public int getCountAll(String searchType, String keyword){
+		driverLoad();
+		DBConnect();
+		
+		String sql = "select count(*) as cnt from board where 1=1";
+		
 		if(searchType != null && keyword != null) {
 			sql += " and " + searchType + " like '%" + keyword + "%'";
 		}
