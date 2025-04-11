@@ -66,7 +66,7 @@
     .advertising-container{
     	text-align: center;
     	margin-top: 100px;
-    }
+    }	
 </style>
 </head>
 <body>
@@ -104,7 +104,8 @@
 		</div>
 	</div>
 	<div class="advertising-container">
-	    	<a class="linkfirst" href="https://www.netflix.com/kr/" target="_blank"><img alt="링크이미지1" src="netfilx1.jpg" style="max-width:100%;"></a>
+	    	<a class="linkfirst" href="https://www.netflix.com/kr/" target="_blank"><img alt="링크이미지1" src="netfilx1.jpg" style=" max-width:100%; height: 209px;
+    width: 700px;"></a>
 	    </div>
 </div>
 </body>
