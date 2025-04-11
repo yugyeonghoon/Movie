@@ -59,7 +59,7 @@
 		}
 		.user-container{
 			padding: 20px;
-		    max-width: 1200px;
+		    max-width: 1300px;
 		    margin: 40px auto;
 		    background: white;
 		    border-radius: 10px;
@@ -126,6 +126,10 @@
             background-color: #66FF66; /* Green for Free Board */
             color: white;
         }
+        .delete {
+        	background-color: #E53E31; /* Green for Free Board */
+            color: white;
+        }
         .pagination {
 		    display: flex;
 		    justify-content: center;
@@ -163,6 +167,7 @@
 					<th>작성자</th>					
 					<th>제목</th>
 					<th>본문</th>
+					<th>작성일</th>
 					<th>관리</th>
 				</tr>
 			</thead>
@@ -175,6 +180,7 @@
 						String content = vo.getContent();
 						String author = vo.getAuthor();
 						int boardType = vo.getBoardType();
+						String creaetDate = vo.getCreateDate();
 						
 						String boardTypeClass = ""; 
                         if (boardType == 0) {
@@ -183,15 +189,18 @@
                             boardTypeClass = "movie";
                         } else if (boardType == 2) {
                             boardTypeClass = "free";
+                        } else if (boardType == 99) {
+                        	boardTypeClass = "delete";
                         }
 				%>
 				<tr style="color: black">
-					<td><%= i + 1 %></td>
-					  <td class="<%= boardTypeClass %>"><%= boardType == 0 ? "공지" : (boardType == 1 ? "영화 토론" : (boardType == 2 ? "자유 게시판" : "")) %></td>
+					<td><%= no %></td>
+					  <td class="<%= boardTypeClass %>"><%= boardType == 0 ? "공지" : (boardType == 1 ? "영화 토론" : (boardType == 2 ? "자유 게시판" : "삭제 글")) %></td>
 					<td><%= author %></td>					
-					<td><a href="post.jsp?no=<%= no %>"><%= title %></a></td>
+					<td><a href="post.jsp?no=<%= no %>"><%= title.length() > 20 ? title.substring(0, 20) + "..." : title %></a></td>
 					<td><%= content.length() > 20 ? content.substring(0, 20) + "..." : content %></td>
-						<input type="hidden" name="no" value="">			
+						<input type="hidden" name="no" value="">	
+					<td><%= creaetDate %></td>		
 					<td class="action-buttons">
 						<%-- <button onclick="location.href='board_update.jsp?no=<%= no %>'">수정</button> --%>
 						<button id="delete-board" class="delete" onclick="deletePost(<%= no %>)">삭제</button>
@@ -238,7 +247,7 @@
 	<script>
 		function deletePost(no){
 			confirm("삭제하시겠습니까?")
-			location.href = "delete_managerment.jsp?no="+ no;
+			location.href = "delete_management.jsp?no="+ no;
 		}
 	</script>
 </html>

@@ -85,7 +85,7 @@ public class BoardDAO extends DBManager{
 	        sql += " and "+searchType+ " like '%"+keyword+"%'"; 
 	    }
 	    
-	    sql += " order by board_type asc, create_date desc limit " + startNum + ", " + limitSize;
+	    sql += " order by create_date asc limit " + startNum + ", " + limitSize;
 	    executeQuery(sql);
 	    
 	    List<BoardVO> list = new ArrayList<>();
