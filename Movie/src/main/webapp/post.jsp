@@ -56,7 +56,7 @@
 			    margin: 0px auto;
 			    background: white;
 			    border-radius: 10px;
-			    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);		    	
+			    /* box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15); */		    	
 		    }
 		    .t1{		     
 		     	width: 100%;
@@ -102,7 +102,7 @@
 	        }
 	        h5 {
 	            color: black;
-	            /* text-align: center; */
+	            text-align: center;
 	            font-size: 1.4rem;
 	            margin-bottom: 20px;
 	            margin-top: 10px;
@@ -113,7 +113,7 @@
 	            background: #ffffff;
 	            border-radius: 10px;
 	            border: 1px solid #ddd;
-	            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+	            box-shadow: 0 3px 8px rgba(0, 0, 0, 0);
 	        }
 	        .comment .meta {
 	            font-size: 0.8rem;
@@ -163,7 +163,7 @@
 	        }
 	         .first-ad, .second-ad {
 			    position: fixed;
-			    top: 300px;
+			    top: 200px;
 			    width: 250px;
 			    z-index: 999;
 			    text-align: center;
@@ -188,6 +188,8 @@
 		<div class="write-container">
 				<h4><%= title %></h4>
 				 	<div>작성자 : <%= author %> | 작성일 : <%= createDate %></div>
+				 	<br>
+				 	<br>
 				<div class="content-container">
 					<pre><%= content %></pre>
 				</div>
