@@ -163,7 +163,7 @@
 	        }
 	         .first-ad, .second-ad {
 			    position: fixed;
-			    top: 200px;
+			    top: 300px;
 			    width: 250px;
 			    z-index: 999;
 			    text-align: center;
