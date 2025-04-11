@@ -66,7 +66,7 @@
 			    margin: 0px auto;
 			    background: white;
 			    border-radius: 10px;
-			    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);		    	
+			    /* box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15); */		    	
 		    }
 		    .t1{		     
 		     	width: 100%;
@@ -123,7 +123,7 @@
 	            background: #ffffff;
 	            border-radius: 10px;
 	            border: 1px solid #ddd;
-	            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+	            box-shadow: 0 3px 8px rgba(0, 0, 0, 0);
 	        }
 	        .comment .meta {
 	            font-size: 0.8rem;
@@ -198,6 +198,8 @@
 		<div class="write-container">
 				<h4><%= title %></h4>
 				 	<div>작성자 : <%= author %> | 작성일 : <%= createDate %></div>
+				 	<br>
+				 	<br>
 				<div class="content-container">
 					<pre><%= content %></pre>
 				</div>
