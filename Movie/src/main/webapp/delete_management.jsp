@@ -4,11 +4,11 @@
 <%
 	String no = request.getParameter("no");
 	if(no == null){
-		response.sendRedirect("board_managerment.jsp");
+		response.sendRedirect("board_management.jsp");
 		return;
 	}
 	
 	BoardDAO dao = new BoardDAO();
 	dao.delete(no);
-	response.sendRedirect("board_managerment.jsp");
+	response.sendRedirect("board_management.jsp");
 %>
