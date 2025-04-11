@@ -3,14 +3,20 @@
 <%@page import="board.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="header.jsp" %>    
+<%@ include file="header.jsp" %>   
 <%
 	if(user == null || user.getUserType() != 0){
 		response.sendRedirect("main.jsp");
 		return;
 	}
 
-	int startNum = 0;
+	String pageNum = request.getParameter("page");
+	if(pageNum == null){
+		pageNum = "1";
+	}
+	int currentPage = Integer.parseInt(pageNum);
+	
+	int startNum = (currentPage -1) * 10;
 	
 	int limitPerPage = 10;
 	
@@ -18,8 +24,26 @@
 	String keyword = request.getParameter("searchKeyword");
 	
 	BoardDAO dao = new BoardDAO();
-	List<BoardVO> list = dao.listView(searchType, keyword, startNum, limitPerPage, 0);
- %>
+	List<BoardVO> list = dao.listAllView(searchType, keyword, startNum, limitPerPage);
+	
+	int totalCount = dao.getCountAll(searchType, keyword);
+	
+	int pageGroupSize = 10;
+	int startPage = ((currentPage - 1) / pageGroupSize) * pageGroupSize +1;
+	
+	int totalPage = 
+			(int)Math.ceil(totalCount / (double)limitPerPage);
+	
+	int endPage = 
+			Math.min(startPage + pageGroupSize -1, totalPage);
+	
+	if(searchType == null) {
+		searchType = "";
+	}
+	if(keyword == null) {
+		keyword = "";
+	}
+%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -102,6 +126,30 @@
             background-color: #66FF66; /* Green for Free Board */
             color: white;
         }
+        .pagination {
+		    display: flex;
+		    justify-content: center;
+		    margin-top: 20px;
+		}
+		.pagination a {
+		    display: block;
+		    padding: 10px 15px;
+		    margin: 0 5px;
+		    text-decoration: none;
+		    color: #2575fc;
+		    border: 1px solid #ddd;
+		    border-radius: 5px;
+		    transition: background 0.3s ease, color 0.3s ease;
+		}
+		.pagination a:hover {
+		    background: #2575fc;
+		    color: white;
+		}
+		.pagination a.active {
+		    background: #2575fc;
+		    color: white;
+		    pointer-events: none;
+		}
 	</style>
 	</head>
 	<body>
@@ -154,6 +202,37 @@
 				%>			
 			</tbody>
 		</table>
+		<div class="pagination">
+		<%
+       		if(currentPage > 1){
+        	%>
+			<a href="board_management.jsp?page=1<%= searchType != "" ? "&searchType="+searchType : "" %><%= keyword != "" ? "&searchKeyword="+keyword : "" %>">&lt;&lt;</a>
+			<a href="board_management.jsp?page=<%= currentPage - 1 %><%= searchType != "" ? "&searchType="+searchType : "" %><%= keyword != "" ? "&searchKeyword="+keyword : "" %>">&lt;</a>
+		<%
+        	}
+		%>
+        <%
+           	for(int i = startPage; i <= endPage; i ++){
+           		if(i == currentPage){
+           			%>
+            			<a class="active" href="board_management.jsp?page=<%= i %><%= searchType != "" ? "&searchType="+searchType : "" %><%= keyword != "" ? "&searchKeyword="+keyword : "" %>"><%= i %></a>
+            		<%
+           		}else{
+           			%>
+            			<a href="board_management.jsp?page=<%= i %><%= searchType != "" ? "&searchType="+searchType : "" %><%= keyword != "" ? "&searchKeyword="+keyword : "" %>"><%= i %></a>
+            		<%
+           		}
+           	}
+         %>
+         <%
+          	if(currentPage < totalPage) {
+         %>
+            <a href="board_management.jsp?page=<%= currentPage + 1 %><%= searchType != "" ? "&searchType="+searchType : "" %><%= keyword != "" ? "&searchKeyword="+keyword : "" %>">&gt;</a>
+            <a href="board_management.jsp?page=<%= totalPage %><%= searchType != "" ? "&searchType="+searchType : "" %><%= keyword != "" ? "&searchKeyword="+keyword : "" %>">&gt;&gt;</a>
+         <%
+          	}
+          %>	
+        </div>
 	</div>
 	</body>
 	<script>
