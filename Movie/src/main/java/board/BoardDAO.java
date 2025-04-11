@@ -80,7 +80,12 @@ public class BoardDAO extends DBManager{
 		driverLoad();
 		DBConnect();
 		
-		String sql = "select count(*) as cnt from board where board_type ="+ bno;
+		String sql = "select count(*) as cnt from board where 1=1";
+		if(bno != 0){
+		    sql += " and (board_type = 0 or board_type = " + bno + ")";
+		} else {
+		    sql += " and board_type = 0"; 
+		}
 		if(searchType != null && keyword != null) {
 			sql += " and " + searchType + " like '%" + keyword + "%'";
 		}
