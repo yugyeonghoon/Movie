@@ -103,6 +103,7 @@
 	            margin-top: 40px;
 	            max-width: 1200px;
 	            margin: 0px auto;
+				padding-bottom: 50px;
 	        }
 	        h4 {
 	            color: black;

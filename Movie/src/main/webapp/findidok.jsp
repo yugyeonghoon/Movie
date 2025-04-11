@@ -103,9 +103,9 @@
 			
 			.bounceInDown::before{
 				content: "";
-				background: url(./sky1.jpg) no-repeat;
+				background: url(./movie.jpg) no-repeat;
 			    background-size: 100% 100%;
-			    opacity: 0.5;
+			    opacity: 0.8;
 			    position: absolute;
 			    top: 0px;
 			    left: 0px;

@@ -147,7 +147,7 @@ public class MovieDAO extends DBManager {
 	    driverLoad();
 	    DBConnect();
 	    
-	    String sql = "select * from movie_db where poster != 'aa.jpg' and genre like '%"+genre+"%' and repRlsDate > 20241230";
+	    String sql = "select * from movie_db where poster != 'aa.jpg' and genre like '%"+genre+"%' and repRlsDate > 20200411";
 	    
 	    executeQuery(sql);
 	    
@@ -173,7 +173,7 @@ public class MovieDAO extends DBManager {
 	    driverLoad();
 	    DBConnect();
 	    
-	    String sql = "select * from movie_db where poster != 'aa.jpg' and genre like '%"+genre+"%' and rating >= 7 and rating_people > 3000 order by rating desc";
+	    String sql = "select * from movie_db where poster != 'aa.jpg' and genre like '%"+genre+"%' and rating >= 8 and rating_people > 5000 order by rating desc";
 	    
 	    executeQuery(sql);
 	    
@@ -277,7 +277,7 @@ public class MovieDAO extends DBManager {
 
 	    return list;
 	}
-	
+	//영화 개수 
 	public int getCount(String searchType, String keyword) {
 	    driverLoad();
 	    DBConnect();
