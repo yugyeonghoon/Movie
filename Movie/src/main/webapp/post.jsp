@@ -102,10 +102,10 @@
 	        }
 	        h5 {
 	            color: black;
-	            text-align: center;
+	            /* text-align: center; */
 	            font-size: 1.4rem;
 	            margin-bottom: 20px;
-	            margin-top: -225px;
+	            margin-top: 10px;
 	        }
 	        .comment {
 	            padding: 15px;
@@ -161,30 +161,26 @@
 	        .dpnone{
 	        	display : none;
 	        }
-	        .ad{
-	        	display: flex;
-    			justify-content: space-between;
-	        }
-	        .adlist{
-	        	margin-left: 10px; 
-	        }
-	        .adtitle{
-		        font-size: 1rem;
-		        width: 100%;
-		        text-align: center;
-	        }
-	        .adlist span {
-		        display: inline-block;
-		        width: 200px; 
-		        white-space: nowrap; 
-		        overflow: hidden; 
-		        text-overflow: ellipsis;
-  			}
-  			.ad img {
-	        width: 250px; 
-	        height: 300px;
-	        object-fit: cover;
-	    	}
+	         .first-ad, .second-ad {
+			    position: fixed;
+			    top: 200px;
+			    width: 250px;
+			    z-index: 999;
+			    text-align: center;
+			}
+			.first-ad {
+			    left: 10px;
+			}	
+			.second-ad {
+			    right: 10px;
+			}
+			.first-ad img, .second-ad img {
+			    width: 100%;
+			    height: auto;
+			    object-fit: cover;
+			    border-radius: 8px;
+			    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+			}
 		</style>
 	</head>
 	<body>
@@ -207,25 +203,34 @@
 		        	}
 		        %>
 		</div>
-		 <div class="ad">
-		 	<%
-		 		for(int i = 0; i < adlist.size(); i++ ){
-		 			AdBoardVO advo = adlist.get(i);
-		 			int bno = advo.getBoard_no();
-		 			String img = advo.getAdvertisement_img();
-		 			String link = advo.getAdvertisement_link();
-		 			String adtitle = advo.getAdvertisement_title();
-		 	%>
-		 		<span class="adlist">
-		 			<a href="view.jsp?no=<%= bno%>"><img src="<%= img %>"></a><br>
-		 			<span class="adtitle"><%= adtitle %></span>
-		 		</span>
-		 		
-		 	<%
-		 		}
-		 	%>
-		 </div>
-		 
+		<div class="ad">
+		 	<div class="first-ad">
+				<%
+					if(adlist.size() > 0){
+						AdBoardVO advo = adlist.get(0);
+				%>
+					<a href="view.jsp?no=<%= advo.getBoard_no() %>">
+						<img src="<%= advo.getAdvertisement_img() %>" alt="왼쪽 광고">
+					</a><br>
+					<div class="adtitle"><%= advo.getAdvertisement_title() %></div>
+				<%
+					}
+				%>
+			</div>
+			<div class="second-ad">
+				<%
+					if(adlist.size() > 1){
+						AdBoardVO advo = adlist.get(1);
+				%>
+					<a href="view.jsp?no=<%= advo.getBoard_no() %>">
+						<img src="<%= advo.getAdvertisement_img() %>" alt="오른쪽 광고">
+					</a><br>
+					<div class="adtitle"><%= advo.getAdvertisement_title() %></div>
+				<%
+					}
+				%>
+			</div>
+		 </div> 
         <div class="reply-container">
         <%
         	if(user != null){

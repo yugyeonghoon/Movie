@@ -160,7 +160,7 @@ public class AdDAO extends DBManager {
 				AdBoardVO vo = new AdBoardVO();
 				vo.setNo(getInt("no"));
 				vo.setBoard_no(getInt("board_no"));
-				vo.setAdvertisement_title(getString("advadvertisement_title"));
+				vo.setAdvertisement_title(getString("advertisement_title"));
 				vo.setBoard_title(getString("board_title"));
 				vo.setAdvertisement_link(getString("advertisement_link"));
 				vo.setAdvertisement_img(getString("advertisement_img"));
