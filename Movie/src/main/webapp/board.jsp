@@ -6,7 +6,7 @@
 <%@ include file="header.jsp" %>
 <%
 	String menuid = "자유게시판";
-	
+	String as = "";
 	if (menuid != null) {
 	   
 	    IpDAO ipDao = new IpDAO();
